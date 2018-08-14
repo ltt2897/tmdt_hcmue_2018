@@ -1,0 +1,6 @@
+﻿input[type="date"],
+input[type="date"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    display: none
+}
+

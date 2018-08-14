@@ -1,0 +1,80 @@
+@inject UserManager<ApplicationUser> UserManager
+@{
+	var currentUser = await UserManager.GetUserAsync(User);
+}
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="~/images/users/HS_1.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>@currentUser.HoTen</p>
+                <a href="#">
+                    <i class="fa fa-circle text-success"></i> Online
+                </a>
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">MAIN NAVIGATION</li>
+            <li>
+                <a asp-action="DashBoard" asp-controller="Home" asp-area="Admin">
+                    <i class="fa fa-tachometer"></i>
+                    <span>Trang chủ</span>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="QuanLySanPham" asp-action="index">
+                    <i class="fa fa-book"></i>
+                    <span>Quản lý sản phẩm</span>
+                </a>
+            </li>
+             <li>
+                <a asp-controller="QuanLyNhaXuatBan" asp-action="index">
+                    <i class="fa fa-industry" aria-hidden="true"></i>
+                    <span>Quản lý Nhà xuất bản</span>
+                </a>
+            </li>
+             <li>
+                <a asp-controller="QuanLyChuDe" asp-action="index">
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                    <span>Quản lý chủ đề</span>
+                </a>
+            </li>
+             <li>
+                <a asp-controller="QuanLyDanhMuc" asp-action="index">
+                    <i class="fa fa-address-card" aria-hidden="true"></i>
+                    <span>Quản lý danh mục</span>
+                </a>
+            </li>
+             <li>
+                <a asp-controller="QuanLyTacGia" asp-action="index">
+                    <i class="fa fa-yc-square" aria-hidden="true"></i>
+                    <span>Quản lý tác giả</span>
+                </a>
+            </li>
+            <li>
+                <a asp-controller="QuanLyNguoiDung" asp-action="index">
+                    <i class="fa fa-users"></i>
+                    <span>Quản lý Người dùng</span>
+                </a>
+            </li>
+            @*<li>
+                <a asp-controller="QuanLyLienLac" asp-action="index">
+                    <i class="fa fa-users"></i>
+                    <span>Quản lý Liên lạc</span>
+                </a>
+            </li>*@
+            <li>
+                <a asp-controller="ThongKe" asp-action="Index">
+                    <i class="fa fa-bar-chart"></i>
+                    <span>Thống Kê</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

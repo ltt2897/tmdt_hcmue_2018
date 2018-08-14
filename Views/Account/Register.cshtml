@@ -1,0 +1,90 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["HeadTitle"] = "Register";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <form id="frm_register" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <h4>Create a new account.</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HoTen"></label>
+                <input id="HoTen" asp-for="HoTen" class="form-control">
+            </div>
+            <div class="row"> 
+                <div class="form-group col-md-6">
+                    <label asp-for="PhoneNumber"></label>
+                    <input id="PhoneNumber" asp-for="PhoneNumber" class="form-control">
+                     <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="GioiTinh"></label>
+                    <select class="form-control" asp-for="GioiTinh" name="GioiTinh" id="GioiTinh">
+                        <option value="true" selected>Nam</option>
+                        <option value="false">Nữ</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="NgaySinh"></label>
+                    <input asp-for="NgaySinh" class="form-control" />
+                    <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="DiaChi"></label>
+                    <input asp-for="DiaChi" class="form-control">
+                    <span asp-validation-for="DiaChi" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="ConfirmPassword"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <button type="submit" id="btnFromsubmit" class="btn btn-default">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn4b6Y62qV-ONkx8YJ7YSNx_B-SR316Rc"type="text/javascript"></script>
+    <script>
+        //google map
+        $("#btnFromsubmit").on("click", function(btnevent){
+            btnevent.preventDefault();
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                address: DiaChi.value,
+            },(rel, stat)=>
+            {
+                if(stat == google.maps.GeocoderStatus.ZERO_RESULTS || rel ==0)
+                {
+                    $('span[data-valmsg-for="DiaChi"]').html("Địa chỉ bạn nhập không phù hợp, vui lòng nhập lại sau");
+                }
+                else
+                {
+                    $("#frm_register").submit();
+                }
+            });
+        })
+
+    </script>
+}

@@ -1,0 +1,48 @@
+@using Microsoft.AspNetCore.Identity
+@using QuanLyBanSach.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+   
+    <ul class="nav navbar-nav">
+        @{
+            var userRole = "Users";
+            if(User.IsInRole("Admin"))
+            {
+                <li> 
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+                </li>
+            }
+            else if(User.IsInRole("Giao Hàng"))
+            {
+                <li> 
+                    <a asp-area="GiaoHang" asp-controller="Home" asp-action="ChuaGiao">Giao Hàng</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của bạn</a>
+                </li>
+                <li>
+                    <a is-active-route asp-area="Users" asp-controller="TaiKhoan" asp-action="Index"> <i class="fa fa-user" aria-hidden="true"></i> Account</a>
+                </li>     
+            }   
+        }
+      
+        <li>
+            <a onclick="$('#frm_Logout').submit();" id="btnLogout" class="btn btn-link navbar-btn navbar-link"><i class="fa fa-sign-out" aria-hidden="true"></i>Log out</a>
+        </li>
+    </ul>
+    <form asp-area="" id="frm_Logout" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right"></form>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" is-active-route asp-controller="Account" asp-action="Register">Register</a></li>
+        <li><a asp-area="" is-active-route asp-controller="Account" asp-action="Login">Log in</a></li>
+    </ul>
+}

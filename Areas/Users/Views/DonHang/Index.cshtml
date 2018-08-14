@@ -1,0 +1,62 @@
+@{
+    Layout="_MainLayout";
+    ViewData["HeadTitle"]="Quản lý đơn hàng";
+}
+@*@model List<QuanLyBanSach.Models.HoaDon>*@
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+<h3>Đơn hàng của bạn</h3>
+<section id="cart_items">
+    <div class="table-responsive cart_info">
+        <table class="table table-condensed">
+            <thead>
+                <tr class="cart_menu">
+                    <td class="image">Mã Hóa đơn</td>
+                    <td class="">Ngày lặp</td>
+                    <td class="">Tổng thành tiền</td>
+                    <td class="">Trạng thái</td>
+                    <td class="total">Chi tiết</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <a href="">#@item.Id</a>
+                        </td>
+                        <td class="cart_description">
+                            <h4><a href="">@item.NgayLapHoaDon.ToString("dd/MM/yyyy")</a></h4>
+                            <p>Giờ đặt hàng: @item.NgayLapHoaDon.ToString("HH:ss")</p>
+                        </td>
+                        <td class="cart_price">
+                            <p>@item.TongThanhTien.ToString("#,0")</p>
+                        </td>
+                        <td class="cart_total">
+                            @*<p class="">@((item.NgayGiao.HasValue)?item.NgayGiao.Value.ToString("dd/MM/yyyy"):"Chưa giao")</p>
+                        *@
+                            <p>@((item.NgayGiao != null)?item.NgayGiao.ToString("dd/MM/yyyy"):"Chưa Giao")</p>
+                        </td>
+                        <td class="cart_delete">
+                             <a class="cart_quantity_delete" asp-route-Id="@item.Id" asp-action="ChiTietDonHang" asp-controller="DonHang">
+                                <i class="fa fa-list-alt" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="text-right">
+            @Html.PagedListPager( (IPagedList)Model, page => Url.Action("Index", new { page }) )
+        </div>
+    </div>
+</section>
+
+
+@section Styles{
+    <style>
+    .cart_delete{
+        display: table-cell;
+    }
+    </style>
+}

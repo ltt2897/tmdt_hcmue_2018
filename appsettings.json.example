@@ -1,0 +1,11 @@
+﻿{
+	"ConnectionStrings": {
+		"DefaultConnection": "Server=xxx.xxx.xxx.xxx;Database=YYY;Integrated Security=False;User Id=XXX;Password=YYY;MultipleActiveResultSets=true"
+	},
+	"Logging": {
+		"IncludeScopes": false,
+		"LogLevel": {
+			"Default": "Warning"
+		}
+	}
+}

@@ -1,0 +1,79 @@
+@{
+    ViewData["HeadTitle"]="Sửa nhân viên";
+}
+@using QuanLyBanSach.Areas.Admin.Models.NguoiDungViewModels
+@model ThemNguoiDungViewModel
+<section class="content-header">
+    <h1>
+        Thêm nhân viên mới
+    </h1>
+</section>
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <form asp-action="ThemNhanVien" asp-controller="QuanLyNhanVien" method="POST">
+                        <div class="form-group">
+                            <label asp-for="HoTen"></label>
+                            <input type="text" id="HoTen" asp-for="HoTen" class="form-control" >    
+                            <span asp-validation-for="HoTen" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input id="Email" asp-for="Email" class="form-control">    
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NgaySinh"></label>
+                            <input class="form-control" type="date" id="NgaySinh" asp-for="NgaySinh" >
+                            <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="GioiTinh"></label>
+                            <label class="radio-inline">
+                                <input type="radio" asp-for="GioiTinh" value="true" id="GioiTinh_Nam" >
+                                Nam
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" value="false" asp-for="GioiTinh" id="GioiTinh_Nu">
+                                Nữ
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ChucVu"></label>
+                            <select asp-for="ChucVu" id="ChucVu" class="form-control">
+                                @foreach(var item in ViewBag.ChucVu)
+                                {
+                                    <option value="@item.Name">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DiaChi"></label>
+                            <input class="form-control" type="text" id="DiaChi" asp-for="DiaChi" >
+                            <span asp-validation-for="DiaChi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber"></label>
+                            <input class="form-control" type="text" id="PhoneNumber" asp-for="PhoneNumber" >
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input class="form-control" id="Password" asp-for="Password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <button type="submit" class="btn-info btn pull-right">Sửa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+}

@@ -1,0 +1,12 @@
+@model ApplicationUser
+
+<form asp-action="ThanhToanHoaDon" asp-controller="GioHang" method="post">
+    <div class="form-group">
+        <label for="frmThanhToan_diaChi">Địa chỉ</label>
+        <input type="text" id="frmThanhToan_diaChi" class="form-control" name="DiaChi" value="@Model.DiaChi">
+    </div>
+    <label for="frmThanhToan_ghiChu">Ghi chú</label>
+    <textarea name="GhiChu" id="frmThanhToan_ghiChu" cols="30" rows="10"></textarea>
+    <a class="btn btn-default update" asp-action="index" asp-controller="Home">Tiếp tục mua hàng</a>
+    <button class="btn btn-default check_out" type="submit">Thanh toán hóa đơn</button>
+</form>
