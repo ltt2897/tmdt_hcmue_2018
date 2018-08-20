@@ -4,16 +4,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models.SachViewModels;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models.SanPhamViewModels;
 using Microsoft.AspNetCore.Identity;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Models;
 using System.Linq;
 using Microsoft.AspNetCore.Hosting;
-using QuanLyBanSach.Services;
-using QuanLyBanSach.Repositories.Email;
+using PhuKienDienThoai.Services;
+using PhuKienDienThoai.Repositories.Email;
 
-namespace QuanLyBanSach.Controllers
+namespace PhuKienDienThoai.Controllers
 {
 
     public class GioHangController : Controller
@@ -41,14 +41,14 @@ namespace QuanLyBanSach.Controllers
         }
         [Authorize(Roles = "User")]
         [HttpPost]
-        public async Task<IActionResult> ThemVaoGioHang(int SachId, int SoLuong)
+        public async Task<IActionResult> ThemVaoGioHang(int SanPhamId, int SoLuong)
         {
             try
             {
                 var stringItem = HttpContext.Session.GetString("GioHang");
                 //nếu trước đó chưa lưu vào giỏ hàng một món hàng nào
-                var sach = await context.Sach.FindAsync(SachId);
-                if (sach.SoLuong == 0)
+                var sanpham = await context.SanPham.FindAsync(SanPhamId);
+                if (sanpham.SoLuong == 0)
                 {
                     TempData["message"] = "Sản phẩm đã hết, vui lòng chọn mua sản phẩm khác";
                     return Redirect(Request.Headers["Referer"].ToString());
@@ -62,23 +62,23 @@ namespace QuanLyBanSach.Controllers
                     */
                     lst = JsonConvert.DeserializeObject<List<GioHangViewModel>>(stringItem);
                 }
-                var kiemTraItemDaTonTaiTrongGioHang = lst.Find(x => x.Sach.id == SachId);
+                var kiemTraItemDaTonTaiTrongGioHang = lst.Find(x => x.SanPham.id == SanPhamId);
 
                 if (kiemTraItemDaTonTaiTrongGioHang == null)
                     //thêm món hàng vào danh sách
                     lst.Add(new GioHangViewModel
                     {
-                        Sach = sach,
+                        SanPham = sanpham,
                         SoLuong = SoLuong
                     });
                 else
                 {
-                    lst.Find(x => x.Sach.id == SachId).SoLuong += SoLuong;
+                    lst.Find(x => x.SanPham.id == SanPhamId).SoLuong += SoLuong;
                 }
-                //sau khi thêm vào giỏ hàng thì trừ số lượng tồn của sách trong csdl
-                sach.SoLuong -= SoLuong;
-                //cập nhật lại sách
-                context.Sach.Update(sach);
+                //sau khi thêm vào giỏ hàng thì trừ số lượng tồn của sản phẩm trong csdl
+                sanpham.SoLuong -= SoLuong;
+                //cập nhật lại sản phẩm
+                context.SanPham.Update(sanpham);
                 await context.SaveChangesAsync();
                 //thêm vào session giỏ hàng với giá trị là chuỗi json  
                 HttpContext.Session.SetString("GioHang", JsonConvert.SerializeObject(lst));
@@ -91,7 +91,7 @@ namespace QuanLyBanSach.Controllers
             }
         }
         [HttpPost]
-        public IActionResult SuaGioHang(int SachId, int SoLuong)
+        public IActionResult SuaGioHang(int SanPhamId, int SoLuong)
         {
             try
             {
@@ -100,7 +100,7 @@ namespace QuanLyBanSach.Controllers
                 //chuyển qua json
                 var ListItemTrongGioHang = JsonConvert.DeserializeObject<List<GioHangViewModel>>(getStringGioHang);
                 //cập nhật lại danh sách
-                ListItemTrongGioHang.Find(sach => sach.Sach.id == SachId).SoLuong = SoLuong;
+                ListItemTrongGioHang.Find(sanpham => sanpham.SanPham.id == SanPhamId).SoLuong = SoLuong;
                 //chuyển lại chuỗi
                 getStringGioHang = JsonConvert.SerializeObject(ListItemTrongGioHang);
                 //gắn vào lại json
@@ -113,7 +113,7 @@ namespace QuanLyBanSach.Controllers
                 return BadRequest("Có lỗi trong quá trinh thực hiện");
             }
         }
-        public async Task<IActionResult> XoaGioHang(int SachId)
+        public async Task<IActionResult> XoaGioHang(int SanPhamId)
         {
             //lấy giá trị trong session giỏ hàng ra dưới dạng chuỗi
             var stringList = HttpContext.Session.GetString("GioHang");
@@ -121,15 +121,15 @@ namespace QuanLyBanSach.Controllers
             {   //nếu nó không rỗng thì chuyển thành kiểu list
                 var ListItemTrongGioHang = JsonConvert.DeserializeObject<List<GioHangViewModel>>(stringList);
                 //lấy ra item cần xóa
-                var itemCanXoa = ListItemTrongGioHang.Find(item => item.Sach.id == SachId);
+                var itemCanXoa = ListItemTrongGioHang.Find(item => item.SanPham.id == SanPhamId);
                 //xóa item vừa lấy ra
                 ListItemTrongGioHang.Remove(itemCanXoa);
                 //cập nhật lại số lượng tồn trong csdl 
-                var sach = await context.Sach.FindAsync(SachId);
+                var sanpham = await context.SanPham.FindAsync(SanPhamId);
                 //cộng lại số lượng đã trừ ra
-                sach.SoLuong += itemCanXoa.SoLuong;
+                sanpham.SoLuong += itemCanXoa.SoLuong;
                 //cập nhật csdl
-                context.Sach.Update(sach);
+                context.SanPham.Update(sanpham);
                 await context.SaveChangesAsync();
                 //gắn lại vào giỏ hàng
                 HttpContext.Session.SetString("GioHang", JsonConvert.SerializeObject(ListItemTrongGioHang));
@@ -164,9 +164,9 @@ namespace QuanLyBanSach.Controllers
                     {
                         ChiTietHoaDon.Add(new Models.ChiTietHoaDon
                         {
-                            SachId = item.Sach.id,
+                            SanPhamId = item.SanPham.id,
                             SoLuong = item.SoLuong,
-                            ThanhTien = item.Sach.DonGia * item.SoLuong,
+                            ThanhTien = item.SanPham.DonGia * item.SoLuong,
                         });
                     }
 
@@ -192,10 +192,10 @@ namespace QuanLyBanSach.Controllers
                         var NoiDungTemplate = await NoiDungfileStream.ReadToEndAsync();
                         foreach (var item in ListItemTrongGioHang)
                         {
-                            NoiDungEmailTemplate += NoiDungTemplate.Replace("{TenSanPham}", item.Sach.TenSach)
+                            NoiDungEmailTemplate += NoiDungTemplate.Replace("{TenSanPham}", item.SanPham.TenSanPham)
                                                         .Replace("{SoLuong}", item.SoLuong.ToString())
                                                         .Replace("{ThanhTien}", item.ThanhTien.ToString("#,0"))
-                                                        .Replace("{SanPhamUrl}", Url.Action(nameof(SachController.Index), nameof(SachController), new { id = item.Sach.id }));
+                                                        .Replace("{SanPhamUrl}", Url.Action(nameof(SanPhamController.Index), nameof(SanPhamController), new { id = item.SanPham.id }));
                             NoiDungfileStream.Close();
                         }
                     }

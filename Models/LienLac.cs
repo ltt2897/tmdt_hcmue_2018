@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuanLyBanSach.Models
+namespace PhuKienDienThoai.Models
 {
     public class LienLac
     {

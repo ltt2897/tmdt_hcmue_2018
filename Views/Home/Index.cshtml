@@ -1,11 +1,11 @@
-﻿@*using QuanLyBanSach.Models*@
-@*model List<Sach>*@
+﻿@*using PhuKienDienThoai.Models*@
+@*model List<SanPham>*@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList; 
 @*@using X.PagedList;*@
 
 <div class="features_items"><!--features_items-->
-    <h2 class="title text-center">@ViewData["Title"]</h2>
+    <h2 class="title text-center"><span class="text-block">@ViewData["Title"]</span></h2>
     <div class="row">
     @foreach(var item in Model)
     {
@@ -13,15 +13,15 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="~/images/Sach/@item.HinhAnh" style="height: 100%; width:auto; max-height:130px" alt="" />
+                        <img src="~/images/SanPham/@item.HinhAnh" style="height: 100%; width:auto; max-height:130px" alt="" />
                         <h2>@((item.DonGia*(100 - item.PhanTramGiamGia)/100).ToString("#,0"))Đ</h2>
-                        <p title="@item.TenSach">@item.TenSach</p>
+                        <p title="@item.TenSanPham">@item.TenSanPham</p>
                     </div>
                 </div>
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
                         <li><a asp-controller="Wishlist" asp-area="Users" asp-action="ThemVaoWishList" data-id="@item.id" class="ThemVaoWishList"><i class="fa fa-plus-square"></i>Thêm vào wishlist</a></li>
-                        <li><a asp-controller="Sach" asp-action="index" asp-route-id="@item.id" asp-route-TenSach="@item.TenSach.Replace(" ","-")"><i class="fa fa-info"></i>Chi tiêt sản phẩm</a></li>
+                        <li><a asp-controller="SanPham" asp-action="index" asp-route-id="@item.id" asp-route-TenSanPham="@item.TenSanPham.Replace(" ","-")"><i class="fa fa-info"></i>Chi tiêt sản phẩm</a></li>
                     </ul>
                 </div>
             </div>

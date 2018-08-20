@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace QuanLyBanSach.Areas.Admin.Models.ThongKeViewModels
+namespace PhuKienDienThoai.Areas.Admin.Models.ThongKeViewModels
 {
     public class ThongKeModel
     {

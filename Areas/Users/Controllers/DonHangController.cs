@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
 using X.PagedList;
 
-namespace QuanLyBanSach.Areas.Users.Controllers
+namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
     [Authorize(Roles = "User")]
@@ -28,16 +28,16 @@ namespace QuanLyBanSach.Areas.Users.Controllers
 
             var user = await userManager.GetUserAsync(User);
             var userId = await userManager.GetUserIdAsync(user);
-            var danhsachDonHang = context.HoaDon.Include(x => x.ChiTietHoaDons)
-                                                    .ThenInclude(x => x.Sach)
+            var danhsanphamDonHang = context.HoaDon.Include(x => x.ChiTietHoaDons)
+                                                    .ThenInclude(x => x.SanPham)
                                                 .Where(x => x.User.Id == userId)
                                                 .ToList();
-            return View(danhsachDonHang.ToPagedList(page ?? 1, 5));
+            return View(danhsanphamDonHang.ToPagedList(page ?? 1, 5));
         }
         public async Task<IActionResult> ChiTietDonHang(int Id)
         {
             var data = await context.ChiTietHoaDon.Include(x => x.HoaDon)
-                                                    .Include(x => x.Sach)
+                                                    .Include(x => x.SanPham)
                                                     .Where(x => x.HoaDonId == Id).ToListAsync();
             return View(data);
         }

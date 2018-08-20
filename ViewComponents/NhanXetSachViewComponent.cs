@@ -3,26 +3,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
 
-namespace QuanLyBanSach.ViewComponents
+namespace PhuKienDienThoai.ViewComponents
 {
-    public class NhanXetSachViewComponent : ViewComponent
+    public class NhanXetSanPhamViewComponent : ViewComponent
     {
         private ApplicationDbContext context;
-        public NhanXetSachViewComponent(ApplicationDbContext dbcontext) => context = dbcontext;
-        public Task<List<NhanXet>> GetList(int SachId)
+        public NhanXetSanPhamViewComponent(ApplicationDbContext dbcontext) => context = dbcontext;
+        public Task<List<NhanXet>> GetList(int SanPhamId)
         {
             return context.NhanXet
-                        .Include(x => x.Sach)
+                        .Include(x => x.SanPham)
                         .Include(x => x.User)
-                        .Where(x => x.Sach.id == SachId)
+                        .Where(x => x.SanPham.id == SanPhamId)
                         .ToListAsync();
         }
-        public async Task<IViewComponentResult> InvokeAsync(int SachId)
+        public async Task<IViewComponentResult> InvokeAsync(int SanPhamId)
         {
-            var data = await GetList(SachId);
+            var data = await GetList(SanPhamId);
             return View(data);
         }
 

@@ -19,56 +19,56 @@
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
-            <li class="header">MAIN NAVIGATION</li>
-            <li>
+            <li class="header">ĐIỀU HƯỚNG</li>
+            <li class='@if(ViewData["TagName"] == "Dashboard") { <text>active</text> }'>
                 <a asp-action="DashBoard" asp-controller="Home" asp-area="Admin">
                     <i class="fa fa-tachometer"></i>
-                    <span>Trang chủ</span>
+                    <span>Bảng điều khiển</span>
                 </a>
             </li>
-            <li>
+            <li class='@if(ViewData["TagName"] == "QuanLySanPham") { <text>active</text> }'>
                 <a asp-controller="QuanLySanPham" asp-action="index">
                     <i class="fa fa-book"></i>
-                    <span>Quản lý sản phẩm</span>
+                    <span>Quản lý Sản phẩm</span>
                 </a>
             </li>
-             <li>
-                <a asp-controller="QuanLyNhaXuatBan" asp-action="index">
+            <li class='@if(ViewData["TagName"] == "QuanLyThuongHieu") { <text>active</text> }'>
+                <a asp-controller="QuanLyThuongHieu" asp-action="index">
                     <i class="fa fa-industry" aria-hidden="true"></i>
-                    <span>Quản lý Nhà xuất bản</span>
+                    <span>Quản lý Thương hiệu</span>
                 </a>
             </li>
-             <li>
-                <a asp-controller="QuanLyChuDe" asp-action="index">
+            <li class='@if(ViewData["TagName"] == "QuanLyMatHang") { <text>active</text> }'>
+                <a asp-controller="QuanLyMatHang" asp-action="index">
                     <i class="fa fa-info" aria-hidden="true"></i>
-                    <span>Quản lý chủ đề</span>
+                    <span>Quản lý Mặt hàng</span>
                 </a>
             </li>
-             <li>
+             <li class='@if(ViewData["TagName"] == "QuanLyDanhMuc") { <text>active</text> }'>
                 <a asp-controller="QuanLyDanhMuc" asp-action="index">
                     <i class="fa fa-address-card" aria-hidden="true"></i>
-                    <span>Quản lý danh mục</span>
+                    <span>Quản lý Danh mục</span>
                 </a>
             </li>
-             <li>
-                <a asp-controller="QuanLyTacGia" asp-action="index">
+            <li class='@if(ViewData["TagName"] == "QuanLyDongDienThoai") { <text>active</text> }'>
+                <a asp-controller="QuanLyDongDienThoai" asp-action="index">
                     <i class="fa fa-yc-square" aria-hidden="true"></i>
-                    <span>Quản lý tác giả</span>
+                    <span>Quản lý Dòng điện thoại</span>
                 </a>
             </li>
-            <li>
+            <li class='@if(ViewData["TagName"] == "QuanLyNguoiDung") { <text>active</text> }'>
                 <a asp-controller="QuanLyNguoiDung" asp-action="index">
                     <i class="fa fa-users"></i>
                     <span>Quản lý Người dùng</span>
                 </a>
             </li>
-            @*<li>
+            @*<li class='@if(ViewData["TagName"] == "QuanLyLienLac") { <text>active</text> }'>
                 <a asp-controller="QuanLyLienLac" asp-action="index">
                     <i class="fa fa-users"></i>
                     <span>Quản lý Liên lạc</span>
                 </a>
             </li>*@
-            <li>
+            <li class='@if(ViewData["TagName"] == "ThongKe") { <text>active</text> }'>
                 <a asp-controller="ThongKe" asp-action="Index">
                     <i class="fa fa-bar-chart"></i>
                     <span>Thống Kê</span>
@@ -78,3 +78,7 @@
     </section>
     <!-- /.sidebar -->
 </aside>
+
+<script>
+    
+</script>

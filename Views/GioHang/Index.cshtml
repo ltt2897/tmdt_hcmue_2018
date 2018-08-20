@@ -2,7 +2,7 @@
     Layout="_MasterLayout";
     ViewData["HeadTitle"]="Giỏ hàng";
 }
-@model List<QuanLyBanSach.Models.SachViewModels.GioHangViewModel>
+@model List<PhuKienDienThoai.Models.SanPhamViewModels.GioHangViewModel>
 
 @if(Model.Count >0)
 {
@@ -13,7 +13,7 @@
 					<thead>
 						<tr class="cart_menu">
 							<td class="image">Item</td>
-							<td class="description">Tên sách</td>
+							<td class="description">Tên sản phẩm</td>
 							<td class="price">Đơn giá</td>
 							<td class="quantity">Số lượng</td>
 							<td class="total">Tổng tiền</td>
@@ -25,25 +25,25 @@
                         {
                             <tr>
                                 <td class="cart_product">
-                                   <img src="~/images/Sach/@item.Sach.HinhAnh" class="" alt="">
+                                   <img src="~/images/SanPham/@item.SanPham.HinhAnh" class="" alt="">
                                 </td>
                                 <td class="cart_description">
-                                    <h4><a href="">@item.Sach.TenSach</a></h4>
-                                    <p>Web ID: @item.Sach.id</p>
+                                    <h4><a href="">@item.SanPham.TenSanPham</a></h4>
+                                    <p>Web ID: @item.SanPham.id</p>
                                 </td>
                                 <td class="cart_price">
-                                    <p>@item.Sach.DonGia</p>
+                                    <p>@item.SanPham.DonGia</p>
                                 </td>
                                 <td class="cart_price">
                                     <div class="cart_quantity_button">
-                                        <p type="text" data-sachid="@item.Sach.id" class="cart_quantity_input">@item.SoLuong</p>
+                                        <p type="text" data-sanphamid="@item.SanPham.id" class="cart_quantity_input">@item.SoLuong</p>
                                     </div>
                                 </td>
                                 <td class="cart_total">
                                     <p class="cart_total_price">@item.ThanhTien</p>
                                 </td>
                                 <td class="cart_delete">
-                                    <a class="cart_quantity_delete" asp-route-SachId="@item.Sach.id" asp-action="XoaGioHang" asp-controller="GioHang"><i class="fa fa-times"></i></a>
+                                    <a class="cart_quantity_delete" asp-route-SanPhamId="@item.SanPham.id" asp-action="XoaGioHang" asp-controller="GioHang"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
                         }
@@ -52,7 +52,7 @@
                         <tr>
                             <td colspan="4">Thành tiên</td>
                             <td>
-                                @Model.Sum(x=>x.ThanhTien).ToString("#,0")
+                                @model.Sum(x=>x.ThanhTien).ToString("#,0")
                             </td>
                             <td></td>
                         </tr>

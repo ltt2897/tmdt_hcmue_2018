@@ -15,13 +15,13 @@
             "wwwroot/js/main.js"
         ]
     },
-    {
-        "outputFileName": "wwwroot/css/site.min.css",
-        // An array of relative input file paths. Globbing patterns supported
-        "inputFiles": [
-            "wwwroot/css/site.css"
-        ]
-    },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    // An array of relative input file paths. Globbing patterns supported
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  },
     {
         "outputFileName": "wwwroot/js/jquery-migrate.min.js",
         // An array of relative input file paths. Globbing patterns supported

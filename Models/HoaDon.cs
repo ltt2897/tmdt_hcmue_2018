@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace QuanLyBanSach.Models
+namespace PhuKienDienThoai.Models
 {
     public class HoaDon
     {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace QuanLyBanSach.Models.ContactViewModels
+namespace PhuKienDienThoai.Models.ContactViewModels
 {
     public class ContactViewModel
     {

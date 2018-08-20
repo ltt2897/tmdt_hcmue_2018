@@ -1,15 +1,15 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using QuanLyBanSach.Areas.Admin.Models.NguoiDungViewModels;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Areas.Admin.Models.NguoiDungViewModels;
+using PhuKienDienThoai.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using QuanLyBanSach.Data;
+using PhuKienDienThoai.Data;
 
-namespace QuanLyBanSach.Areas.Admin.Controllers
+namespace PhuKienDienThoai.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -29,16 +29,17 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         }
         #endregion
 
-        #region View Danh sách nhân viên
+        #region View Danh sách người dùng
         public async Task<IActionResult> Index()
         {
-            var data = await DanhSachNhanVien();
+            ViewData["TagName"] = "QuanLyNguoiDung";
+            var data = await DanhSachNguoiDung();
             return View(data);
         }
         #endregion
 
-        #region lấy Danh sách nhân viên
-        private async Task<List<ApplicationUser>> DanhSachNhanVien()
+        #region lấy Danh sách người dùng
+        private async Task<List<ApplicationUser>> DanhSachNguoiDung()
         {
             var allUsers = await usermanager.Users.ToListAsync();
             return allUsers;
@@ -53,7 +54,7 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
             var ChucVuList = await context.Roles.ToListAsync();
             return ChucVuList;
         }
-        #region view Thêm nhân viên
+        #region view Thêm người dùng
         public async Task<IActionResult> ThemNguoiDung()
         {
             var model = new ThemNguoiDungViewModel();
@@ -62,7 +63,7 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         }
         #endregion
 
-        #region action Thêm nhân viên
+        #region action Thêm người dùng
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ThemNguoiDung(ThemNguoiDungViewModel model)
@@ -87,13 +88,13 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
             await usermanager.CreateAsync(newuser);
             await usermanager.AddToRoleAsync(newuser, model.ChucVu);
             return RedirectToAction(
-                actionName: "DanhSach",
+                actionName: "DanhSanPham",
                 controllerName: "QuanLyNhanVien"
             );
         }
         #endregion
 
-        #region action Xóa nhân viên
+        #region action Xóa người dùng
         public async Task<IActionResult> XoaNguoiDung(string email)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrWhiteSpace(email))
@@ -106,7 +107,7 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         }
         #endregion
 
-        #region view sửa nhân viên
+        #region view sửa người dùng
         public async Task<IActionResult> SuaNguoiDung(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -130,7 +131,7 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         }
         #endregion
 
-        #region action Sửa nhân viên
+        #region action Sửa người dùng
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SuaNguoiDung(SuaNguoiDungViewModel model)

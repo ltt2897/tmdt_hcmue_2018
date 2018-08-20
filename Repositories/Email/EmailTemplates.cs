@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 
-namespace QuanLyBanSach.Repositories.Email
+namespace PhuKienDienThoai.Repositories.Email
 {
     public class EmailTemplate
     {

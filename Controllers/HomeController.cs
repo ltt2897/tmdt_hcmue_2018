@@ -3,12 +3,12 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Models.ContactViewModels;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Models.ContactViewModels;
 using X.PagedList;
 
-namespace QuanLyBanSach.Controllers
+namespace PhuKienDienThoai.Controllers
 {
     public class HomeController : Controller
     {
@@ -16,15 +16,15 @@ namespace QuanLyBanSach.Controllers
         public HomeController(ApplicationDbContext _context) =>
             context = _context;
         ///<return>
-        ///Returns 12 items in database Sach
+        ///Returns 12 items in database SanPham
         ///</return>
         public async Task<IActionResult> Index(int? page)
         {
             ViewData["HeadTitle"] = "Trang chủ";
-            ViewData["Title"] = "Sách hay nên đọc";
-            var ListSach = await context.Sach.ToListAsync();
-            var model = ListSach.ToPagedList(page ?? 1, 9);
-            // return View(ListSach);
+            ViewData["Title"] = "Phụ kiện vừa cập nhật";
+            var ListSanPham = await context.SanPham.ToListAsync();
+            var model = ListSanPham.ToPagedList(page ?? 1, 9);
+            // return View(ListSanPham);
             return View(model);
         }
         public IActionResult Contact() => View();

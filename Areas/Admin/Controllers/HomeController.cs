@@ -2,15 +2,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Areas.Admin.Models;
-using QuanLyBanSach.Data;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Areas.Admin.Models;
+using PhuKienDienThoai.Data;
 using System.Linq;
 using System;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-namespace QuanLyBanSach.Areas.Admin.Controllers
+namespace PhuKienDienThoai.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -31,9 +31,10 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         [Route("[area]")]
         public async Task<IActionResult> DashBoard()
         {
+            ViewData["TagName"] = "Dashboard";
             var _dashBoard = new DashBoardViewModel
             {
-                TongSoLuongSach = context.Sach.Count(),
+                TongSoLuongSanPham = context.SanPham.Count(),
                 TongDoanhThuTrongThang = context.HoaDon
                                                 .Where(x => x.NgayLapHoaDon.Year == DateTime.Now.Year && x.NgayLapHoaDon.Month == DateTime.Now.Month)
                                                 .Sum(x => x.TongThanhTien),

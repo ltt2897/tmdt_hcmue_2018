@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 
-namespace QuanLyBanSach.Bussinesses
+namespace PhuKienDienThoai.Bussinesses
 {
     public class RoleBussiness
     {

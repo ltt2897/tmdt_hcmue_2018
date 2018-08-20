@@ -1,7 +1,7 @@
 @{
     ViewData["HeadTitle"]="Thống kê";
 }
-@using QuanLyBanSach.Areas.Admin.Models.ThongKeViewModels
+@using PhuKienDienThoai.Areas.Admin.Models.ThongKeViewModels
 @model ThongKeModel
 <section class="content-header">
     <h1>Thông kê</h1>
@@ -25,34 +25,34 @@
         <div class="col-md-12">
             <div class="box box-primary">
                 <div class="box-header">
-                    <h3 class="box-title">Thống kê Số sách bán được</h3>
+                    <h3 class="box-title">Thống kê Số sản phẩm bán được</h3>
                 </div>
                 <div class="box-body row">
                     <div class="form-group col-md-5">
                         <div class="row">
                             <div class="col-md-3">
-                                <label for="thongkesach_thangthongke">Chọn tháng</label>
+                                <label for="thongkesanpham_thangthongke">Chọn tháng</label>
                             </div>
                             <div class="col-md-9">
-                                <select class="form-control col-md-10" id="thongkesach_thangthongke" asp-for="_month" asp-items="Model.Thang"></select>
+                                <select class="form-control col-md-10" id="thongkesanpham_thangthongke" asp-for="_month" asp-items="Model.Thang"></select>
                             </div>
                         </div>                      
                     </div>
                     <div class="form-group col-md-5">
                         <div class="row">
                             <div class="col-md-3">
-                                <label class="control-label" for="thongkesach_namthongke">Chọn năm</label>
+                                <label class="control-label" for="thongkesanpham_namthongke">Chọn năm</label>
                             </div>
                             <div class="col-md-9">
-                                <select class="form-control" id="thongkesach_namthongke" asp-for="_year" asp-items="Model.Nam">
+                                <select class="form-control" id="thongkesanpham_namthongke" asp-for="_year" asp-items="Model.Nam">
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-primary btn_thongkesachban">Xem thống kê</button>
+                        <button type="button" class="btn btn-primary btn_thongkesanphamban">Xem thống kê</button>
                     </div>
-                    <div id="ThongKeSach" class="col-md-12"></div>
+                    <div id="ThongKeSanPham" class="col-md-12"></div>
                 </div>
             </div>
         </div>  
@@ -110,10 +110,10 @@
     
     //#endregion
 
-    //#region Thông kê sách
-    function DrawChartThongkeSach(_data)
+    //#region Thông kê sản phẩm
+    function DrawChartThongkeSanPham(_data)
     {
-        Highcharts.chart('ThongKeSach', {
+        Highcharts.chart('ThongKeSanPham', {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -146,13 +146,13 @@
         });
     }
 
-    function getDataThongKeSach()
+    function getDataThongKeSanPham()
     {
         return new Promise((resolve, reject)=>
         {
-            var _month = $("#thongkesach_thangthongke").val();
-            var _year = $("#thongkesach_namthongke").val(); 
-            var url = "@Url.Action("ThongKeSachBanDuoc","ThongKe")";
+            var _month = $("#thongkesanpham_thangthongke").val();
+            var _year = $("#thongkesanpham_namthongke").val(); 
+            var url = "@Url.Action("ThongKeSanPhamBanDuoc","ThongKe")";
             var data = {
                 thang: _month,
                 nam:_year
@@ -175,20 +175,20 @@
                 DrawChartThongkeDoanhThu(data)
             }); 
         });
-        $(".btn_thongkesachban").click(function(e)
+        $(".btn_thongkesanphamban").click(function(e)
         {
             e.preventDefault();
-            getDataThongKeSach().then(data =>
+            getDataThongKeSanPham().then(data =>
             {
-                getDataThongKeSach().then(data=>
+                getDataThongKeSanPham().then(data=>
                 {
-                    DrawChartThongkeSach(data);
+                    DrawChartThongkeSanPham(data);
                 });
             });
         });
 
         $("#thongkedoanhthu_namthongke").change();
-        $(".btn_thongkesachban").click();
+        $(".btn_thongkesanphamban").click();
         
     });
     

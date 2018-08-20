@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuanLyBanSach.Models.AccountViewModels
+namespace PhuKienDienThoai.Models.AccountViewModels
 {
     public class ExternalLoginViewModel
     {

@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using QuanLyBanSach.Data;
+using PhuKienDienThoai.Data;
 
-namespace QuanLyBanSach.Areas.Admin.Controllers
+namespace PhuKienDienThoai.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -25,7 +25,7 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         public IActionResult Index()
         {
             ViewData["HeadTitle"] = "Quản lý liên lạc";
-
+            ViewData["TagName"] = "QuanLyLienLac";
             return View();
         }
 

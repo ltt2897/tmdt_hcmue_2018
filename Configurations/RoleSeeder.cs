@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace QuanLyBanSach.Configurations
+namespace PhuKienDienThoai.Configurations
 {
     public class RoleSeeder : IDisposable
     {

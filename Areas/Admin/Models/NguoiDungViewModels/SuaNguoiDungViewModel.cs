@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace QuanLyBanSach.Areas.Admin.Models.NguoiDungViewModels
+namespace PhuKienDienThoai.Areas.Admin.Models.NguoiDungViewModels
 {
     public class SuaNguoiDungViewModel
     {

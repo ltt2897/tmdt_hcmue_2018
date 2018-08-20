@@ -1,4 +1,4 @@
-namespace QuanLyBanSach.Models
+namespace PhuKienDienThoai.Models
 {
     using System;
     using System.Collections.Generic;
@@ -8,8 +8,8 @@ namespace QuanLyBanSach.Models
     {
         public string UserID { get; set; }
         public virtual ApplicationUser User { get; set; }
-        public int SachID { get; set; }
-        public virtual Sach Sach { get; set; }
+        public int SanPhamID { get; set; }
+        public virtual SanPham SanPham { get; set; }
         public Wishlist()
         {
             User = new ApplicationUser();

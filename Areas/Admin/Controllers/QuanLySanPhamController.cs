@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using QuanLyBanSach.Areas.Admin.Models.SachViewModels;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
 
-namespace QuanLyBanSach.Areas.Admin.Controllers
+namespace PhuKienDienThoai.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -27,53 +27,52 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var model =  context.Sach
-                                    .Include(x => x.TacGia)
-                                    .Include(x => x.NhaXuatBan);
+            ViewData["TagName"] = "QuanLySanPham";
+            var model = context.SanPham
+                            .Include(x => x.DongDienThoai)
+                            .Include(x => x.ThuongHieu);
                                    
             return View(model);
         }
-        public async Task<IActionResult> SuaSach(int? id)
+        public async Task<IActionResult> SuaSanPham(int? id)
         {
-            if (!id.HasValue || await context.Sach.FindAsync(id) == null)//tìm thông tin sách theo id)
+            if (!id.HasValue || await context.SanPham.FindAsync(id) == null)//tìm thông tin sản phẩm theo id)
             {//nếu không có id thì trở lại trang trước đó
                 return NotFound();
             }
-            var sach = await context.Sach.FindAsync(id);
-            if(sach==null) //nếu mã số sai thì không có trang
+            var sanpham = await context.SanPham.FindAsync(id);
+            if(sanpham==null) //nếu mã số sai thì không có trang
                 return NotFound();
-            await context.Entry(sach).Reference(x => x.ChuDe).LoadAsync(); //load chủ đề vào sách
-            await context.Entry(sach).Reference(x => x.TacGia).LoadAsync();
-            await context.Entry(sach).Reference(x => x.DanhMuc).LoadAsync();
-            await context.Entry(sach).Reference(x => x.NhaXuatBan).LoadAsync();
-            var model = new SuaSachViewModel
+            await context.Entry(sanpham).Reference(x => x.MatHang).LoadAsync(); //load mặt hàng vào sản phẩm
+            await context.Entry(sanpham).Reference(x => x.DongDienThoai).LoadAsync();
+            await context.Entry(sanpham).Reference(x => x.DanhMuc).LoadAsync();
+            await context.Entry(sanpham).Reference(x => x.ThuongHieu).LoadAsync();
+            var model = new SuaSanPhamViewModel
             {
-                Id = sach.id,
-                ChieuDai = sach.ChieuDai,
-                ChieuRong = sach.ChieuRong,
-                ChuDeId = sach.ChuDeId,
-                TacGiaId = sach.TacGiaId,
-                DanhMucId = sach.DanhMucId,
-                NhaXuatBanId = sach.NhaXuatBanId,
-                DinhDang = sach.DinhDang,
-                DonGia = sach.DonGia,
-                TomTat = sach.TomTat,
-                TenSach = sach.TenSach,
-                SoLuong = sach.SoLuong,
-                SoTrang = sach.SoTrang,
-                HinhAnh = sach.HinhAnh,
-                PhanTramGiamGia = sach.PhanTramGiamGia,
-                ChuDes = await context.ChuDe.ToListAsync(),
+                Id = sanpham.id,
+                MatHangId = sanpham.MatHangId,
+                DongDienThoaiId = sanpham.DongDienThoaiId,
+                DanhMucId = sanpham.DanhMucId,
+                ThuongHieuId = sanpham.ThuongHieuId,
+                DinhDang = sanpham.DinhDang,
+                DonGia = sanpham.DonGia,
+                TomTat = sanpham.TomTat,
+                TenSanPham = sanpham.TenSanPham,
+                SoLuong = sanpham.SoLuong,
+                MauSac = sanpham.MauSac,
+                HinhAnh = sanpham.HinhAnh,
+                PhanTramGiamGia = sanpham.PhanTramGiamGia,
+                MatHangs = await context.MatHang.ToListAsync(),
                 DanhMucs = await context.DanhMuc.ToListAsync(),
-                NhaXuatBans = await context.NhaXuatBan.ToListAsync(),
-                TacGias = await context.TacGia.ToListAsync(),
+                ThuongHieus = await context.ThuongHieu.ToListAsync(),
+                DongDienThoais = await context.DongDienThoai.ToListAsync(),
             };
             return View(model);
         }
-        private async Task<string> uploadHinhAnh(int sachid, IFormFile ff)
+        private async Task<string> uploadHinhAnh(int sanphamid, IFormFile ff)
         {
-            var filename = sachid + "_" + ff.FileName;
-            using (var fstream = new FileStream(environment.WebRootPath + "/images/Sach/" + filename, FileMode.Create))
+            var filename = sanphamid + "_" + ff.FileName;
+            using (var fstream = new FileStream(environment.WebRootPath + "/images/SanPham/" + filename, FileMode.Create))
             {
                 await ff.CopyToAsync(fstream);
                 fstream.Close();
@@ -81,83 +80,79 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> SuaSach(int id, SuaSachViewModel model)
+        public async Task<IActionResult> SuaSanPham(int id, SuaSanPhamViewModel model)
         {
-            var sach = await context.Sach.FindAsync(id);
-            sach.ChieuDai = model.ChieuDai;
-            sach.ChieuRong = model.ChieuRong;
-            sach.ChuDeId = model.ChuDeId;
-            sach.DanhMucId = model.DanhMucId;
-            sach.DinhDang = model.DinhDang;
-            sach.DonGia = model.DonGia;
-            sach.NhaXuatBanId = model.NhaXuatBanId;
-            sach.TomTat = model.TomTat;
-            sach.TacGiaId = model.TacGiaId;
-            sach.SoLuong = model.SoLuong;
-            sach.SoTrang = model.SoTrang;
-            sach.PhanTramGiamGia = model.PhanTramGiamGia;
-            sach.TenSach = model.TenSach;
+            var sanpham = await context.SanPham.FindAsync(id);
+            sanpham.MatHangId = model.MatHangId;
+            sanpham.DanhMucId = model.DanhMucId;
+            sanpham.DinhDang = model.DinhDang;
+            sanpham.DonGia = model.DonGia;
+            sanpham.ThuongHieuId = model.ThuongHieuId;
+            sanpham.TomTat = model.TomTat;
+            sanpham.DongDienThoaiId = model.DongDienThoaiId;
+            sanpham.SoLuong = model.SoLuong;
+            sanpham.MauSac = model.MauSac;
+            sanpham.PhanTramGiamGia = model.PhanTramGiamGia;
+            sanpham.TenSanPham = model.TenSanPham;
 
             //nếu muốn upload hình ảnh mới thì
             if (model.uploadHinhAnh != null)
             {
                 //lấy file cũ
-                var fileInfo = new FileInfo(environment.WebRootPath + "/images/Sach/" + sach.HinhAnh);
+                var fileInfo = new FileInfo(environment.WebRootPath + "/images/SanPham/" + sanpham.HinhAnh);
                 if (fileInfo.Exists)//nếu trước đó có ảnh thì xóa ảnh đó đi
                     fileInfo.Delete();
                 //upload ảnh mới
-                sach.HinhAnh = await uploadHinhAnh(id, model.uploadHinhAnh);
+                sanpham.HinhAnh = await uploadHinhAnh(id, model.uploadHinhAnh);
             }
-            context.Sach.Update(sach);
+            context.SanPham.Update(sanpham);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public IActionResult ThemSach()
+        public IActionResult ThemSanPham()
         {
-            var model = new ThemSachViewModel(context);
+            var model = new ThemSanPhamViewModel(context);
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ThemSach(ThemSachViewModel model)
+        public async Task<IActionResult> ThemSanPham(ThemSanPhamViewModel model)
         {
             //nếu các model ko hợp lệ thì trả lại view báo lỗi validation
             if (!ModelState.IsValid)
             {
-                model.ChuDes = await context.ChuDe.ToListAsync();
+                model.MatHangs = await context.MatHang.ToListAsync();
                 model.DanhMucs = await context.DanhMuc.ToListAsync();
-                model.NhaXuatBans = await context.NhaXuatBan.ToListAsync();
-                model.TacGias = await context.TacGia.ToListAsync();
+                model.ThuongHieus = await context.ThuongHieu.ToListAsync();
+                model.DongDienThoais = await context.DongDienThoai.ToListAsync();
                 return View(model);
             }
-            var sach = new Sach
+            var sanpham = new SanPham
             {
-                TenSach = model.TenSach,
-                ChieuRong = model.ChieuRong,
-                ChieuDai = model.ChieuDai,
-                SoTrang = model.SoTrang,
+                TenSanPham = model.TenSanPham,
+                MauSac = model.MauSac,
                 DinhDang = model.DinhDang,
                 DonGia = model.DonGia,
                 PhanTramGiamGia = model.PhanTramGiamGia,
-                ChuDeId = model.ChuDeId,
-                TacGiaId = model.TacGiaId,
+                MatHangId = model.MatHangId,
+                DongDienThoaiId = model.DongDienThoaiId,
                 DanhMucId = model.DanhMucId,
-                NhaXuatBanId = model.NhaXuatBanId,
+                ThuongHieuId = model.ThuongHieuId,
                 TomTat = model.TomTat,
             };
-            await context.Sach.AddAsync(sach);
+            await context.SanPham.AddAsync(sanpham);
             await context.SaveChangesAsync();
-            sach.HinhAnh = await uploadHinhAnh(sach.id, model.uploadHinhAnh);
-            context.Sach.Update(sach);
+            sanpham.HinhAnh = await uploadHinhAnh(sanpham.id, model.uploadHinhAnh);
+            context.SanPham.Update(sanpham);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-        public async Task<IActionResult> XoaSach(int id)
+        public async Task<IActionResult> XoaSanPham(int id)
         {
-            var sach = await context.Sach.FindAsync(id);
-            var filepath = environment.WebRootPath + "/images/Sach/" + sach.HinhAnh;
+            var sanpham = await context.SanPham.FindAsync(id);
+            var filepath = environment.WebRootPath + "/images/SanPham/" + sanpham.HinhAnh;
             System.IO.File.Delete(filepath);
-            context.Sach.Remove(sach);
+            context.SanPham.Remove(sanpham);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

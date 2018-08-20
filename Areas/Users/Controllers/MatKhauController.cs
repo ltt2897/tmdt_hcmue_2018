@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QuanLyBanSach.Controllers;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Models.ManageViewModels;
-using QuanLyBanSach.Services;
+using PhuKienDienThoai.Controllers;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Models.ManageViewModels;
+using PhuKienDienThoai.Services;
 
-namespace QuanLyBanSach.Areas.Users.Controllers
+namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
     [Authorize(Roles = "User")]

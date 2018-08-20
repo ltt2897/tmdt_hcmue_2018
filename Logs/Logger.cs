@@ -1,6 +1,6 @@
 using System;
 
-namespace QuanLyBanSach.Logs
+namespace PhuKienDienThoai.Logs
 {
     ///<summary>class dùng để ghi log</summary>
     public class Logger

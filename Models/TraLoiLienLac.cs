@@ -1,6 +1,6 @@
 using System;
 
-namespace QuanLyBanSach.Models
+namespace PhuKienDienThoai.Models
 {
     public class TraLoiLienLac
     {

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Areas.Admin.Models.ThongKeViewModels;
-using QuanLyBanSach.Data;
+using PhuKienDienThoai.Areas.Admin.Models.ThongKeViewModels;
+using PhuKienDienThoai.Data;
 
-namespace QuanLyBanSach.Areas.Admin.Controllers
+namespace PhuKienDienThoai.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -18,11 +18,16 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         #region required fields
         ApplicationDbContext context;
         #endregion
+
         #region Contructor
         public ThongKeController(ApplicationDbContext _context) => context = _context;
         #endregion
+
         #region Index
-        public IActionResult Index() => View(new ThongKeModel());
+        public IActionResult Index() {
+            ViewData["TagName"] = "ThongKe";
+            return View(new ThongKeModel());
+        }
         #endregion
         #region Dispose
 
@@ -52,21 +57,21 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         }
         #endregion
 
-        #region Thống kê sách
+        #region Thống kê sản phẩm
         [HttpGet]
         [AllowAnonymous]
-        public IEnumerable ThongKeSachBanDuoc(int thang, int nam)
+        public IEnumerable ThongKeSanPhamBanDuoc(int thang, int nam)
         {
             var data = (
                 from cthd in context.ChiTietHoaDon
                 join hd in context.HoaDon on cthd.HoaDonId equals hd.Id
-                join s in context.Sach on cthd.SachId equals s.id
+                join s in context.SanPham on cthd.SanPhamId equals s.id
                 where cthd.HoaDon.NgayLapHoaDon.Month == thang && cthd.HoaDon.NgayLapHoaDon.Year == nam
-                group cthd by s.TenSach into tensach
+                group cthd by s.TenSanPham into tensanpham
                 select new
                 {
-                    name = tensach.Key,
-                    y = tensach.Sum(x => x.SoLuong)
+                    name = tensanpham.Key,
+                    y = tensanpham.Sum(x => x.SoLuong)
                 }
             );
             return data;

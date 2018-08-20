@@ -1,13 +1,13 @@
 using System;
 
-namespace QuanLyBanSach.Models
+namespace PhuKienDienThoai.Models
 {
     public class ChiTietHoaDon
     {
         public int HoaDonId { get; set; }
         public HoaDon HoaDon { get; set; }
-        public int SachId { get; set; }
-        public Sach Sach { get; set; }
+        public int SanPhamId { get; set; }
+        public SanPham SanPham { get; set; }
         public int SoLuong { get; set; }
         public int ThanhTien { get; set; }
         public DateTime NgayThem { get; set; }

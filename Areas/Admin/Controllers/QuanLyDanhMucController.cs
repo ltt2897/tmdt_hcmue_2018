@@ -1,15 +1,16 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using QuanLyBanSach.Areas.Admin.Models.DanhMucViewmodels;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Areas.Admin.Models.DanhMucViewmodels;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
 
-namespace QuanLyBanSach.Areas.Admin.Controllers
+namespace PhuKienDienThoai.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = "Admin")]
@@ -24,7 +25,14 @@ namespace QuanLyBanSach.Areas.Admin.Controllers
         #region Index
         public async Task<IActionResult> Index()
         {
-            var model = await context.DanhMuc.Include(p => p.Saches).ToListAsync();
+            ViewData["TagName"] = "QuanLyDanhMuc";
+            ViewData["ListMatHang"] = await context.MatHang.ToArrayAsync();
+
+            var model = await context.DanhMuc
+                                    .Include(x => x.MatHang)
+                                    .Include(p => p.SanPhames)
+                                    .ToListAsync();
+            
             return View(model);
         }
         #endregion

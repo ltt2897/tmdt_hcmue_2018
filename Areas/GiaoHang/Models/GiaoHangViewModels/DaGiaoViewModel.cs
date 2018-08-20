@@ -1,4 +1,4 @@
-namespace QuanLyBanSach.Areas.GiaoHang.Models.GiaoHangViewModels
+namespace PhuKienDienThoai.Areas.GiaoHang.Models.GiaoHangViewModels
 {
     public class DaGiaoViewModel
     {

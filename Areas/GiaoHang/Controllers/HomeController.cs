@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Areas.GiaoHang.Models.GiaoHangViewModels;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Areas.GiaoHang.Models.GiaoHangViewModels;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
 
-namespace QuanLyBanSach.Areas.GiaoHang.Controllers
+namespace PhuKienDienThoai.Areas.GiaoHang.Controllers
 {
     [Area("GiaoHang")]
     [Authorize(Roles = "Giao Hàng")]
@@ -34,7 +34,7 @@ namespace QuanLyBanSach.Areas.GiaoHang.Controllers
             var model = new ChuaGiaoViewModel();
             foreach (var item in data)
             {
-                model.DanhSachHoaDon.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                model.DanhSanPhamHoaDon.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
                     Value = item.Id.ToString(),
                     Text = item.User.HoTen,
@@ -63,12 +63,12 @@ namespace QuanLyBanSach.Areas.GiaoHang.Controllers
         public async Task<JsonResult> ChiTietDonHang(int Id)
         {
             var donhang = await context.ChiTietHoaDon.Include(x => x.HoaDon)
-                                                    .Include(x => x.Sach)
+                                                    .Include(x => x.SanPham)
                                                     .Where(x => x.HoaDonId == Id)
                                                     .Select(x => new
                                                     {
-                                                        x.Sach.TenSach,
-                                                        x.Sach.DonGia,
+                                                        x.SanPham.TenSanPham,
+                                                        x.SanPham.DonGia,
                                                         x.SoLuong,
                                                         x.ThanhTien
                                                     })

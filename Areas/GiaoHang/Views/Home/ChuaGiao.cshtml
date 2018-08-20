@@ -1,4 +1,4 @@
-@using QuanLyBanSach.Areas.GiaoHang.Models.GiaoHangViewModels
+@using PhuKienDienThoai.Areas.GiaoHang.Models.GiaoHangViewModels
 @model ChuaGiaoViewModel 
 @{ViewData["HeadTitle"]="Danh sách hóa đơn chưa giao";}
 <section class="content-header">
@@ -14,7 +14,7 @@
             <div class="box-body">
                 <div class="form-group">
                     <label for="slct_HoaDonChuaGiao">Chọn hóa đơn</label>
-                    <select class="form-control" id="slct_HoaDonChuaGiao" asp-for="Id" asp-items="Model.DanhSachHoaDon"></select>
+                    <select class="form-control" id="slct_HoaDonChuaGiao" asp-for="Id" asp-items="Model.DanhSanPhamHoaDon"></select>
                 </div>
                 <div class="row clearfix">
                     <div class="col-md-5">
@@ -90,7 +90,7 @@
                     "destroy": true,
                     ajax: "@Url.Action("ChiTietDonHang","Home")" + "/" + _id,
                     columns: [
-                        {data: "tenSach"},
+                        {data: "tenSanPham"},
                         {data:"soLuong"},
                         {data:"donGia"},
                         {data:"thanhTien"}

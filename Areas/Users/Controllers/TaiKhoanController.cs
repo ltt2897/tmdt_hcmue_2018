@@ -2,10 +2,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Models.AccountViewModels;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Models.AccountViewModels;
 
-namespace QuanLyBanSach.Areas.Users.Controllers
+namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
     [Authorize(Roles = "User")]

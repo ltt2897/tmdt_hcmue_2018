@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Models.ManageViewModels;
-using QuanLyBanSach.Services;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Models.ManageViewModels;
+using PhuKienDienThoai.Services;
 
-namespace QuanLyBanSach.Controllers
+namespace PhuKienDienThoai.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
@@ -469,7 +469,7 @@ namespace QuanLyBanSach.Controllers
         {
             return string.Format(
                 AuthenicatorUriFormat,
-                _urlEncoder.Encode("QuanLyBanSach"),
+                _urlEncoder.Encode("PhuKienDienThoai"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

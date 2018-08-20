@@ -1,4 +1,4 @@
-namespace QuanLyBanSach.Areas.Admin.Models.DanhMucViewmodels
+namespace PhuKienDienThoai.Areas.Admin.Models.DanhMucViewmodels
 {
     public class ThemDanhMucViewModel
     {

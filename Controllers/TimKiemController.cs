@@ -2,10 +2,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Data;
+using PhuKienDienThoai.Data;
 using X.PagedList;
 
-namespace QuanLyBanSach.Controllers
+namespace PhuKienDienThoai.Controllers
 {
     public class TimKiemController : Controller
     {
@@ -16,13 +16,13 @@ namespace QuanLyBanSach.Controllers
         {
             ViewData["HeadTitle"] = "search page";
             ViewData["Title"] = "Kết quả tìm kiếm với " + keyword;
-            var KetQuaTimKiem = await context.Sach
-                                            .Where(sach => sach.TenSach.Contains(keyword) |
-                                                            sach.TacGia.TenTacGia.Contains(keyword) |
-                                                            sach.NhaXuatBan.TenNhaXuatBan.Contains(keyword) |
-                                                            sach.ChuDe.TenChuDe.Contains(keyword) |
-                                                            sach.DanhMuc.TenDanhMuc.Contains(keyword) |
-                                                            sach.TomTat.Contains(keyword))
+            var KetQuaTimKiem = await context.SanPham
+                                            .Where(sanpham => sanpham.TenSanPham.Contains(keyword) |
+                                                            sanpham.DongDienThoai.TenDongDienThoai.Contains(keyword) |
+                                                            sanpham.ThuongHieu.TenThuongHieu.Contains(keyword) |
+                                                            sanpham.MatHang.TenMatHang.Contains(keyword) |
+                                                            sanpham.DanhMuc.TenDanhMuc.Contains(keyword) |
+                                                            sanpham.TomTat.Contains(keyword))
                                             .ToListAsync();
             var model = KetQuaTimKiem.ToPagedList(page ?? 1, 9);
             return View("Views/Home/Index.cshtml", model);

@@ -1,10 +1,10 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
 
-namespace QuanLyBanSach.ViewComponents
+namespace PhuKienDienThoai.ViewComponents
 {
     ///<summary>class để xuất dữ liệu cho form thanh toán hóa đơn</summary>
     public class ThanhToanHoaDonViewComponent : ViewComponent

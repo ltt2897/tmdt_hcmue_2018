@@ -1,9 +1,9 @@
-@model IEnumerable<DanhMuc>
 @{ 
     ViewData["HeadTitle"]="quản lý danh mục"; 
 }
+@model IEnumerable<DanhMuc>
 <section class="content-header">
-    <h1>quản lý Danh Mục</h1>
+    <h1>Quản lý Danh mục</h1>
 </section>
 
 <!-- Main content -->
@@ -22,10 +22,11 @@
                     <table class="table table-bordered table-responsive" id="tb_DanhMuc">
                         <thead>
                             <tr>
-                                <th>Mã Danh Mục</th>
-                                <th>Tên Danh Mục</th>
-                                <th>Số Lượng Sách</th>
-                                <th></th>
+                                <th>Mã Danh mục</th>
+                                <th>Tên Danh mục</th>
+                                <th>Tên Mặt hàng</th>
+                                <th>Số lượng</th>
+                                <th width="33"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,7 +34,8 @@
                             <tr>
                                 <td>@item.Id</td>
                                 <td>@item.TenDanhMuc</td>
-                                <td>@item.Saches.Count()</td>
+                                <td>@item.MatHang.TenMatHang</td>
+                                <td>@item.SanPhames.Count()</td>
                                 <td>
                                     <a class="btn btn-default btn-xs btn-editDanhMuc" asp-action="SuaDanhMuc" asp-controller="QuanLyDanhMuc" asp-route-id="@item.Id">
                                         <i class="fa fa-edit"></i>
@@ -85,6 +87,14 @@
                             <label for="suaDanhMuc_Ten">Tên Danh Mục</label>
                             <input type="text" class="form-control" name="TenDanhMuc" id="suaDanhMuc_Ten">
                         </div>
+                        <div class="form-group">
+                            <label for="suaDanhMuc_MatHang"></label>
+                            <select class="form-control" id="suaDanhMuc_MatHang">
+                                @foreach(var mathang in ViewData["ListMatHang"]) {
+                                    <option value="mathang["Id"]">mathang["TenMatHang"]</option>
+                                }
+                            </select>   
+                        </div>
                         <button type="submit" class="btn bg-aqua">Sửa</button>
                     </form>
                 </div>
@@ -103,8 +113,9 @@
         {
             e.preventDefault();
             var data = datatable.row($(this).parents("tr")).data();
-            $("#suaDanhMuc_Ten").val(data[1]);
             $("#suaDanhMuc_id").val(data[0]);
+            $("#suaDanhMuc_Ten").val(data[1]);
+            $("#suaDanhMuc_MatHang option[value='+data[2]+"']").prop('selected', true);
             var action = "/Admin/QuanLyDanhMuc/SuaDanhMuc/" + data[0];
             $("form#frm_suaDanhMuc").attr("action", action);
             $(".box-suaDanhMuc").slideDown();

@@ -4,18 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Models;
 
-namespace QuanLyBanSach.Data
+namespace PhuKienDienThoai.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Sach> Sach { get; set; }
-        public DbSet<TacGia> TacGia { get; set; }
-        public DbSet<NhaXuatBan> NhaXuatBan { get; set; }
+        public DbSet<SanPham> SanPham { get; set; }
+        public DbSet<DongDienThoai> DongDienThoai { get; set; }
+        public DbSet<ThuongHieu> ThuongHieu { get; set; }
         public DbSet<NhanXet> NhanXet { get; set; }
         public DbSet<DanhMuc> DanhMuc { get; set; }
-        public DbSet<ChuDe> ChuDe { get; set; }
+        public DbSet<MatHang> MatHang { get; set; }
         public DbSet<HoaDon> HoaDon { get; set; }
         public DbSet<ChiTietHoaDon> ChiTietHoaDon { get; set; }
         public DbSet<Wishlist> Wishlist { get; set; }
@@ -32,14 +32,14 @@ namespace QuanLyBanSach.Data
 			// Customize the ASP.NET Identity model and override the defaults if needed.
 			// For example, you can rename the ASP.NET Identity table names and more.
 			// Add your customizations after calling base.OnModelCreating(builder);
-			builder.Entity<Sach>().HasKey(p => p.id);
+			builder.Entity<SanPham>().HasKey(p => p.id);
 			builder.Entity<ChiTietHoaDon>()
-					.HasKey(p => new { p.HoaDonId, p.SachId });
+					.HasKey(p => new { p.HoaDonId, p.SanPhamId });
 
 			builder.Entity<ChiTietHoaDon>()
-					.HasOne(p => p.Sach)
+					.HasOne(p => p.SanPham)
 					.WithMany(p => p.ChiTietHoaDons)
-					.HasForeignKey(p => p.SachId);
+					.HasForeignKey(p => p.SanPhamId);
 
 			builder.Entity<ChiTietHoaDon>()
 					.HasOne(p => p.HoaDon)
@@ -47,12 +47,12 @@ namespace QuanLyBanSach.Data
 					.HasForeignKey(p => p.HoaDonId);
 
 			builder.Entity<Wishlist>()
-					.HasKey(p => new { p.SachID, p.UserID });
+					.HasKey(p => new { p.SanPhamID, p.UserID });
 
 			builder.Entity<Wishlist>()
-					.HasOne(p => p.Sach)
+					.HasOne(p => p.SanPham)
 					.WithMany(p => p.Wishlist)
-					.HasForeignKey(p => p.SachID);
+					.HasForeignKey(p => p.SanPhamID);
 
 			builder.Entity<Wishlist>()
 					.HasOne(p => p.User)
@@ -62,21 +62,26 @@ namespace QuanLyBanSach.Data
 			builder.Entity<TraLoiLienLac>()
 					.HasOne(p => p.LienLac);
 			
-			builder.Entity<Sach>()
-					.HasOne(p=>p.ChuDe)
-					.WithMany(x=>x.Saches)
-					.HasForeignKey(x=>x.ChuDeId);
+			builder.Entity<SanPham>()
+					.HasOne(p => p.MatHang)
+					.WithMany(x => x.SanPhames)
+					.HasForeignKey(x => x.MatHangId);
 			
-			builder.Entity<Sach>()
-					.HasOne(p=>p.DanhMuc)
-					.WithMany(x=>x.Saches)
-					.HasForeignKey(x=>x.DanhMucId);
+			builder.Entity<SanPham>()
+					.HasOne(p => p.DanhMuc)
+					.WithMany(x => x.SanPhames)
+					.HasForeignKey(x => x.DanhMucId);
 			
-			builder.Entity<Sach>()
-					.HasOne(p=>p.TacGia)
-					.WithMany(x=>x.Saches)
-					.HasForeignKey(x=>x.TacGiaId);
-                
+			builder.Entity<SanPham>()
+					.HasOne(p => p.DongDienThoai)
+					.WithMany(x => x.SanPhames)
+					.HasForeignKey(x => x.DongDienThoaiId);
+            
+			builder.Entity<DanhMuc>()
+					.HasOne(p => p.MatHang)
+					.WithMany(x => x.DanhMuces)
+					.HasForeignKey(x => x.MatHangId);
+
         }
     }
 }

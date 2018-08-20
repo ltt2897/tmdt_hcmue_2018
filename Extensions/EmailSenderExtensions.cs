@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using QuanLyBanSach.Services;
+using PhuKienDienThoai.Services;
 
-namespace QuanLyBanSach.Services
+namespace PhuKienDienThoai.Services
 {
     public static class EmailSenderExtensions
     {

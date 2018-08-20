@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 
-namespace QuanLyBanSach.Models.ManageViewModels
+namespace PhuKienDienThoai.Models.ManageViewModels
 {
     public class ExternalLoginsViewModel
     {

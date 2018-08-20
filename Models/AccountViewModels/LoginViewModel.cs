@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace QuanLyBanSach.Models.AccountViewModels
+namespace PhuKienDienThoai.Models.AccountViewModels
 {
     public class LoginViewModel
     {
@@ -13,6 +13,7 @@ namespace QuanLyBanSach.Models.AccountViewModels
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Mật khẩu")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

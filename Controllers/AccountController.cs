@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Models.AccountViewModels;
-using QuanLyBanSach.Services;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Models.AccountViewModels;
+using PhuKienDienThoai.Services;
 
-namespace QuanLyBanSach.Controllers
+namespace PhuKienDienThoai.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

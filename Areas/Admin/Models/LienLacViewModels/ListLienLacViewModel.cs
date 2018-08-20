@@ -1,6 +1,6 @@
 using System;
 
-namespace QuanLyBanSach.Areas.Admin.Models.LienLacViewModels
+namespace PhuKienDienThoai.Areas.Admin.Models.LienLacViewModels
 {
     public class ListLienLacViewModel
     {

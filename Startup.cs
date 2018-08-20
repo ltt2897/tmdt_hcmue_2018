@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Services;
-using System;
+using Microsoft.AspNetCore.Identity;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Services;
+using Microsoft.EntityFrameworkCore;
 
-namespace QuanLyBanSach
+namespace PhuKienDienThoai
 {
     public class Startup
     {
@@ -31,7 +31,8 @@ namespace QuanLyBanSach
             {
                 opt.SignIn.RequireConfirmedEmail = false;
                 opt.User.RequireUniqueEmail = true;
-
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
             });
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -67,7 +68,7 @@ namespace QuanLyBanSach
             });
             // try
             // {
-            //     var roleseeder = new QuanLyBanSach.Configurations.RoleSeeder(serviceProvider);
+            //     var roleseeder = new PhuKienDienThoai.Configurations.RoleSeeder(serviceProvider);
             //     roleseeder.SeedAsync().Wait();
 
             // }

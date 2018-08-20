@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Data;
+using PhuKienDienThoai.Data;
 
-namespace QuanLyBanSach.ViewComponents
+namespace PhuKienDienThoai.ViewComponents
 {
-    public class NhaXuatBanViewComponent : ViewComponent
+    public class ThuongHieuViewComponent : ViewComponent
     {
         ApplicationDbContext dbContext;
-        public NhaXuatBanViewComponent(ApplicationDbContext context) =>
+        public ThuongHieuViewComponent(ApplicationDbContext context) =>
             dbContext = context;
-        private Task<List<Models.NhaXuatBan>> getData() =>
-            dbContext.NhaXuatBan.ToListAsync();
+        private Task<List<Models.ThuongHieu>> getData() =>
+            dbContext.ThuongHieu.ToListAsync();
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var data = await getData();

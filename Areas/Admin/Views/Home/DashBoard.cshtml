@@ -1,11 +1,11 @@
-@model QuanLyBanSach.Areas.Admin.Models.DashBoardViewModel
 @{
     ViewData["HeadTitle"]="Dashboard";
 }
+@model PhuKienDienThoai.Areas.Admin.Models.DashBoardViewModel
 <section class="content-header">
     <h1>
-        Dashboard
-        <small>Control panel</small>
+        Bảng điều khiển
+        <small>Admin Panel</small>
     </h1>
 </section>
 
@@ -53,9 +53,9 @@
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>@Model.TongSoLuongSach</h3>
+                    <h3>@Model.TongSoLuongSanPham</h3>
 
-                    <p>Tổng số lượng sách</p>
+                    <p>Tổng số lượng sản phẩm</p>
                 </div>
                 <div class="icon">
                     <i class="fa fa-book"></i>

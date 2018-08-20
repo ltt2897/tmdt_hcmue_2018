@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models;
 
-namespace QuanLyBanSach.Areas.Users.Controllers
+namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
     [Authorize(Roles = "User")]
@@ -29,14 +29,14 @@ namespace QuanLyBanSach.Areas.Users.Controllers
             var user = await userManager.GetUserAsync(HttpContext.User);
             //lấy dữ liệu theo người dùng hiện tại
             var lstItemTrongWishlist = await context.Wishlist
-                                                    .Include(x => x.Sach)
+                                                    .Include(x => x.SanPham)
                                                     .Include(x => x.User)
                                                     .Where(x => x.UserID == user.Id)
                                                     .ToListAsync();
             
              return View(lstItemTrongWishlist);
         }
-        ///<param name="id">sách id</param>
+        ///<param name="id">sản phẩm id</param>
         [HttpPost]
         [AllowAnonymous]
 
@@ -58,7 +58,7 @@ namespace QuanLyBanSach.Areas.Users.Controllers
                 {
                     await context.Wishlist.AddAsync(new Wishlist
                     {
-                        SachID = id,
+                        SanPhamID = id,
                         User = await userManager.GetUserAsync(HttpContext.User),
                     });
                     context.SaveChanges();
@@ -80,7 +80,7 @@ namespace QuanLyBanSach.Areas.Users.Controllers
             try
             {
                 var currentuser = await userManager.GetUserAsync(User);
-                var item_need_to_remove = await context.Wishlist.FirstOrDefaultAsync(z => z.UserID == currentuser.Id && z.SachID == id);
+                var item_need_to_remove = await context.Wishlist.FirstOrDefaultAsync(z => z.UserID == currentuser.Id && z.SanPhamID == id);
                 context.Wishlist.Remove(item_need_to_remove);
                 await context.SaveChangesAsync();
             }
