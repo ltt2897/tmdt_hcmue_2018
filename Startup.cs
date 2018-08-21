@@ -4,15 +4,23 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PhuKienDienThoai.Data;
 using PhuKienDienThoai.Models;
 using PhuKienDienThoai.Services;
+<<<<<<< HEAD
 using Microsoft.EntityFrameworkCore;
 using PaypalExpressCheckout.BusinessLogic;
 using PaypalExpressCheckout.BusinessLogic.ConfigOptions;
 using PaypalExpressCheckout.BusinessLogic.Interfaces;
 using System;
 using Microsoft.Extensions.Logging;
+=======
+using PaypalExpressCheckout.BusinessLogic;
+using PaypalExpressCheckout.BusinessLogic.ConfigOptions;
+using PaypalExpressCheckout.BusinessLogic.Interfaces;
+>>>>>>> Duc_2
 
 namespace PhuKienDienThoai
 {
@@ -53,12 +61,20 @@ namespace PhuKienDienThoai
 
             services.AddMvc()
                     .AddSessionStateTempDataProvider();
+<<<<<<< HEAD
 
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = "1585151324855686";
                 facebookOptions.AppSecret = "0cebe3614d74d124ddd698867645a22a";
             });
+=======
+            // services.AddAuthentication().AddFacebook(facebookOptions =>
+            // {
+            //     facebookOptions.AppId = "1585151324855686";
+            //     facebookOptions.AppSecret = "0cebe3614d74d124ddd698867645a22a";
+            // });        
+>>>>>>> Duc_2
             services.AddSingleton<IPaypalServices, PaypalServices>();
             services.Configure<PayPalAuthOptions>(Configuration);
         }
@@ -92,8 +108,13 @@ namespace PhuKienDienThoai
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRoute(
+<<<<<<< HEAD
                     name: "payment",
                     template: "{controller=Payment}/{action=Index}/{id?}");
+=======
+                name: "payment",
+                template: "{controller=Payment}/{action=Index}/{id?}");
+>>>>>>> Duc_2
             });
             // try
             // {
