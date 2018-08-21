@@ -12,11 +12,22 @@
     <link href="~/css/animate.css" rel="stylesheet">
 	<link href="~/css/main.min.css" rel="stylesheet">
 	<link href="~/css/responsive.css" rel="stylesheet">
+<<<<<<< HEAD
 	<link href="~/css/mystyle.css" rel="stylesheet">
 
+=======
+	<script src="https://js.braintreegateway.com/web/dropin/1.12.0/js/dropin.min.js"></script>
+	<!-- <meta property="og:url"           content="https://www.your-domain.com/your-page.html" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="Your Website Title" />
+	<meta property="og:description"   content="Your description" />
+	<meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" /> -->
+>>>>>>> Duc
 	@RenderSection("styles",  required: false)
 </head>
 <body>
+	
+	<div class="fb-root"></div>
     <header id="header"><!--header-->  
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -31,11 +42,22 @@
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<script>(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=878613658998659&autoLogAppEvents=1';
+								fjs.parentNode.insertBefore(js, fjs);
+								}(document, 'script', 'facebook-jssdk'));
+								</script>						
+								<li><a href="#"><i class="fb-login-button" data-width="16px" data-max-rows="1" data-size="small" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></i></a></li>
+								<li><a href="#"><i id="shareBtn"
+													data-share="true"
+    												data-layout="button_count"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -97,8 +119,21 @@
 	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.scrollUp.min.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
-    
+    <script src="~/js/facebook.js"></script>
     <script src="~/js/main.js"></script>
     @RenderSection("Scripts", required: false)
+	<script>
+	document.getElementById('shareBtn').onclick = function() {
+		FB.ui({
+			method: 'share',
+			display: 'popup',
+			href: 'http://localhost:51748/',
+			picture: 'https://scontent.fsgn8-1.fna.fbcdn.net/v/t1.0-9/29314512_1714972961895422_1404300356984242176_n.jpg?_nc_cat=0&oh=134a60fe5729138ff83b6ce4cda3ac1a&oe=5BFE830A',
+			name: "The name who will be displayed on the post",
+			description: "The description who will be displayed"
+				
+		}, function(response){});
+	}
+	</script>
 </body>
 </html>
