@@ -9,6 +9,7 @@
     <div class="row">
     @foreach(var item in Model)
     {
+        <div id="paypal-button" item-id="@item.id"></div>
         <div class="col-sm-4" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <div class="product-image-wrapper">
                 <div class="single-products">
@@ -28,7 +29,35 @@
         </div>
     }
     </div>
-    
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        var host = document.location.href;
+
+        var CREATE_PAYMENT_URL = host + 'Payment/CreatePayment';
+        var EXECUTE_PAYMENT_URL = host + 'Payment/ExecutePayment';
+        // var id = document.getElementsByClassName('paypal-button').getAttribute('item-id');
+
+        paypal.Button.render({
+            env: 'sandbox', //'production',
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function (e) {
+                return paypal.request.post(CREATE_PAYMENT_URL).then(function (data) {
+                    return data.id;
+                });
+            },
+
+            onAuthorize: function (data) {
+                return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                    paymentID: data.paymentID,
+                    payerID: data.payerID
+                }).then(function () {
+                    window.location.href = host + 'Payment/Success'
+                });
+            }
+
+        }, '#paypal-button');
+    </script>   
 </div><!--features_items-->
 @*Html.PagedListPager( myList, page => Url.Action("Index", new { page = page}) )*@
 <div class="text-right">
