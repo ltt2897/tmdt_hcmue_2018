@@ -35,22 +35,13 @@
 
         var CREATE_PAYMENT_URL = host + 'Payment/CreatePayment';
         var EXECUTE_PAYMENT_URL = host + 'Payment/ExecutePayment';
-<<<<<<< HEAD
-        var id = document.getElementsByClassName('paypal-button').getAttribute('item-id');
-=======
         // var id = document.getElementsByClassName('paypal-button').getAttribute('item-id');
->>>>>>> Duc_2
 
         paypal.Button.render({
             env: 'sandbox', //'production',
             commit: true, // Show a 'Pay Now' button
 
             payment: function (e) {
-<<<<<<< HEAD
-
-
-=======
->>>>>>> Duc_2
                 return paypal.request.post(CREATE_PAYMENT_URL).then(function (data) {
                     return data.id;
                 });
