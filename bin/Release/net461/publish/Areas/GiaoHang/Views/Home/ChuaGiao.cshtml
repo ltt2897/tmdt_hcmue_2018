@@ -1,0 +1,110 @@
+@using PhuKienDienThoai.Areas.GiaoHang.Models.GiaoHangViewModels
+@model ChuaGiaoViewModel 
+@{ViewData["HeadTitle"]="Danh sách hóa đơn chưa giao";}
+<section class="content-header">
+    <h1>Danh sách các hóa đơn chưa giao</h1>
+</section>
+
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="box box-primary">
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="slct_HoaDonChuaGiao">Chọn hóa đơn</label>
+                    <select class="form-control" id="slct_HoaDonChuaGiao" asp-for="Id" asp-items="Model.DanhSanPhamHoaDon"></select>
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-5">
+                        <table class="table table-responsive table-datatable">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Đơn giá</th>
+                                    <th>Thành tiền</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="col-md-7">
+                        <div id="googlemap" style="height:370px"></div>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <form asp-action="GiaoHang" asp-controller="Home" method="POST">
+                        <input type="hidden" name="Id" id="XacNhanGiaoHang_HoaDonID">
+                        <button type="submit" class="btn btn-primary pull-right">Xác nhận giao hàng</button>
+                    </form>
+                </div>
+                <div id="directionpanel" style="height: 330px; overflow: auto"></div> 
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+@section Scripts
+{
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn4b6Y62qV-ONkx8YJ7YSNx_B-SR316Rc&callback=initMap&language=vi"type="text/javascript"></script>
+    <script>
+        var directionsDisplay;
+        var directionsService;
+        function initMap() {
+            directionsService = new window.google.maps.DirectionsService();
+            directionsDisplay = new google.maps.DirectionsRenderer();
+            var latlng = new google.maps.LatLng(10.754792, 106.6952276);
+            var myOptions = {
+                zoom: 9,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("googlemap"), myOptions);
+
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('directionpanel'));
+
+        }
+
+        function XL_Xuat_Dia_diem(pointStart,pointEnd) {
+            var request = {
+                origin: pointStart,
+                destination: pointEnd,
+                travelMode: google.maps.DirectionsTravelMode.DRIVING
+            };
+            directionsService.route(request, function(response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+        }
+        $(function()
+        {
+            $("#slct_HoaDonChuaGiao").change(function()
+            {
+                var _id = $(this).val();
+                var table = $(".table-datatable").DataTable(
+                {
+                    "destroy": true,
+                    ajax: "@Url.Action("ChiTietDonHang","Home")" + "/" + _id,
+                    columns: [
+                        {data: "tenSanPham"},
+                        {data:"soLuong"},
+                        {data:"donGia"},
+                        {data:"thanhTien"}
+                    ],
+                });
+                var pointStart="280 An Dương Vương Phường 4 Quận 10 Tp.HCM";
+                var pointEnd= $("#slct_HoaDonChuaGiao option:selected").text();
+                $("#XacNhanGiaoHang_HoaDonID").val(_id);
+                XL_Xuat_Dia_diem(pointStart,pointEnd);
+            });
+            
+            $("#slct_HoaDonChuaGiao").change();
+           
+        })
+        
+    </script>
+}

@@ -1,0 +1,84 @@
+@model List<ApplicationUser>
+@{
+    ViewData["HeadTitle"]="quản lý người dùng";
+    var chck = ""; //check giới tính
+}
+<section class="content-header">
+    <h1>
+        Danh sách Người dùng
+        <small>Control panel</small>
+        <a class="btn btn-primary pull-right" asp-action="ThemNguoiDung" asp-controller="QuanLyNguoiDung">
+            <i class="fa fa-user-plus fa-fw"></i> 
+            Thêm người dùng mới
+        </a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+            <!-- small box -->
+            <div class="box box-aqua">
+                <div class="box-body">
+                    <table class="table table-bordered table-responsive" id="tb_NhanVien">
+                        <thead>
+                            <tr>
+                                <th>Họ tên</th>  
+                                <th>Ngày sinh</th>  
+                                <th>Giới tính</th>  
+                                <th>Địa chỉ</th>  
+                                <th>Email</th>  
+                                <th>Điện thoại</th>
+                                <th width="33"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                                chck = (item.GioiTinh)?"checked":"";
+                                <tr>
+                                    <td>@item.HoTen</td>
+                                    <td>@item.NgaySinh.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-center">
+                                        <input class="" disabled="disabled" type="checkbox" @chck>
+                                    </td>
+                                    <td>@item.DiaChi</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.PhoneNumber</td>
+                                    <td>
+                                        <a class="btn btn-default btn-xs btn-editNhanvien" asp-action="SuaNguoiDung" asp-controller="QuanLyNguoiDung" asp-route-email="@item.Email">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a asp-action="XoaNguoiDung" asp-route-email="@item.Email" asp-controller="QuanLyNguoiDung" class="btn btn-danger btn-xs">
+                                            <i class="fa fa-fw fa-remove"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+
+@section Scripts
+{
+    <script>
+    $(function()
+    {
+       $("#tb_NhanVien").dataTable();
+        @if(ViewData["Message"]!=null)
+        {
+            @:alert("@ViewData["Message"]");
+        }
+    })
+    
+    </script>
+}

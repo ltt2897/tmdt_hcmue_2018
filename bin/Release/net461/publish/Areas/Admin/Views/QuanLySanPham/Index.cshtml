@@ -1,0 +1,77 @@
+@model IEnumerable<SanPham>
+@{
+    ViewData["HeadTitle"]="quản lý sản phẩm";
+    var chck = ""; //check giới tính
+}
+<section class="content-header">
+    <h1>
+        Danh sách Sản phẩm
+        <a class="btn btn-primary pull-right" asp-action="ThemSanPham" asp-controller="QuanLySanPham">
+            <i class="fa fa-user-plus fa-fw"></i> 
+            Thêm Sản phẩm mới
+        </a>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+            <!-- small box -->
+            <div class="box box-aqua">
+                <div class="box-body">
+                    <table class="table table-bordered table-responsive" id="tb_SanPham">
+                        <thead>
+                            <tr>
+                                <th>Tên Sản phẩm</th>  
+                                <th>Tên Dòng điện thoại</th>  
+                                <th>Tên Thương hiệu</th>  
+                                <th>Số lượng</th>  
+                                <th>Đơn giá</th>  
+                                <th width="33"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.TenSanPham</td>
+                                    <td>@item.DongDienThoai.TenDongDienThoai</td>
+                                    <td>@item.ThuongHieu.TenThuongHieu</td>
+                                    <td>@item.SoLuong</td>
+                                    <td>@item.DonGia.ToString("#,0")</td>
+                                    <td>
+                                        <a class="btn btn-default btn-xs btn-editNhanvien" asp-action="SuaSanPham" asp-controller="QuanLySanPham" asp-route-id="@item.id">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+                                        <a asp-action="XoaSanPham"asp-controller="QuanLySanPham" asp-route-id="@item.id" class="btn btn-danger btn-xs">
+                                            <i class="fa fa-fw fa-remove"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+@section Scripts
+{
+    <script>
+    $(function()
+    {
+       $("#tb_SanPham").dataTable();
+        @if(ViewData["Message"]!=null)
+        {
+            @:alert("@ViewData["Message"]");
+        }
+    })
+    
+    </script>
+}

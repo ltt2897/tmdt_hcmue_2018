@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	@await Html.PartialAsync("_HeadPartial")
+</head>
+<body class="hold-transition skin-blue-light sidebar-mini">
+	<div class="wrapper">
+		@await Html.PartialAsync("_NavbarPartial")
+		@await Html.PartialAsync("_SidebarPartial")
+		<div class="content-wrapper">
+			@RenderBody()
+		</div>
+		<footer class="main-footer">
+			<div class="pull-right hidden-xs">
+				<b>Version</b> 1.0.0
+			</div>
+			<strong>Copyright &copy; 2017-2018
+				<a href="">	Phần mềm quản lý bán phụ kiện điện thoại</a>
+			</strong>
+		</footer>
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
+	@await Html.PartialAsync("_ScriptsPartial")
+	@await RenderSectionAsync("Scripts",false)
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["HeadTitle"] = "Confirm email";
+}
+
+<h2>@ViewData["HeadTitle"]</h2>
+<div>
+    <p>
+        Cảm ơn bạn đã xác thực tài khoản, bạn có thể trở về trang chủ sau 3s
+    </p>
+</div>
+
+@section Scripts
+{
+    <script>
+        setTimeout(()=>
+        {
+            window.location.href="/";
+        },3000);
+    </script>
+}

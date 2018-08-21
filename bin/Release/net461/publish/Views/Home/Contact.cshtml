@@ -1,0 +1,127 @@
+﻿@{
+    Layout="_MasterLayout";
+    ViewData["HeadTitle"]="Contact";
+}
+@model PhuKienDienThoai.Models.ContactViewModels.ContactViewModel
+<div id="contact-page" class="container">
+    	<div class="bg">
+	    	<div class="row">    		
+	    		<div class="col-sm-12">    			   			
+					<h2 class="title text-center">Bản đồ</h2>    			    				    				
+					<div id="gmap" class="contact-map"></div>
+				</div>			 		
+			</div>    	
+    		<div class="row">  	
+	    		<div class="col-sm-8">
+	    			<div class="contact-form">
+	    				<h2 class="title text-center">Liên hệ</h2>
+	    				<div class="status alert alert-success" style="display: none"></div>
+				    	<form asp-action="Contact" id="main-contact-form" class="contact-form row" name="contact-form" method="post">
+				            <div class="form-group col-md-6">
+				                <input type="text" asp-for="Ten" class="form-control" placeholder="Họ tên">
+                                <span asp-validation-for="Ten" class="text-danger"></span>
+				            </div>
+				            <div class="form-group col-md-6">
+				                <input type="email" name="Email" class="form-control" placeholder="Email">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+				            </div>
+				            <div class="form-group col-md-12">
+				                <input type="text" name="TieuDe" class="form-control" placeholder="Subject">
+                                <span asp-validation-for="TieuDe" class="text-danger"></span>
+				            </div>
+				            <div class="form-group col-md-12">
+				                <textarea name="NoiDung" id="message" class="form-control" placeholder="Your Message Here"></textarea>
+                                <span asp-validation-for="NoiDung" class="text-danger"></span>
+				            </div>                        
+				            <div class="form-group col-md-12">
+				                <input type="submit" class="btn btn-primary pull-right" value="Submit">
+				            </div>
+                            @* <div asp-validation-summary="All" class="text-danger"></div> -->*@
+				        </form>
+	    			</div>
+	    		</div>
+	    		<div class="col-sm-4">
+	    			<div class="contact-info">
+	    				<h2 class="title text-center">Thông tin liên hệ</h2>
+	    				<address>
+	    					<p>National Book store</p>
+							<p>280 An Dương Vương, Phường 9, Quận 8, TP. HCM</p>
+							<p>Hồ Chí Minh, Việt Nam</p>
+							<p>Điện thoại: (84-8) 3835.2020</p>
+							<p>Email: :webmaster@hcmup.edu.vn</p>
+	    				</address>
+	    				<div class="social-networks">
+	    					<h2 class="title text-center">Social Networking</h2>
+							<ul>
+								<li>
+									<a href="#"><i class="fa fa-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-google-plus"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="fa fa-youtube"></i></a>
+								</li>
+							</ul>
+	    				</div>
+	    			</div>
+    			</div>    			
+	    	</div>  
+    	</div>	
+    </div><!--/#contact-page-->
+
+
+@section Scripts
+{
+    @await Html.PartialAsync("_ValidationScriptsPartial");
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn4b6Y62qV-ONkx8YJ7YSNx_B-SR316Rc&callback=initMap"type="text/javascript"></script>
+    <script src="~/lib/ckeditor/ckeditor.js"></script>
+	<script></script>
+    <script>
+        var map;
+        function initMap()
+        {
+            var latlng = new google.maps.LatLng(10.754792, 106.6952276); // Tp Hồ Chí Minh
+            var myOptions = {
+                zoom: 8,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                disableDefaultUI: true
+            };
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+        }
+        //google map
+        function getLocation()
+        {
+            var geocoder = new google.maps.Geocoder();
+            initMap();
+            var address =" 280 An Dương Vương, Phường 4, Quận 5, TP. Hồ Chí Minh";
+            geocoder.geocode({
+                address: address,
+            },(rel, stat)=>
+            {
+                if(stat == google.maps.GeocoderStatus.OK)
+                {
+                    map.setCenter(rel[0].geometry.location);
+                    var maker = new google.maps.Marker({
+                        zoom: 8,
+                        map:map,
+                        position: rel[0].geometry.location,
+                        title: "National book store"
+                    });
+                    map.setZoom(17);
+                    map.panTo(maker.position);
+                }
+            });
+        }
+        window.onload = getLocation;
+
+        //ckeditor
+        CKEDITOR.replace("message",{
+            customConfig:"/js/ckeditor.config.js"
+        });
+    </script>
+}

@@ -1,0 +1,131 @@
+<section class="content">
+    <div class="row " style="height:100%">
+        <div class="col-md-3 " style="height:100%">
+            <div class="box box-solid" style="height:100%">
+                <div class="box-header with-border">
+                <h4 class="box-title">Danh sách</h4>
+                </div>
+                <div class="box-body LstLienHe" style="height:100%"></div>
+            </div>
+        </div> 
+        <div style="height:100%" class="col-md-9">
+            <div  class="ChiTietLienLac box box-solid">
+                <div class="box-body ">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tên người Gởi:</label>
+                                 <span id="TenNguoiGoi">asd</span>
+                                <!-- <input id="TenNguoiGoi" type="text" class="form-control" readonly> -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Email:</label>
+                                <span id="EmailNguoiGoi">asd</span>
+                                <!-- <input type="text" id="EmailNguoiGoi" class="form-control" disabled> -->
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>ngày gởi:</label>
+                                <span id="NgayGoi">asd</span>
+                                <!-- <input type="text" id="NgayGoi" class="form-control"disabled> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <label>Tiêu đề: </label>
+                                <span id="TieuDe">asd</span>
+                                <!-- <input type="text" id="TieuDe" class="form-control" readonly> -->
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group col-md-12">
+                            <label>Nội Dung</label>
+                            <div style="border: 1px solid gray; height:23px" id="NoiDung"> asdasd</textarea>
+                            <!-- <textarea name="" style="resize:none" id="" cols="30" rows="3" disabled class="form-control"></textarea> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  class="TraLoiLienLac box box-solid box-body">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <form action="" method="POST" id="frm_traLoiLienHe">
+                            <div class="form-group">
+                                <label>Trả lời</label>
+                                <input type="hidden" name="LienLacId" id="LienLacId">
+                                <textarea name="TraLoiLienLac" id="TraLoiLienLac" class="form-control"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right">
+                                <i class="fa fa-send" aria-hidden="true"></i>
+                                Gửi
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles
+{
+    <style>
+        .unread{
+            font-weight: bold;
+        }
+    </style>
+}
+
+@section Scripts
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js"></script>
+    <script>
+        
+        CKEDITOR.replace('TraLoiLienLac',{
+            customConfig: "/js/ckeditor.config.js"
+        });
+
+        function ChiTiet(id)
+        {
+            $("#LienLacId").val(id);
+            $.get(`@Url.Action("ChiTietLienLac","QuanLyLienLac", new{area="Admin"})/${id}`, function(data, stt, xhr)
+            {
+                $("#TenNguoiGoi").html(data.ten);
+                $("#EmailNguoiGoi").html(data.email);
+                $("#NgayGoi").html(moment(data.ngayGoi).format("D/M/Y"));
+                $("#TieuDe").html(data.tieuDe);
+                $("#NoiDung").html(data.noiDung);
+            })
+        }
+        
+        $(function()
+        {
+            $.get("/Admin/QuanLyLienLac/GetList",function(data, stt, xhr)
+            {
+                data.forEach(function(item, index)
+                {
+                    var ngayGoi = moment(item.ngayGoi).format("D/MM/Y");
+                    $(".LstLienHe").append(
+                        `<div class="LienHeItem ${(!item.isRead)?"unread":""}" style="cursor: pointer; margin: 10px 0;" onclick="ChiTiet(${item.id})">
+                            ${item.tieuDe}
+                            <span class="pull-right">
+                                ${ngayGoi}
+                            </span>
+                        </div>`
+                    );
+                });
+            });
+            $("#frm_traLoiLienHe").submit(function(ev)
+            {
+                ev.preventDefault();
+                console.log("hi");
+            });
+        });
+    </script>
+    
+}

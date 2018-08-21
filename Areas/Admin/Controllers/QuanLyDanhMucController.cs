@@ -26,13 +26,11 @@ namespace PhuKienDienThoai.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             ViewData["TagName"] = "QuanLyDanhMuc";
-            ViewData["ListMatHang"] = await context.MatHang.ToArrayAsync();
-
             var model = await context.DanhMuc
                                     .Include(x => x.MatHang)
                                     .Include(p => p.SanPhames)
                                     .ToListAsync();
-            
+
             return View(model);
         }
         #endregion

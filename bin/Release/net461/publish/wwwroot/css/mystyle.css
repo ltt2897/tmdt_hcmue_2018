@@ -1,0 +1,8 @@
+h2.title {
+    top: 5px;
+}
+h2 span.text-block {
+    padding: 0 20px;
+    z-index: 5;
+    background-color: #fff;
+}

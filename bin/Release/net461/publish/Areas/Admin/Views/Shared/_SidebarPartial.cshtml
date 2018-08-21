@@ -1,0 +1,84 @@
+@inject UserManager<ApplicationUser> UserManager
+@{
+	var currentUser = await UserManager.GetUserAsync(User);
+}
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="~/images/users/HS_1.jpg" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>@currentUser.HoTen</p>
+                <a href="#">
+                    <i class="fa fa-circle text-success"></i> Online
+                </a>
+            </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">ĐIỀU HƯỚNG</li>
+            <li class='@if(ViewData["TagName"] == "Dashboard") { <text>active</text> }'>
+                <a asp-action="DashBoard" asp-controller="Home" asp-area="Admin">
+                    <i class="fa fa-tachometer"></i>
+                    <span>Bảng điều khiển</span>
+                </a>
+            </li>
+            <li class='@if(ViewData["TagName"] == "QuanLySanPham") { <text>active</text> }'>
+                <a asp-controller="QuanLySanPham" asp-action="index">
+                    <i class="fa fa-book"></i>
+                    <span>Quản lý Sản phẩm</span>
+                </a>
+            </li>
+            <li class='@if(ViewData["TagName"] == "QuanLyThuongHieu") { <text>active</text> }'>
+                <a asp-controller="QuanLyThuongHieu" asp-action="index">
+                    <i class="fa fa-industry" aria-hidden="true"></i>
+                    <span>Quản lý Thương hiệu</span>
+                </a>
+            </li>
+            <li class='@if(ViewData["TagName"] == "QuanLyMatHang") { <text>active</text> }'>
+                <a asp-controller="QuanLyMatHang" asp-action="index">
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                    <span>Quản lý Mặt hàng</span>
+                </a>
+            </li>
+             <li class='@if(ViewData["TagName"] == "QuanLyDanhMuc") { <text>active</text> }'>
+                <a asp-controller="QuanLyDanhMuc" asp-action="index">
+                    <i class="fa fa-address-card" aria-hidden="true"></i>
+                    <span>Quản lý Danh mục</span>
+                </a>
+            </li>
+            <li class='@if(ViewData["TagName"] == "QuanLyDongDienThoai") { <text>active</text> }'>
+                <a asp-controller="QuanLyDongDienThoai" asp-action="index">
+                    <i class="fa fa-yc-square" aria-hidden="true"></i>
+                    <span>Quản lý Dòng điện thoại</span>
+                </a>
+            </li>
+            <li class='@if(ViewData["TagName"] == "QuanLyNguoiDung") { <text>active</text> }'>
+                <a asp-controller="QuanLyNguoiDung" asp-action="index">
+                    <i class="fa fa-users"></i>
+                    <span>Quản lý Người dùng</span>
+                </a>
+            </li>
+            @*<li class='@if(ViewData["TagName"] == "QuanLyLienLac") { <text>active</text> }'>
+                <a asp-controller="QuanLyLienLac" asp-action="index">
+                    <i class="fa fa-users"></i>
+                    <span>Quản lý Liên lạc</span>
+                </a>
+            </li>*@
+            <li class='@if(ViewData["TagName"] == "ThongKe") { <text>active</text> }'>
+                <a asp-controller="ThongKe" asp-action="Index">
+                    <i class="fa fa-bar-chart"></i>
+                    <span>Thống Kê</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
+
+<script>
+    
+</script>

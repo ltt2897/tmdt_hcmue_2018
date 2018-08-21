@@ -1,0 +1,16 @@
+@model List<NhanXet>
+<div class="clearfix"></div>
+<div class="col-md-12" id="NhanXet">
+@if(Model.Count>0)
+{
+    @foreach(var item in Model)
+    {
+        <ul class="reviews">
+            <li><a href="" onclick="event.preventDefault()"><i class="fa fa-user"></i>@item.User.HoTen</a></li>
+            <li><a href="" onclick="event.preventDefault()"><i class="fa fa-clock-o"></i>@item.NgayDang</a></li>  
+        </ul>
+        <h4> @item.TieuDe</h4>
+        <p>@Html.Raw(@item.NoiDung)</p>
+    }
+}
+</div>

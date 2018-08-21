@@ -1,0 +1,89 @@
+@{
+    ViewData["HeadTitle"]="Sửa người dùng";
+}
+@using PhuKienDienThoai.Areas.Admin.Models.NguoiDungViewModels
+@model SuaNguoiDungViewModel
+<section class="content-header">
+    <h1>
+        Sửa thông tin người dùng
+        <small>@model.HoTen</small>
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <form asp-action="SuaNguoiDung" asp-controller="QuanLyNguoiDung" asp-route-email="@model.Email" method="POST">
+                        <div class="form-group">
+                            <label asp-for="HoTen"></label>
+                            <input type="text" id="HoTen" asp-for="HoTen" class="form-control" value="@model.HoTen">    
+                            <span asp-validation-for="HoTen" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input type="text" readonly="readonly" id="Email" asp-for="Email" class="form-control" value="@model.Email">    
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NgaySinh"></label>
+                            <input class="form-control" type="date" id="NgaySinh" asp-for="NgaySinh" value="@model.NgaySinh.ToString("yyyy-MM-dd")">
+                            <span asp-validation-for="NgaySinh" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính: </label>
+                            <label class="radio-inline">
+                                <input type="radio" disabled name="GioiTinh" value="true" @((Model.GioiTinh)?"checked":"") id="GioiTinh_Nam" >
+                                Nam
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" disabled value="false" name="GioiTinh" @((!Model.GioiTinh)?"checked":"") id="GioiTinh_Nu">
+                                Nữ
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ChucVu"></label>
+                            <select asp-for="ChucVu" id="ChucVu" class="form-control">
+                                @foreach(var item in ViewBag.ChucVu)
+                                {
+                                    <option value="@item.Name" @((item.Name == Model.ChucVu)?"checked":"")>@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DiaChi"></label>
+                            <input class="form-control" type="text" id="DiaChi" asp-for="DiaChi" value="@model.DiaChi">
+                            <span asp-validation-for="DiaChi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber"></label>
+                            <input class="form-control" type="text" id="PhoneNumber" asp-for="PhoneNumber" value="@model.PhoneNumber">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group" id="changePassword" style="display:none">
+                            <label asp-for="Password"></label>
+                            <input class="form-control" id="Password" asp-for="Password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <button type="button" id="btn_openChangepassword" class="btn btn-primary">Đổi mật khẩu</button>
+                        <button type="submit" class="btn-info btn pull-right">Sửa</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>
+    $(function()
+    {
+        $("#btn_openChangepassword").on("click", function(e)
+        {
+            $("#changePassword").slideToggle()
+        });
+    });
+    </script>
+}

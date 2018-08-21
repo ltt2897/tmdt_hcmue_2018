@@ -1,0 +1,116 @@
+@{
+    ViewData["HeadTitle"]="Thêm người dùng";
+}
+@using PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
+@model SuaSanPhamViewModel
+<section class="content-header">
+    <h1>
+        Thêm Sản phẩm mới
+    </h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <form asp-action="SuaSanPham" asp-route-id="@Model.Id" asp-controller="QuanLySanPham" method="POST" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <div class="form-group">
+                                    <img src="/images/SanPham/@Model.HinhAnh" alt="" id="imgpreview" style="height:170px" class="img-responsive center-block">
+                                    <input accept="image/*" class="hidden" id="HinhAnh" asp-for="uploadHinhAnh" onchange="document.getElementById('imgpreview').src=window.URL.createObjectURL(new Blob([this.files[0]]))">
+                                    <span asp-validation-for="uploadHinhAnh" class="text-danger"></span>  
+                                </div>
+                                <button type="button" onclick="document.getElementById('HinhAnh').click()" class="btn btn-info">Upload Hình</button>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label asp-for="TenSanPham"></label>
+                                    <input type="text" id="TenSanPham" asp-for="TenSanPham" class="form-control">    
+                                    <span asp-validation-for="TenSanPham" class="text-danger"></span>
+                                </div>
+                                <div class="row">                                    
+                                    <div class="form-group col-md-4">
+                                        <label asp-for="MauSac"></label>
+                                        <input class="form-control" id="MauSac" asp-for="MauSac" >
+                                        <span asp-validation-for="MauSac" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-3">
+                                        <label asp-for="DinhDang"></label>
+                                        <input class="form-control" type="text" id="DinhDang" asp-for="DinhDang" >
+                                        <span asp-validation-for="DinhDang" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label asp-for="DonGia"></label>
+                                        <input class="form-control" type="text" id="DonGia" asp-for="DonGia" >
+                                        <span asp-validation-for="DonGia" class="text-danger"></span>
+                                    </div>
+                                     <div class="form-group col-md-3">
+                                        <label asp-for="PhanTramGiamGia"></label>
+                                        <input class="form-control" type="text" id="PhanTramGiamGia" asp-for="PhanTramGiamGia" >
+                                        <span asp-validation-for="PhanTramGiamGia" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label asp-for="SoLuong"></label>
+                                        <input class="form-control" type="text" id="SoLuong" asp-for="SoLuong" >
+                                        <span asp-validation-for="SoLuong" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="MatHangId"></label>
+                                    <select class="form-control" asp-for="MatHangId" id="MatHang" asp-items="@(new SelectList(Model.MatHangs,"Id","TenMatHang"))"></select>   
+                                </div>
+                            </div>
+                        
+                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="DongDienThoaiId"></label>
+                                    <select id="DongDienThoaiId" asp-for="DongDienThoaiId" class="form-control" asp-items="@(new SelectList(Model.DongDienThoais,"Id","TenDongDienThoai"))"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="DanhMucId"></label>
+                                    <select id="DanhMucId" asp-for="DanhMucId" class="form-control" asp-items="@(new SelectList(Model.DanhMucs,"Id","TenDanhMuc"))"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="ThuongHieuId"></label>
+                                    <select id="ThuongHieuId" name="ThuongHieuId" class="form-control" asp-items="@(new SelectList(Model.ThuongHieus,"Id","TenThuongHieu"))"></select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label asp-for="TomTat"></label>
+                            <textarea class="form-control" id="TomTat" asp-for="TomTat"></textarea>
+                            <span asp-validation-for="TomTat" class="text-danger"></span>
+                        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group pull-right">
+                            <a class="btn btn-danger" asp-action="XoaSanPham" asp-controller="QuanLySanPham" asp-route-id="@Model.Id"> <i class="fa fa-remove" aria-hidden="true"></i> Xóa sản phẩm</a>
+                            <button type="submit" class="btn-info btn "><i class="fa fa-edit" aria-hidden="true"></i> Sửa</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts
+{
+    <script>
+        CKEDITOR.replace('TomTat',{
+            customConfig: "/js/ckeditor.config.js"
+        });
+    </script>
+}
