@@ -1,6 +1,6 @@
 obj/*
 .vscode/*
 Data/Migrations/*
-bin/*
+bin/Debug/*
 Error.log
 appsettings.json
