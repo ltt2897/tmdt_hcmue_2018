@@ -41,5 +41,11 @@
         },
         // Optionally generate .map file
         "sourceMap": false
+    },
+    {
+        "outputFileName": "wwwroot/js/facebook.js",
+        "inputFiles": [
+            "wwwroot/js/facebook.js"
+        ]
     }
 ]

@@ -4,16 +4,29 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PaypalExpressCheckout.BusinessLogic;
+using PaypalExpressCheckout.BusinessLogic.ConfigOptions;
+using PaypalExpressCheckout.BusinessLogic.Interfaces;
 using QuanLyBanSach.Data;
 using QuanLyBanSach.Models;
 using QuanLyBanSach.Services;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace QuanLyBanSach
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) => Configuration = configuration;
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+        }
 
         public IConfiguration Configuration { get; }
 
@@ -39,10 +52,17 @@ namespace QuanLyBanSach
             services.AddMvc()
                     .AddSessionStateTempDataProvider();
 
+            services.AddAuthentication().AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = "1585151324855686";
+                facebookOptions.AppSecret = "0cebe3614d74d124ddd698867645a22a";
+            });
+            services.AddSingleton<IPaypalServices, PaypalServices>();
+            services.Configure<PayPalAuthOptions>(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -53,6 +73,11 @@ namespace QuanLyBanSach
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+
+            app.UseDeveloperExceptionPage();
+            app.UseBrowserLink();
             app.UseStaticFiles();
             app.UseAuthentication();
             app.UseSession();
@@ -64,6 +89,9 @@ namespace QuanLyBanSach
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "payment",
+                    template: "{controller=Payment}/{action=Index}/{id?}");
             });
             // try
             // {
