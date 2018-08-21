@@ -3,11 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-<<<<<<< HEAD
       "applicationUrl": "http://localhost:21766/",
-=======
-      "applicationUrl": "http://localhost:51728/",
->>>>>>> Duc
       "sslPort": 0
     }
   },
@@ -19,24 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-<<<<<<< HEAD
     "PhuKienDienThoai": {
-=======
-    "QuanLyBanSach": {
->>>>>>> Duc
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-<<<<<<< HEAD
       "applicationUrl": "http://localhost:21765/"
     }
   }
 }
-=======
-      "applicationUrl": "http://localhost:51748/"
-    }
-  }
-}
->>>>>>> Duc

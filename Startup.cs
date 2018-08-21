@@ -3,22 +3,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Identity;
 using PhuKienDienThoai.Data;
 using PhuKienDienThoai.Models;
 using PhuKienDienThoai.Services;
 using Microsoft.EntityFrameworkCore;
-=======
 using PaypalExpressCheckout.BusinessLogic;
 using PaypalExpressCheckout.BusinessLogic.ConfigOptions;
 using PaypalExpressCheckout.BusinessLogic.Interfaces;
-using QuanLyBanSach.Data;
-using QuanLyBanSach.Models;
-using QuanLyBanSach.Services;
 using System;
 using Microsoft.Extensions.Logging;
->>>>>>> Duc
 
 namespace PhuKienDienThoai
 {
