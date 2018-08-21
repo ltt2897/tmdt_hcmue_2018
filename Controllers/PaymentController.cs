@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PaypalExpressCheckout.BusinessLogic.Interfaces;
 
 
-namespace QuanLyBanSach.Controllers
+namespace PhuKienDienThoai.Controllers
 {
     public class PaymentController : Controller
     {
