@@ -1,7 +1,12 @@
 ﻿﻿using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using PhuKienDienThoai.Data;
+using PhuKienDienThoai.Models.SanPhamViewModels;
+using PhuKienDienThoai.Models;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 using PaypalExpressCheckout.BusinessLogic.Interfaces;
-
+using System.Collections.Generic;
 
 namespace PhuKienDienThoai.Controllers
 {
@@ -25,14 +30,18 @@ namespace PhuKienDienThoai.Controllers
             // WebClient client = new WebClient();
             // client.Headers.Add("referer", "http://stackoverflow.com");
             // client.Headers.Add("user-agent", "Mozilla/5.0");
+            //lấy dữ liệu từ session
+            var stringItem = HttpContext.Session.GetString("GioHang");
+            var ListItemTrongGioHang = new List<GioHangViewModel>();
+            ListItemTrongGioHang = JsonConvert.DeserializeObject<List<GioHangViewModel>>(stringItem);
             string returnURL = Request.Scheme + "://" + Request.Host + "/Payment/ExecutePayment";
             string cancelURL = Request.Scheme + "://" + Request.Host + "/Payment/Cancel";
-            var payment = _PaypalServices.CreatePayment(100, returnURL, cancelURL, "sale");
+            var payment = _PaypalServices.CreatePayment(ListItemTrongGioHang.Count, returnURL, cancelURL, "sale", ListItemTrongGioHang);
 
             return new JsonResult(payment);
         }
 
-        public IActionResult ExecutePayment(string paymentId, string token, string PayerID)
+        public IActionResult ExecutePayment(string paymentId, string PayerID)
         {
             var payment = _PaypalServices.ExecutePayment(paymentId, PayerID);
 
