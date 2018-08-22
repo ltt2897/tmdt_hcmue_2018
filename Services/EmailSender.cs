@@ -17,10 +17,10 @@ namespace PhuKienDienThoai.Services
                 Port = 587,
                 UseDefaultCredentials = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
-                Credentials = new NetworkCredential("zeronguyen1995@gmail.com", "maverickhunter"),
+                Credentials = new NetworkCredential("phukiendienthoai41@gmail.com", "admin@1234"),
                 EnableSsl = true,
             };
-            var from = ("zeronguyen1995@gmail.com");
+            var from = ("phukiendienthoai41@gmail.com");
             var mail = new MailMessage(from, email, subject, message);
             mail.IsBodyHtml = true;
             mail.HeadersEncoding = Encoding.UTF8;
