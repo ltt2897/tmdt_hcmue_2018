@@ -8,7 +8,7 @@ using PhuKienDienThoai.Models;
 
 namespace PhuKienDienThoai.Areas.Users.ViewComponents
 {
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Admin, User")]
     [ViewComponent]
     public class Sidebar : ViewComponent, IDisposable
     {

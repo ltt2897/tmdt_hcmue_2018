@@ -8,7 +8,7 @@ using PhuKienDienThoai.Models.AccountViewModels;
 namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Admin, User")]
     public class TaiKhoanController : Controller
     {
         UserManager<ApplicationUser> usermanager;
@@ -42,6 +42,7 @@ namespace PhuKienDienThoai.Areas.Users.Controllers
             oldUser.HoTen = user.HoTen;
             oldUser.DiaChi = user.DiaChi;
             oldUser.GioiTinh = user.GioiTinh;
+            oldUser.NgaySinh = user.NgaySinh;
             oldUser.PhoneNumber = user.PhoneNumber;
             var update = await usermanager.UpdateAsync(oldUser);
             if (update.Succeeded)
