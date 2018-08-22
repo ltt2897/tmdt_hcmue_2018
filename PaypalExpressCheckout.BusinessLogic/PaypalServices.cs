@@ -18,6 +18,7 @@ namespace PaypalExpressCheckout.BusinessLogic
         {
             _options = options.Value;
         }
+        
 
         public Payment CreatePayment(decimal amount, string returnUrl, string cancelUrl, string intent, List<GioHangViewModel> ListItemTrongGioHang)
         {
