@@ -6,8 +6,9 @@
     <title>@ViewData["HeadTitle"]</title>
     <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">    
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.theme.default.min.css">
+    <link href="~/lib/OwlCarousel2/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/OwlCarousel2/assets/owl.theme.default.min.css" rel="stylesheet">
+	<link href="~/lib/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
     <link href="~/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/css/animate.css" rel="stylesheet">
 	<link href="~/css/main.min.css" rel="stylesheet">
@@ -95,11 +96,12 @@
 
     <script src="~/lib/jquery/jquery.min.js"></script>
 	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/js/jquery.scrollUp.min.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
     <script src="~/js/main.js"></script>
 	<script>
-		$('input[type=date]').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+		$('input[type=date]').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 	</script>
 
     @RenderSection("Scripts", required: false)
