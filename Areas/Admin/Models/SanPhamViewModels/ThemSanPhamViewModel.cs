@@ -23,10 +23,10 @@ namespace PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
         public int DonGia { get; set; }
         #endregion
 
-        #region tác giả
+        #region Dòng điện thoại
 
-        [Display(Name = "Tác giả")]
-        [Required(ErrorMessage = "Vui lòng chọn tác giả")]
+        [Display(Name = "Dòng điện thoại")]
+        [Required(ErrorMessage = "Vui lòng chọn Dòng điện thoại")]
         public int DongDienThoaiId { get; set; }
         public List<DongDienThoai> DongDienThoais { get; set; }
 
@@ -35,7 +35,7 @@ namespace PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
         #region Thương hiệu
 
         [Display(Name = "Thương hiệu")]
-        [Required(ErrorMessage = "vui lòng chọn nhà xuất bạn")]
+        [Required(ErrorMessage = "vui lòng chọn Thương hiệu")]
         public int ThuongHieuId { get; set; }
         public List<ThuongHieu> ThuongHieus { get; set; }
         #endregion
@@ -43,7 +43,7 @@ namespace PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
         #region Danh mục
 
         [Display(Name = "Danh mục")]
-        [Required(ErrorMessage = "Vui lòng chọn danh mục")]
+        [Required(ErrorMessage = "Vui lòng chọn Danh mục")]
         public int DanhMucId { get; set; } = 1;
         public List<DanhMuc> DanhMucs { get; set; }
 
