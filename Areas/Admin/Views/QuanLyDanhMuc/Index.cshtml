@@ -26,7 +26,7 @@
                                 <th>Tên Danh mục</th>
                                 <th>Tên Mặt hàng</th>
                                 <th>Số lượng</th>
-                                <th width="72" class="no-sort"></th>
+                                <th width="33"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,8 +59,17 @@
                     </div>
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="ThemTenDanhMuc">Tên Danh Mục</label>
-                            <input type="text" id="ThemTenDanhMuc" name="TenDanhMuc" class="form-control">
+                            <label for="ThemTenDanhMuc">Tên danh mục</label>
+                            <input type="text" id="ThemTenDanhMuc" name="TenDanhMuc" class="form-control" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="ThemMatHang">Tên mặt hàng</label>
+                            <select for="ThemMatHang" id="MatHangId" name="MatHangId" class="form-control">
+                                @foreach(var itemmh in ViewBag.MatHang)
+                                {
+                                    <option value="@itemmh.Id">@itemmh.TenMatHang</option>
+                                }
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Thêm</button>
                     </div>
@@ -80,15 +89,21 @@
                 <div class="box-body">
                     <form asp-route-id="" asp-action="SuaDanhMuc" asp-controller="QuanLyDanhMuc" id="frm_suaDanhMuc">
                         <div class="form-group">
-                            <label for="suaDanhMuc_id">Mã Danh Mục</label>
+                            <label for="suaDanhMuc_id">Mã danh mục</label>
                             <input type="text" class="form-control" name="id" id="suaDanhMuc_id" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="suaDanhMuc_Ten">Tên Danh Mục</label>
+                            <label for="suaDanhMuc_Ten">Tên danh mục</label>
                             <input type="text" class="form-control" name="TenDanhMuc" id="suaDanhMuc_Ten">
                         </div>
                         <div class="form-group">
-                            <label for="suaDanhMuc_MatHang"></label>
+                            <label for="suaDanhMuc_MatHang">Tên mặt hàng</label>
+                            <select for="suaDanhMuc_MatHang" id="suaDanhMuc_MatHang" name="MatHangId" class="form-control">
+                                @foreach(var itemmh in ViewBag.MatHang)
+                                {
+                                    <option value="@itemmh.Id">@itemmh.TenMatHang</option>
+                                }
+                            </select>
                         </div>
                         <button type="submit" class="btn bg-aqua">Sửa</button>
                     </form>
@@ -101,20 +116,15 @@
 <!-- /.content -->
 @section Scripts {
 <script>
-    $(function ()
-    {
-        var datatable = $("#tb_DanhMuc").DataTable(
-            columnDefs: [
-                { targets: 'no-sort', orderable: false }
-            ]
-        );
+    $(document).ready(function() {
+        var datatable = $("#tb_DanhMuc").DataTable();
         $("#tb_DanhMuc").on("click", ".btn-editDanhMuc", function (e)
         {
             e.preventDefault();
             var data = datatable.row($(this).parents("tr")).data();
             $("#suaDanhMuc_id").val(data[0]);
             $("#suaDanhMuc_Ten").val(data[1]);
-            $("#suaDanhMuc_MatHang option[value='+data[2]+"']").prop('selected', true);
+            $("#suaDanhMuc_MatHang option[value='"+data[2]+"']").prop('selected', true);
             var action = "/Admin/QuanLyDanhMuc/SuaDanhMuc/" + data[0];
             $("form#frm_suaDanhMuc").attr("action", action);
             $(".box-suaDanhMuc").slideDown();
@@ -129,7 +139,7 @@
             e.preventDefault();
             $(this).parents("div[data-widget='box-widget']").fadeToggle();
         });
-    })
+    });
 
 </script> 
 }
