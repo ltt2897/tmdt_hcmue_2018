@@ -49,10 +49,10 @@ namespace PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
 
         #endregion
 
-        #region Định dạng
+        #region Chất liệu
 
-        [Display(Name = "Định dạng")]
-        [Required(ErrorMessage = "Định dạng bắt buộc")]
+        [Display(Name = "Chất liệu")]
+        [Required(ErrorMessage = "Chất liệu bắt buộc")]
         public string DinhDang { get; set; }
         #endregion
 
@@ -80,9 +80,9 @@ namespace PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
 
         #endregion
 
-        #region Số trang
-        [Required(ErrorMessage = "Số trang là bắt buộc")]
-        [Display(Name = "Số trang")]
+        #region Màu sắc
+        [Required(ErrorMessage = "Màu sắc là bắt buộc")]
+        [Display(Name = "Màu sắc")]
         public string MauSac { get; set; }
         #endregion
 
@@ -97,21 +97,6 @@ namespace PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
         [Required(ErrorMessage = "vui lòng upload hình ảnh")]
         public IFormFile uploadHinhAnh { get; set; }
         public string HinhAnh { get; set; }
-        #endregion
-
-        #region Contructor
-        public ThemSanPhamViewModel(ApplicationDbContext context)
-        {
-            ThuongHieuId = context.ThuongHieu.Min(x => x.Id);
-            MatHangId = context.MatHang.Min(x => x.Id);
-            DanhMucId = context.DanhMuc.Min(x => x.Id);
-            DongDienThoaiId = context.DongDienThoai.Min(x => x.Id);
-            MatHangs = context.MatHang.ToList();
-            DanhMucs = context.DanhMuc.ToList();
-            ThuongHieus = context.ThuongHieu.ToList();
-            DongDienThoais = context.DongDienThoai.ToList();
-        }
-
         #endregion
     }
 }
