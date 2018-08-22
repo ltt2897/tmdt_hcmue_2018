@@ -17,19 +17,21 @@
 	<link href="~/css/responsive.css" rel="stylesheet">
 	<link href="~/css/mystyle.css" rel="stylesheet">
 	<script src="https://js.braintreegateway.com/web/dropin/1.12.0/js/dropin.min.js"></script>
+
 	<meta property="fb:app_id"        content="1585151324855686" /> 
 	<meta property="og:title"         content="@Html.Raw(ViewData["HeadTitle"])" />
 	<meta property="og:url"           content="http://@Context.Request.Host@Context.Request.Path" />
 	<meta property="og:type"          content="website" />
-	<meta property="og:description"   content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
-	<meta property="og:image"         content="~/images/components/logo.png" />
 	@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
 	{
-		<meta property="og:title"         content="@Html.Raw(ViewData["HeadTitle"])" />
 		<meta property="og:description"   content="@Html.Raw(@Model.TomTat)" />
 		<meta property="og:image"         content="@Html.Raw(@Model.HinhAnh)" />
 	}
-
+	@else
+	{
+		<meta property="og:description"   content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
+		<meta property="og:image"         content="~/images/components/logo.png" />
+	}
 	
 	@RenderSection("styles",  required: false)
 </head>
