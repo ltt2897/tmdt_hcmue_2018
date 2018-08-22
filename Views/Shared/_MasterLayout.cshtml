@@ -138,24 +138,9 @@
     @RenderSection("Scripts", required: false)
 	<script>
 	document.getElementById('shareBtn').onclick = function() {
-		var host = document.location.href;
-		var shareURL = host;
-		function setShareURL(share) { 
-			var metas = document.getElementsByTagName('meta'); 
-
-			for (var i=0; i<metas.length; i++) { 
-				if (metas[i].getAttribute("property") == "url") { 
-					return metas[i].setAttribute(share); 
-				} 
-			} 
-
-				return "";
-		}
-		setShareURL(shareURL);
 		FB.ui({
 			method: 'share',
 			display: 'popup',
-
 				
 		}, function(response){});
 	}
