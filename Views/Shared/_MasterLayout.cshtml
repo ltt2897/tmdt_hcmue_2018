@@ -19,9 +19,14 @@
 	<script src="https://js.braintreegateway.com/web/dropin/1.12.0/js/dropin.min.js"></script>
 	<meta property="og:url"           content="@Context.Request.Host@Context.Request.Path" />
 	<meta property="og:type"          content="website" />
-	<meta property="og:title"         content="@Html.Raw(ViewData["HeadTitle"])" />
-	<meta property="og:description"   content="@Html.Raw(@Model.TomTat)" />
-	<meta property="og:image"         content="@Html.Raw(@Model.HinhAnh)" />
+	@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
+	{
+		<meta property="og:title"         content="@Html.Raw(ViewData["HeadTitle"])" />
+		<meta property="og:description"   content="@Html.Raw(@Model.TomTat)" />
+		<meta property="og:image"         content="@Html.Raw(@Model.HinhAnh)" />
+	}
+
+	
 	@RenderSection("styles",  required: false)
 </head>
 <body>
@@ -149,10 +154,7 @@
 		FB.ui({
 			method: 'share',
 			display: 'popup',
-			// href: shareURL,
-			// image: shareURL + @Html.Raw(@Model.HinhAnh),
-			// name: @Html.Raw(@Model.TenSanPham),
-			// description: @Html.Raw(@Model.TomTat)
+
 				
 		}, function(response){});
 	}
