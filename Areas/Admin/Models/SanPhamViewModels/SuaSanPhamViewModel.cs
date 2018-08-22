@@ -49,10 +49,10 @@ namespace PhuKienDienThoai.Areas.Admin.Models.SanPhamViewModels
 
         #endregion
 
-        #region Định dạng
+        #region Chất liệu
 
-        [Display(Name = "Định dạng")]
-        [Required(ErrorMessage = "Định dạng bắt buộc")]
+        [Display(Name = "Chất liệu")]
+        [Required(ErrorMessage = "Chất liệu bắt buộc")]
         public string DinhDang { get; set; }
         #endregion
 

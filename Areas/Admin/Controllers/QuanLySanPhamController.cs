@@ -111,7 +111,17 @@ namespace PhuKienDienThoai.Areas.Admin.Controllers
         }
         public IActionResult ThemSanPham()
         {
-            var model = new ThemSanPhamViewModel(context);
+            var model = new ThemSanPhamViewModel
+            {
+                ThuongHieuId = context.ThuongHieu.Min(x => x.Id),
+                MatHangId = context.MatHang.Min(x => x.Id),
+                DanhMucId = context.DanhMuc.Min(x => x.Id),
+                DongDienThoaiId = context.DongDienThoai.Min(x => x.Id),
+                MatHangs = context.MatHang.ToList(),
+                DanhMucs = context.DanhMuc.ToList(),
+                ThuongHieus = context.ThuongHieu.ToList(),
+                DongDienThoais = context.DongDienThoai.ToList()
+            };
             return View(model);
         }
 
