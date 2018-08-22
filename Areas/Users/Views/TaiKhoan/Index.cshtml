@@ -29,8 +29,8 @@
                 <input type="radio" value="false" name="GioiTinh"  @((Model.GioiTinh==false)?"checked":"") id="GioiTinhNu">
             </fieldset>
             <div class="form-group">
-                <label asp-for="NgaySinh"></label>
-                <input class="form-control" type="date" asp-for="NgaySinh">
+                <label asp-for="NgaySinh"></label> (tháng/ngày/năm)
+                <input type="date" class="form-control" asp-for="NgaySinh">
             </div>   
             <div class="form-group">
                 <label asp-for="DiaChi"></label>

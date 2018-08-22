@@ -22,7 +22,7 @@
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
                         <li><a asp-controller="Wishlist" asp-area="Users" asp-action="ThemVaoWishList" data-id="@item.id" class="ThemVaoWishList"><i class="fa fa-plus-square"></i>Thêm vào wishlist</a></li>
-                        <li><a asp-controller="SanPham" asp-action="Index" asp-route-id="@item.id" asp-route-TenSanPham="@(SlugController.GenerateSlug(item.TenSanPham))"><i class="fa fa-info"></i>Chi tiêt sản phẩm</a></li>
+                        <li><a asp-controller="SanPham" asp-action="Index" asp-route-id="@item.id" asp-route-TenSanPham="@(SlugController.GenerateSlug(item.TenSanPham))"><i class="fa fa-info"></i>Chi tiết sản phẩm</a></li>
                     </ul>
                 </div>
             </div>

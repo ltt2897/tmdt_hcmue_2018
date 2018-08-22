@@ -36,13 +36,13 @@
                 </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label asp-for="NgaySinh"></label>
-                    <input asp-for="NgaySinh" class="form-control" />
+                    <label asp-for="NgaySinh"></label> (tháng/ngày/năm)
+                    <input asp-for="NgaySinh" class="form-control" type="date" />
                     <span asp-validation-for="NgaySinh" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="DiaChi"></label>
-                    <input asp-for="DiaChi" class="form-control">
+                    <input asp-for="DiaChi" class="form-control" type="text">
                     <span asp-validation-for="DiaChi" class="text-danger"></span>
                 </div>
             </div>
