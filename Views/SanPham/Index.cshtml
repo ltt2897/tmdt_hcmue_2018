@@ -29,7 +29,7 @@
                         }
                         
                         <input type="hidden" name="SanPhamId" value="@Model.id">
-                        @if(User.IsInRole("User"))
+                        @if(User.IsInRole("Admin") || User.IsInRole("User"))
                         {
                             <label>Số lượng:
                                 <input type="text" value="3" name="SoLuong" required="required" class="Quantity"/>

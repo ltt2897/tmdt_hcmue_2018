@@ -39,7 +39,7 @@ namespace PhuKienDienThoai.Controllers
             );
 
         }
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin, User")]
         [HttpPost]
         public async Task<IActionResult> ThemVaoGioHang(int SanPhamId, int SoLuong)
         {
@@ -146,7 +146,7 @@ namespace PhuKienDienThoai.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<IActionResult> ThanhToanHoaDon(string DiaChi, string GhiChu)
         {
             //lấy dữ liệu từ session
