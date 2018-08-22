@@ -36,10 +36,8 @@ namespace PhuKienDienThoai
             });
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
             services.AddMvc()
                     .AddSessionStateTempDataProvider();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,10 +59,12 @@ namespace PhuKienDienThoai
             {
                 routes.MapRoute(
                     name: "areaRoute",
-                    template: "{area:exists}/{Controller=Home}/{Action=Index}/{id?}");
+                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
             });
             // try
             // {

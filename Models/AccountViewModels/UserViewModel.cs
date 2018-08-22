@@ -5,7 +5,7 @@ namespace PhuKienDienThoai.Models.AccountViewModels
 {
     public class UserViewModel
     {
-        [Display(Name="Họ Tên")]
+        [Display(Name="Họ tên")]
         public string HoTen { get; set; }
 
         [Display(Name="Số điện thoại")]
@@ -19,7 +19,7 @@ namespace PhuKienDienThoai.Models.AccountViewModels
 
         public bool GioiTinh { get; set; }
 
-        [Display(Name="Địa chỉ giao hàng Mặc định")]
+        [Display(Name="Địa chỉ giao hàng mặc định")]
         public string DiaChi { get; set; }
         
     }

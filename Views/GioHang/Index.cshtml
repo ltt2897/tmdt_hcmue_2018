@@ -8,6 +8,9 @@
 {
     <section id="cart_items">
         <div class="container">
+            <div class="heading">
+				<h3>Giỏ hàng của tôi</h3>
+			</div>
             <div class="table-responsive cart_info">
 				<table class="table" style="margin-bottom:0px ">
 					<thead>
@@ -28,7 +31,7 @@
                                    <img src="~/images/SanPham/@item.SanPham.HinhAnh" style="max-height:100px" alt="Ảnh của @item.SanPham.TenSanPham">
                                 </td>
                                 <td class="cart_description">
-                                    <h4><a href="">@item.SanPham.TenSanPham</a></h4>
+                                    <h4><a asp-controller="SanPham" asp-action="Index" asp-route-id="@item.SanPham.id" asp-area="">@item.SanPham.TenSanPham</a></h4>
                                     <p>ID Sản phẩm: @item.SanPham.id</p>
                                 </td>
                                 <td class="cart_price">
@@ -64,7 +67,7 @@
     <section id="do_action">
 		<div class="container">
 			<div class="heading">
-				<h3>Thanh Toán hóa đơn</h3>
+				<h3>Thanh toán hóa đơn</h3>
 			</div>
             <div class="chose_area" style="padding-left: 25px">
                 @await Component.InvokeAsync("ThanhToanHoaDon")

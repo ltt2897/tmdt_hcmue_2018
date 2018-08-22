@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["HeadTitle"]</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">    
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/lib/OwlCarousel2/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/lib/OwlCarousel2/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/lib/OwlCarousel2/assets/owl.theme.default.min.css">
     <link href="~/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/css/animate.css" rel="stylesheet">
 	<link href="~/css/main.min.css" rel="stylesheet">
@@ -93,12 +93,15 @@
 	
    	@RenderBody()
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/js/jquery.scrollUp.min.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
-    
     <script src="~/js/main.js"></script>
+	<script>
+		$('input[type=date]').datepicker({ dateFormat: 'dd/mm/yy' }).val();
+	</script>
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

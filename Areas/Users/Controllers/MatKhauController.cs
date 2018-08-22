@@ -14,7 +14,7 @@ using PhuKienDienThoai.Services;
 namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Admin, User")]
     public class MatKhauController : Controller
     {
          UserManager<ApplicationUser> usermanager;

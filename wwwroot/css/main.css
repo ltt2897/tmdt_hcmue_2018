@@ -1600,13 +1600,9 @@ ul.reviews li a:hover{
   
 }
 
-
 .cart_delete  {
-  display: block;
-  margin-right: -12px;
   overflow: hidden;
 }
-
 
 .cart_delete a {
   background:#F0F0E9;
@@ -2459,4 +2455,8 @@ ul.reviews li a:hover{
 
 .contact-info .social-networks ul li a:hover{
   color: #FE980F;
+}
+
+.nopadding {
+  padding: 0 !important;
 }
