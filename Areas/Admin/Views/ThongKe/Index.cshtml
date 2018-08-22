@@ -18,6 +18,15 @@
                         <label for="thongkedoanhthu_namthongke">Chọn năm</label>
                         <select class="form-control"  id="thongkedoanhthu_namthongke" asp-for="_year" asp-items="Model.Nam"></select>
                     </div>
+                                            <div class="form-group">
+                            <label asp-for="ChucVu"></label>
+                            <select asp-for="ChucVu" id="ChucVu" class="form-control">
+                                @foreach(var item in ViewBag.ChucVu)
+                                {
+                                    <option value="@item.Name">@item.Name</option>
+                                }
+                            </select>
+                        </div>
                     <div id="ThongKeDoanhThu"></div>
                 </div>
             </div>
