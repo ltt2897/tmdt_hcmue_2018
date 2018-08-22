@@ -16,6 +16,7 @@
 	<link href="~/css/responsive.css" rel="stylesheet">
 	<link href="~/css/mystyle.css" rel="stylesheet">
 	<script src="https://js.braintreegateway.com/web/dropin/1.12.0/js/dropin.min.js"></script>
+	<meta property="fb:app_id"        content="1585151324855686" /> 
 	<meta property="og:url"           content="http://@Context.Request.Host@Context.Request.Path" />
 	<meta property="og:type"          content="website" />
 	<meta property="og:description"   content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
@@ -129,9 +130,24 @@
     @RenderSection("Scripts", required: false)
 	<script>
 	document.getElementById('shareBtn').onclick = function() {
+		var host = document.location.href;
+		var shareURL = host;
+		function setShareURL(share) { 
+			var metas = document.getElementsByTagName('meta'); 
+
+			for (var i=0; i<metas.length; i++) { 
+				if (metas[i].getAttribute("property") == "url") { 
+					return metas[i].setAttribute(share); 
+				} 
+			} 
+
+				return "";
+		}
+		setShareURL(shareURL);
 		FB.ui({
 			method: 'share',
 			display: 'popup',
+
 				
 		}, function(response){});
 	}
