@@ -21,8 +21,6 @@ namespace PhuKienDienThoai.Controllers
         ///</return>
         public async Task<IActionResult> Index(int? page)
         {
-            ViewData["HeadTitle"] = "Trang chủ";
-            ViewData["Title"] = "Phụ kiện vừa cập nhật";
             var ListSanPham = await context.SanPham.ToListAsync();
             var model = ListSanPham.ToPagedList(page ?? 1, 9);
             // return View(ListSanPham);

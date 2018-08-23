@@ -1,4 +1,4 @@
-﻿
+﻿@using System.Text.RegularExpressions;
 
 <!DOCTYPE html>
 <html>
@@ -17,22 +17,24 @@
 	<link href="~/css/responsive.css" rel="stylesheet">
 	<link href="~/css/mystyle.css" rel="stylesheet">
 
-	<meta property="fb:app_id"        content="1585151324855686" /> 
-	<meta property="og:title"         content="@Html.Raw(ViewData["HeadTitle"])" />
-	<meta property="og:url"           content="http://@Context.Request.Host@Context.Request.Path" />
-	<meta property="og:type"          content="website" />
+	<meta property="fb:app_id" content="1585151324855686" /> 
+	<meta property="og:title" content="@Html.Raw(ViewData["HeadTitle"])" />
+	<meta property="og:url" content="http://@Context.Request.Host@Context.Request.Path" />
+	<meta property="og:type" content="website" />
 	<meta name="author" content="Công ty Phụ Kiện Điện Thoại">
 	<meta name="copyright" content="Công ty Phụ Kiện Điện Thoại">
-@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
+
+	@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
 	{
-		<meta property="og:description"   content="@Html.Raw(@Model.TomTat)" />
-		<meta property="og:image"         content="@Context.Request.Host/images/SanPham/@Html.Raw(@Model.HinhAnh)" />
-		<meta name="keywords" content="mua @Html.Raw(@Model.TenSanPham), mua online @Html.Raw(@Model.TenSanPham), @Html.Raw(@Model.TenSanPham)">
+	var description = Regex.Replace(Model.TomTat, "<.*?>", string.Empty).Substring(0, 150) + "...";
+	<meta property="og:description" content="@Html.Raw(description)" />
+	<meta property="og:image" content="http://@Context.Request.Host/images/SanPham/@Html.Raw(@Model.HinhAnh)" />
+	<meta name="keywords" content="mua @Html.Raw(@Model.TenSanPham), mua online @Html.Raw(@Model.TenSanPham), @Html.Raw(@Model.TenSanPham)">
 	}
 	else
 	{
-		<meta property="og:description"   content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
-		<meta name="keywords" content="Phụ Kiện Điện Thoại, mua phụ kiện, phụ kiện, công ty Phụ Kiện">
+	<meta property="og:description" content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
+	<meta name="keywords" content="Phụ Kiện Điện Thoại, mua phụ kiện, phụ kiện, công ty Phụ Kiện">
 	}
 	
 	@RenderSection("styles",  required: false)
