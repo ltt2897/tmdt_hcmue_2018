@@ -16,20 +16,23 @@
 	<link href="~/css/main.min.css" rel="stylesheet">
 	<link href="~/css/responsive.css" rel="stylesheet">
 	<link href="~/css/mystyle.css" rel="stylesheet">
-	<script src="https://js.braintreegateway.com/web/dropin/1.12.0/js/dropin.min.js"></script>
 
 	<meta property="fb:app_id"        content="1585151324855686" /> 
 	<meta property="og:title"         content="@Html.Raw(ViewData["HeadTitle"])" />
 	<meta property="og:url"           content="http://@Context.Request.Host@Context.Request.Path" />
 	<meta property="og:type"          content="website" />
-	@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
+	<meta name="author" content="Công ty Phụ Kiện Điện Thoại">
+	<meta name="copyright" content="Công ty Phụ Kiện Điện Thoại">
+@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
 	{
 		<meta property="og:description"   content="@Html.Raw(@Model.TomTat)" />
-		<meta property="og:image"         content="@Html.Raw(@Model.HinhAnh)" />
+		<meta property="og:image"         content="@Context.Request.Host/images/SanPham/@Html.Raw(@Model.HinhAnh)" />
+		<meta name="keywords" content="mua @Html.Raw(@Model.TenSanPham), mua online @Html.Raw(@Model.TenSanPham), @Html.Raw(@Model.TenSanPham)">
 	}
 	else
 	{
 		<meta property="og:description"   content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
+		<meta name="keywords" content="Phụ Kiện Điện Thoại, mua phụ kiện, phụ kiện, công ty Phụ Kiện">
 	}
 	
 	@RenderSection("styles",  required: false)
@@ -54,19 +57,12 @@
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<script>(function(d, s, id) {
-								var js, fjs = d.getElementsByTagName(s)[0];
-								if (d.getElementById(id)) return;
-								js = d.createElement(s); js.id = id;
-								js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=878613658998659&autoLogAppEvents=1';
-								fjs.parentNode.insertBefore(js, fjs);
-								}(document, 'script', 'facebook-jssdk'));
-								</script>						
-								<li><a href="#"><i class="fb-login-button" data-width="16px" data-max-rows="1" data-size="small" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></i></a></li>
-								<li><a><i id="shareBtn"
-													data-share="true"
-    												data-layout="button_count">Chia sẻ trang</i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>					
+								<li>
+									<a>
+										<i id="shareBtn" data-share="true" data-layout="button_count">Chia sẻ trang</i>
+									</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -79,7 +75,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="/"><img style="max-height:39px; width:auto" src="~/images/components/logo.png" alt="" /></a>
+							<a href="/"><img style="max-height:100px; width:auto" src="~/images/components/logo.png" alt="Phụ Kiện Điện Thoại" /></a>
 						</div>
 					</div>
 					<div class="col-sm-8">
@@ -129,11 +125,8 @@
 	<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/js/jquery.scrollUp.min.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
-<<<<<<< HEAD
-=======
-    
 	<script src="~/js/facebook.js"></script>
->>>>>>> efba5f335d523a1b2bc92c3e108ed239367a144e
+	<script src="~/js/dropin.min.js"></script>
     <script src="~/js/main.js"></script>
 	<script>
 		$('input[type=date]').datepicker({ dateFormat: 'yy-mm-dd' }).val();
