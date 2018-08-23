@@ -1,6 +1,11 @@
 obj/*
+bin/*
+PaypalExpressCheckout.BusinessLogic/obj/*
+PaypalExpressCheckout.BusinessLogic/bin/*
+PayPalCore/obj/*
+PayPalCore/bin/*
+.vs/*
 .vscode/*
 Data/Migrations/*
-bin/*
 Error.log
 appsettings.json
