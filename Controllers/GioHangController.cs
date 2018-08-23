@@ -154,8 +154,6 @@ namespace PhuKienDienThoai.Controllers
         }
         public IActionResult Index()
         {
-            
-            return Content(GioHangController.GetTotalItems());
             var getStringGioHang = HttpContext.Session.GetString("GioHang");
             var data = new List<GioHangViewModel>();
             if (!string.IsNullOrEmpty(getStringGioHang))
