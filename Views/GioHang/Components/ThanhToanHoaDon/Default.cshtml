@@ -16,11 +16,9 @@
 <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
         var host = document.location.href;
-
-        var CREATE_PAYMENT_URL = host + 'Payment/CreatePayment';
-        var EXECUTE_PAYMENT_URL = host + 'Payment/ExecutePayment';
-        // var id = document.getElementsByClassName('paypal-button').getAttribute('item-id');
-
+        var arr_url = host.split("/");
+        var CREATE_PAYMENT_URL = arr_url[0] + '//' + arr_url[2] + '/Payment/CreatePayment';
+        var EXECUTE_PAYMENT_URL = arr_url[0] + '//' + arr_url[2] + '/Payment/ExecutePayment';
         paypal.Button.render({
             env: 'sandbox', //'production',
             commit: true, // Show a 'Pay Now' button
