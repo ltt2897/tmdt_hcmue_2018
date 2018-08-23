@@ -40,7 +40,21 @@ namespace PhuKienDienThoai.Controllers
                 controllerName: "Home"
             );
         }
-        
+
+        [Authorize(Roles = "Admin, User")]
+        public int GetTotalItems()
+        {
+            var stringList = HttpContext.Session.GetString("GioHang");
+            var soluong = 0;
+            if (!string.IsNullOrEmpty(stringList))
+            {
+                var ListItemTrongGioHang = JsonConvert.DeserializeObject<List<GioHangViewModel>>(stringList);
+                soluong = ListItemTrongGioHang.Count();
+            }
+
+            return soluong;
+        }
+
         [Authorize(Roles = "Admin, User")]
         [HttpPost]
         public async Task<IActionResult> ThemVaoGioHang(int SanPhamId, int SoLuong)
@@ -140,6 +154,8 @@ namespace PhuKienDienThoai.Controllers
         }
         public IActionResult Index()
         {
+            
+            return Content(GioHangController.GetTotalItems());
             var getStringGioHang = HttpContext.Session.GetString("GioHang");
             var data = new List<GioHangViewModel>();
             if (!string.IsNullOrEmpty(getStringGioHang))

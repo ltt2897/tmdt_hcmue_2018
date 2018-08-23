@@ -21,6 +21,7 @@ namespace PhuKienDienThoai.Controllers
         ///</return>
         public async Task<IActionResult> Index(int? page)
         {
+            //ViewBag.carttotalitems = GioHangController.GetTotalItems();
             var ListSanPham = await context.SanPham.ToListAsync();
             var model = ListSanPham.ToPagedList(page ?? 1, 9);
             // return View(ListSanPham);

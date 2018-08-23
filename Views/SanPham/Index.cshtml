@@ -14,7 +14,7 @@
         </div>
         <div class="col-sm-7">
             <div class="product-information"><!--/product-information-->
-                <h2>@ViewData["HeadTitle"]</h2>
+                <h2>@Model.TenSanPham</h2>
                 <p>ID Sản phẩm: @Model.id</p>
                 <span>
                     <form id="frmDatHang" asp-action="ThemVaoGioHang" asp-controller="GioHang" asp-route-returnurl="@ViewData["ReturnUrl"]" method="POST">
@@ -112,7 +112,7 @@ else
 @section Scripts
 {
     <script src="~/lib/ckeditor/ckeditor.js"></script>
-    <script src="~/lib/OwlCarousel2/dist/owl.carousel.min.js"></script>
+    <script src="~/lib/OwlCarousel2/owl.carousel.min.js"></script>
     <script>
     var BinhLuanDocument = document.getElementById("BinhLuan");
         if(BinhLuanDocument)
