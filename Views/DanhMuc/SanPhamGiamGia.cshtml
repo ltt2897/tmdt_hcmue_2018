@@ -1,0 +1,38 @@
+
+@using PhuKienDienThoai.Models
+@model List<SanPham>
+@{
+    ViewData["HeadTitle"]="Sản phẩm giảm giá";
+}
+<div class="features_items"><!--features_items-->
+    <h2 class="title text-center">@ViewData["HeadTitle"]</h2>
+    <div class="row">
+    @foreach(var item in Model)
+    {
+        <div class="col-sm-4 " style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+            <div class="product-image-wrapper">
+                <div class="single-products">
+                    <div class="productinfo text-center">
+                        <img src="~/images/SanPham/@item.HinhAnh" style="height: 100%; width:auto; max-height:130px" alt="" />
+                        <h2>@((item.DonGia*(100 - item.PhanTramGiamGia)/100).ToString("#,0"))Đ</h2>
+                        <p title="@item.TenSanPham">@item.TenSanPham</p>
+                    </div>
+                </div>
+                <div class="choose">
+                    <ul class="nav nav-pills nav-justified">
+                        <li><a href="#"><i class="fa fa-plus-square"></i>Thêm vào wishlist</a></li>
+                        <li><a asp-controller="SanPham" asp-action="index" asp-route-id="@item.id"><i class="fa fa-info"></i>Chi tiết sản phẩm</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div><!--features_items-->
+
+@if(TempData["Message"]!=null)
+{
+    <script>
+        alert("@Html.Raw(TempData["Message"])");
+    </script>
+}

@@ -22,6 +22,16 @@ namespace PhuKienDienThoai.Areas.Admin.Controllers
         #region contructor
         public QuanLyDanhMucController(ApplicationDbContext _context) => context = _context;
         #endregion
+        
+        ///<summary>
+        ///lấy danh sách tất cả mặt hàng hiện có
+        ///<summary>
+        public async Task<List<MatHang>> getMatHangListAsync()
+        {
+            var MatHangList = await context.MatHang.ToListAsync();
+            return MatHangList;
+        }
+
         #region Index
         public async Task<IActionResult> Index()
         {
@@ -30,7 +40,7 @@ namespace PhuKienDienThoai.Areas.Admin.Controllers
                                     .Include(x => x.MatHang)
                                     .Include(p => p.SanPhames)
                                     .ToListAsync();
-
+            ViewBag.MatHang = await getMatHangListAsync();
             return View(model);
         }
         #endregion
@@ -41,6 +51,7 @@ namespace PhuKienDienThoai.Areas.Admin.Controllers
             var danhmuc = new DanhMuc
             {
                 TenDanhMuc = model.TenDanhMuc,
+                MatHangId = model.MatHangId
             };
             await context.DanhMuc.AddAsync(danhmuc);
             await context.SaveChangesAsync();
@@ -62,6 +73,7 @@ namespace PhuKienDienThoai.Areas.Admin.Controllers
         {
             var danhmuc = await context.DanhMuc.FindAsync(id);
             danhmuc.TenDanhMuc = model.TenDanhMuc;
+            danhmuc.MatHangId = model.MatHangId;
             context.DanhMuc.Update(danhmuc);
             await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

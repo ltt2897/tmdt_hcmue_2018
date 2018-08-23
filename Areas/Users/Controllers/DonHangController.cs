@@ -12,7 +12,7 @@ using X.PagedList;
 namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Admin, User")]
     public class DonHangController : Controller
     {
         private ApplicationDbContext context;

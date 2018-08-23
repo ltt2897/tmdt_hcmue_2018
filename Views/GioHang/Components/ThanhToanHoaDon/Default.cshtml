@@ -3,10 +3,40 @@
 <form asp-action="ThanhToanHoaDon" asp-controller="GioHang" method="post">
     <div class="form-group">
         <label for="frmThanhToan_diaChi">Địa chỉ</label>
-        <input type="text" id="frmThanhToan_diaChi" class="form-control" name="DiaChi" value="@model.DiaChi">
+        <input type="text" id="frmThanhToan_diaChi" class="form-control" name="DiaChi" value="@Model.DiaChi">
     </div>
     <label for="frmThanhToan_ghiChu">Ghi chú</label>
     <textarea name="GhiChu" id="frmThanhToan_ghiChu" cols="30" rows="10"></textarea>
+    <div class="form-group">
+        <div id="paypal-button"></div>
+    </div>
     <a class="btn btn-default update" asp-action="index" asp-controller="Home">Tiếp tục mua hàng</a>
     <button class="btn btn-default check_out" type="submit">Thanh toán hóa đơn</button>
 </form>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        var host = document.location.href;
+        var arr_url = host.split("/");
+        var CREATE_PAYMENT_URL = arr_url[0] + '//' + arr_url[2] + '/Payment/CreatePayment';
+        var EXECUTE_PAYMENT_URL = arr_url[0] + '//' + arr_url[2] + '/Payment/ExecutePayment';
+        paypal.Button.render({
+            env: 'sandbox', //'production',
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function (e) {
+                return paypal.request.post(CREATE_PAYMENT_URL).then(function (data) {
+                    return data.id;
+                });
+            },
+
+            onAuthorize: function (data) {
+                return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                    paymentID: data.paymentID,
+                    payerID: data.payerID
+                }).then(function () {
+                    window.location.href = host + 'Payment/Success'
+                });
+            }
+
+        }, '#paypal-button');
+    </script>   

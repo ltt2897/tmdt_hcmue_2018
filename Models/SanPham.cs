@@ -35,7 +35,7 @@ namespace PhuKienDienThoai.Models
         public List<Wishlist> Wishlist { get; set; }
         public SanPham()
         {
-            //Định dạng mặc định bằng bìa mềm
+            //Chất liệu mặc định bằng bìa mềm
             DinhDang = "Nhựa";
             //mặc định chưa có sản phẩm nào được giảm giá
             PhanTramGiamGia = 0;

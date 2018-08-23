@@ -3,7 +3,7 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
+    
 @if (SignInManager.IsSignedIn(User))
 {
    
@@ -13,7 +13,13 @@
             if(User.IsInRole("Admin"))
             {
                 <li> 
-                    <a asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="Index">Trang quản trị</a>
+                </li>
+                <li>
+                    <a is-active-route asp-area="Users" asp-controller="TaiKhoan" asp-action="Index"> <i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
+                </li> 
+                <li>
+                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi</a>
                 </li>
             }
             else if(User.IsInRole("Giao Hàng"))
@@ -25,14 +31,13 @@
             else
             {
                 <li>
-                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của bạn</a>
+                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi</a>
                 </li>
                 <li>
-                    <a is-active-route asp-area="Users" asp-controller="TaiKhoan" asp-action="Index"> <i class="fa fa-user" aria-hidden="true"></i> Account</a>
+                    <a is-active-route asp-area="Users" asp-controller="TaiKhoan" asp-action="Index"> <i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
                 </li>     
             }   
         }
-      
         <li>
             <a onclick="$('#frm_Logout').submit();" id="btnLogout" class="btn btn-link navbar-btn navbar-link"><i class="fa fa-sign-out" aria-hidden="true"></i>Đăng xuất</a>
         </li>
@@ -42,7 +47,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" is-active-route asp-controller="Account" asp-action="Register">Register</a></li>
-        <li><a asp-area="" is-active-route asp-controller="Account" asp-action="Login">Log in</a></li>
+        <li><a asp-area="" is-active-route asp-controller="Account" asp-action="Register">Đăng kí</a></li>
+        <li><a asp-area="" is-active-route asp-controller="Account" asp-action="Login">Đăng nhập</a></li>
     </ul>
 }

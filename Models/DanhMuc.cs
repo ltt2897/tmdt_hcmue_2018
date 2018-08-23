@@ -15,7 +15,6 @@ namespace PhuKienDienThoai.Models
         public DanhMuc()
         {
             SanPhames = new HashSet<SanPham>();
-            MatHang = new MatHang();
         }
     }
 }

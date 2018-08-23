@@ -1,22 +1,42 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["HeadTitle"]</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">    
     <link href="~/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="~/lib/OwlCarousel2/dist/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/lib/OwlCarousel2/dist/assets/owl.theme.default.min.css">
+    <link href="~/lib/OwlCarousel2/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/OwlCarousel2/assets/owl.theme.default.min.css" rel="stylesheet">
+	<link href="~/lib/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet">
     <link href="~/css/prettyPhoto.css" rel="stylesheet">
     <link href="~/css/animate.css" rel="stylesheet">
 	<link href="~/css/main.min.css" rel="stylesheet">
 	<link href="~/css/responsive.css" rel="stylesheet">
 	<link href="~/css/mystyle.css" rel="stylesheet">
+	<script src="https://js.braintreegateway.com/web/dropin/1.12.0/js/dropin.min.js"></script>
 
+	<meta property="fb:app_id"        content="1585151324855686" /> 
+	<meta property="og:title"         content="@Html.Raw(ViewData["HeadTitle"])" />
+	<meta property="og:url"           content="http://@Context.Request.Host@Context.Request.Path" />
+	<meta property="og:type"          content="website" />
+	@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
+	{
+		<meta property="og:description"   content="@Html.Raw(@Model.TomTat)" />
+		<meta property="og:image"         content="@Html.Raw(@Model.HinhAnh)" />
+	}
+	else
+	{
+		<meta property="og:description"   content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
+	}
+	
 	@RenderSection("styles",  required: false)
 </head>
 <body>
+	
+	<div class="fb-root"></div>
     <header id="header"><!--header-->  
 		<div class="header_top"><!--header_top-->
 			<div class="container">
@@ -31,11 +51,22 @@
 					<div class="col-sm-6">
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 								<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
 								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
 								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<script>(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.1&appId=878613658998659&autoLogAppEvents=1';
+								fjs.parentNode.insertBefore(js, fjs);
+								}(document, 'script', 'facebook-jssdk'));
+								</script>						
+								<li><a href="#"><i class="fb-login-button" data-width="16px" data-max-rows="1" data-size="small" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></i></a></li>
+								<li><a><i id="shareBtn"
+													data-share="true"
+    												data-layout="button_count">Chia sẻ trang</i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -93,12 +124,31 @@
 	
    	@RenderBody()
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-	<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/js/jquery.scrollUp.min.js"></script>
     <script src="~/js/jquery.prettyPhoto.js"></script>
+<<<<<<< HEAD
+=======
     
+	<script src="~/js/facebook.js"></script>
+>>>>>>> efba5f335d523a1b2bc92c3e108ed239367a144e
     <script src="~/js/main.js"></script>
+	<script>
+		$('input[type=date]').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+	</script>
+
     @RenderSection("Scripts", required: false)
+	<script>
+	document.getElementById('shareBtn').onclick = function() {
+		FB.ui({
+			method: 'share',
+			display: 'popup',
+			href: 'http://@Context.Request.Host@Context.Request.Path'
+				
+		}, function(response){});
+	}
+	</script>
 </body>
 </html>

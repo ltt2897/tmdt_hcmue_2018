@@ -11,7 +11,7 @@ using PhuKienDienThoai.Models;
 namespace PhuKienDienThoai.Areas.Users.Controllers
 {
     [Area("Users")]
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "Admin, User")]
     public class WishlistController : Controller
     {
         ApplicationDbContext context;

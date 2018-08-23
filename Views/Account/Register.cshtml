@@ -1,6 +1,6 @@
 ﻿@model RegisterViewModel
 @{
-    ViewData["HeadTitle"] = "Register";
+    ViewData["HeadTitle"] = "Đăng kí tài khoản thành viên tại Phụ Kiện Điện Thoại";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-md-12">
         <form id="frm_register" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Create a new account.</h4>
+            <h4>Đăng kí tài khoản thành viên mới</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -36,13 +36,13 @@
                 </div>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label asp-for="NgaySinh"></label>
-                    <input asp-for="NgaySinh" class="form-control" />
+                    <label asp-for="NgaySinh"></label> (tháng/ngày/năm)
+                    <input asp-for="NgaySinh" class="form-control" type="date" />
                     <span asp-validation-for="NgaySinh" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="DiaChi"></label>
-                    <input asp-for="DiaChi" class="form-control">
+                    <input asp-for="DiaChi" class="form-control" type="text">
                     <span asp-validation-for="DiaChi" class="text-danger"></span>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
             </div>
-            <button type="submit" id="btnFromsubmit" class="btn btn-default">Register</button>
+            <button type="submit" id="btnFromsubmit" class="btn btn-default">Đăng kí</button>
         </form>
     </div>
 </div>
