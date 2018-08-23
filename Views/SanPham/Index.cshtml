@@ -1,3 +1,7 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     Layout="_MainLayout";
     
@@ -14,7 +18,7 @@
         </div>
         <div class="col-sm-7">
             <div class="product-information"><!--/product-information-->
-                <h2>@ViewData["HeadTitle"]</h2>
+                <h2>@Model.TenSanPham</h2>
                 <p>ID Sản phẩm: @Model.id</p>
                 <span>
                     <form id="frmDatHang" asp-action="ThemVaoGioHang" asp-controller="GioHang" asp-route-returnurl="@ViewData["ReturnUrl"]" method="POST">
@@ -29,7 +33,7 @@
                         }
                         
                         <input type="hidden" name="SanPhamId" value="@Model.id">
-                        @if(User.IsInRole("Admin") || User.IsInRole("User"))
+                        @if (SignInManager.IsSignedIn(User))
                         {
                             <label>Số lượng:
                                 <input type="text" value="1" name="SoLuong" required="required" class="Quantity"/>
@@ -47,6 +51,10 @@
                 <p><b>Màu sắc:</b> @Model.MauSac</p>
                 <p><b>Chất liệu:</b> @Model.DinhDang</p>
                 <p><b>Tình trạng:</b> @ViewData["TinhTrang"]</p>
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <p><h6 style="color:red">*Vui lòng đăng nhập để đặt hàng</h6></p>
+                }
             </div><!--/product-information-->
         </div>
     </div><!--/product-details-->
@@ -112,7 +120,7 @@ else
 @section Scripts
 {
     <script src="~/lib/ckeditor/ckeditor.js"></script>
-    <script src="~/lib/OwlCarousel2/dist/owl.carousel.min.js"></script>
+    <script src="~/lib/OwlCarousel2/owl.carousel.min.js"></script>
     <script>
     var BinhLuanDocument = document.getElementById("BinhLuan");
         if(BinhLuanDocument)

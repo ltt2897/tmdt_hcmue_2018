@@ -33,7 +33,7 @@ namespace PhuKienDienThoai.Controllers
                                     .FirstOrDefaultAsync(x => x.id == id);
             if (sanpham != null)
             {
-                ViewData["HeadTitle"] = sanpham.TenSanPham;
+                ViewData["HeadTitle"] = sanpham.TenSanPham + " - PhuKienDienThoai.com";
                 ViewData["TinhTrang"] = (sanpham.SoLuong > 0) ? "Còn hàng" : "hết hàng";
             }
             else

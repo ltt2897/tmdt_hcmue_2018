@@ -1,20 +1,20 @@
 ﻿@{
     Layout="_MasterLayout";
-    ViewData["HeadTitle"]="Contact";
+    ViewData["HeadTitle"]="Liên hệ PhuKienDienThoai.com";
 }
 @model PhuKienDienThoai.Models.ContactViewModels.ContactViewModel
 <div id="contact-page" class="container">
     	<div class="bg">
 	    	<div class="row">    		
 	    		<div class="col-sm-12">    			   			
-					<h2 class="title text-center">Bản đồ</h2>    			    				    				
+					<h2 class="title text-center"><span class="text-block">Bản đồ</span></h2>    			    				    				
 					<div id="gmap" class="contact-map"></div>
 				</div>			 		
 			</div>    	
     		<div class="row">  	
 	    		<div class="col-sm-8">
 	    			<div class="contact-form">
-	    				<h2 class="title text-center">Liên hệ</h2>
+	    				<h2 class="title text-center"><span class="text-block">Liên hệ</span></h2>
 	    				<div class="status alert alert-success" style="display: none"></div>
 				    	<form asp-action="Contact" id="main-contact-form" class="contact-form row" name="contact-form" method="post">
 				            <div class="form-group col-md-6">
@@ -26,7 +26,7 @@
                                 <span asp-validation-for="Email" class="text-danger"></span>
 				            </div>
 				            <div class="form-group col-md-12">
-				                <input type="text" name="TieuDe" class="form-control" placeholder="Subject">
+				                <input type="text" name="TieuDe" class="form-control" placeholder="Tiêu đề">
                                 <span asp-validation-for="TieuDe" class="text-danger"></span>
 				            </div>
 				            <div class="form-group col-md-12">
@@ -34,7 +34,7 @@
                                 <span asp-validation-for="NoiDung" class="text-danger"></span>
 				            </div>                        
 				            <div class="form-group col-md-12">
-				                <input type="submit" class="btn btn-primary pull-right" value="Submit">
+				                <input type="submit" class="btn btn-primary pull-right" value="Gửi">
 				            </div>
                             @* <div asp-validation-summary="All" class="text-danger"></div> -->*@
 				        </form>
@@ -42,7 +42,7 @@
 	    		</div>
 	    		<div class="col-sm-4">
 	    			<div class="contact-info">
-	    				<h2 class="title text-center">Thông tin liên hệ</h2>
+	    				<h2 class="title text-center"><span class="text-block">Thông tin liên hệ</span></h2>
 	    				<address>
 	    					<p>Phụ Kiện Điện Thoại</p>
 							<p>280 An Dương Vương, Phường 9, Quận 8, TP. HCM</p>
@@ -51,7 +51,7 @@
 							<p>Email: admin@gmail.com</p>
 	    				</address>
 	    				<div class="social-networks">
-	    					<h2 class="title text-center">Social Networking</h2>
+	    					<h2 class="title text-center"><span class="text-block">Kết nối mạng xã hội</span></h2>
 							<ul>
 								<li>
 									<a href="#"><i class="fa fa-facebook"></i></a>
