@@ -1,11 +1,9 @@
-obj/*
-bin/*
-PaypalExpressCheckout.BusinessLogic/obj/*
-PaypalExpressCheckout.BusinessLogic/bin/*
+PhuKienDienThoai/obj/*
+PhuKienDienThoai/bin/*
 PayPalCore/obj/*
 PayPalCore/bin/*
 .vs/*
 .vscode/*
-Data/Migrations/*
+PhuKienDienThoai/Data/Migrations/*
 Error.log
 appsettings.json
