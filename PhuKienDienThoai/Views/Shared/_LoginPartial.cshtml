@@ -43,11 +43,11 @@
             else
             {
                 <li>
-                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi (<b>@soluonghangtronggio</b>)</a>
-                </li>
-                <li>
                     <a is-active-route asp-area="Users" asp-controller="TaiKhoan" asp-action="Index"> <i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
-                </li>     
+                </li>   
+                <li>
+                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi (<b>@soluonghangtronggio</b>)</a>
+                </li>  
             }   
         }
         <li>

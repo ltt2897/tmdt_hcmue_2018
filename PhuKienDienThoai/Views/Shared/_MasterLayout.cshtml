@@ -30,11 +30,13 @@
 	<meta property="og:description" content="@Html.Raw(description)" />
 	<meta property="og:image" content="http://@Context.Request.Host/images/SanPham/@Html.Raw(@Model.HinhAnh)" />
 	<meta name="keywords" content="mua @Html.Raw(@Model.TenSanPham), mua online @Html.Raw(@Model.TenSanPham), @Html.Raw(@Model.TenSanPham)">
+	<meta name="description" content="Mua @Html.Raw(@Model.TenSanPham) giá rẻ, khuyến mãi tốt bảo hành 1 đổi 1 tại PhuKienDienThoai.com">
 	}
 	else
 	{
 	<meta property="og:description" content="Cần phụ kiện trang bị cho dế yêu? Hãy đến với Phụ Kiện Điện Thoại!!!" />
 	<meta name="keywords" content="Phụ Kiện Điện Thoại, mua phụ kiện, phụ kiện, công ty Phụ Kiện">
+	<meta name="description" content="Niềm vui mua sắm phụ kiện điện thoại bất tận">
 	}
 	@RenderSection("styles",  required: false)
 
