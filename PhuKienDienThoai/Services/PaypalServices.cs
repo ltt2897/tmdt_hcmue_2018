@@ -51,7 +51,7 @@ namespace PhuKienDienThoai.Services
 
                 var paypal_item = new Item()
                 {
-                    name = "#" + item.SanPham.id,
+                    name = SlugController.GenerateSlug(item.SanPham.TenSanPham),
                     currency = "USD",
                     price = dongia.ToString(),
                     quantity = item.SoLuong.ToString(),
