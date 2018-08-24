@@ -107,4 +107,48 @@ else
             
         })
     </script>
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        var host = document.location.href;
+        var arr_url = host.split("/");
+        var CREATE_PAYMENT_URL = arr_url[0] + '//' + arr_url[2] + '/Payment/CreatePayment';
+        var EXECUTE_PAYMENT_URL = arr_url[0] + '//' + arr_url[2] + '/Payment/ExecutePayment';
+
+        paypal.Button.render({
+            style: {
+                label: 'pay',
+                size: 'small',
+                shape: 'rect',
+                layout: 'horizontal',
+                tagline: false
+            },
+            env: 'sandbox', //'production',
+            commit: true, // Show a 'Pay Now' button
+
+            payment: function (e) {
+                return paypal.request.post(CREATE_PAYMENT_URL).then(function (data) {
+                    return data.id;
+                });
+            },
+
+            onAuthorize: function (data) {
+                return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                    paymentID: data.paymentID,
+                    payerID: data.payerID
+                }).then(function () {
+                    window.location.href = arr_url[0] + '//' + arr_url[2] + '/GioHang/PayPalSuccess?DiaChi=' + encodeURIComponent($("#frmThanhToan_diaChi").val()) + '&GhiChu=' + encodeURIComponent($("#frmThanhToan_ghiChu").val()); 
+                });
+            },
+
+            onCancel: function(data) {
+                alert("Thanh toán qua PayPal bị huỷ");
+            }
+
+        }, '#paypal-button');
+
+        $("#btnbaokim").click(function() {
+            window.location.href = "https://www.baokim.vn/payment/product/version11?business=lethanhtuan2897%40gmail.com&id=&order_description=&product_name=@Html.Raw(ViewData["mathang"])&product_price=@ViewData["thanhtien"]&product_quantity=1&total_amount=@ViewData["thanhtien"]&url_cancel=&url_detail=&url_success=" + arr_url[0] + '//' + arr_url[2] + '/GioHang/BaoKimSuccess?DiaChi=' + encodeURIComponent($("#frmThanhToan_diaChi").val()) + '&GhiChu=' + encodeURIComponent($("#frmThanhToan_ghiChu").val()); 
+        });
+    </script>
 }
