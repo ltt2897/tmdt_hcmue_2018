@@ -34,10 +34,10 @@ namespace PhuKienDienThoai.Areas.GiaoHang.Controllers
             var model = new ChuaGiaoViewModel();
             foreach (var item in data)
             {
-                model.DanhSanPhamHoaDon.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
+                model.DanhSachHoaDon.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
                     Value = item.Id.ToString(),
-                    Text = item.User.HoTen,
+                    Text = item.Id.ToString() + " / " + item.NgayLapHoaDon.ToLongTimeString() + " / " + item.User.HoTen,
                 });
             }
             return View(model);
@@ -62,7 +62,7 @@ namespace PhuKienDienThoai.Areas.GiaoHang.Controllers
         [AllowAnonymous]
         public async Task<JsonResult> ChiTietDonHang(int Id)
         {
-            var donhang = await context.ChiTietHoaDon.Include(x => x.HoaDon)
+            var chitietdonhang = await context.ChiTietHoaDon.Include(x => x.HoaDon)
                                                     .Include(x => x.SanPham)
                                                     .Where(x => x.HoaDonId == Id)
                                                     .Select(x => new
@@ -75,7 +75,20 @@ namespace PhuKienDienThoai.Areas.GiaoHang.Controllers
                                                     .ToListAsync();
             return Json(new
             {
-                data = donhang
+                data = chitietdonhang
+            });
+        }
+        [Route("[Area]/[Controller]/[Action]/{id:int}")]
+        [AllowAnonymous]
+        public JsonResult ChiTietHoaDon(int Id)
+        {
+            var donhang = context.HoaDon.Where(x => x.Id == Id).FirstOrDefault();
+        
+            return Json(new
+            {
+                diachi = donhang.DiaChi,
+                ghichu = donhang.GhiChu,
+                phuongthucthanhtoan = donhang.PhuongThucThanhToan
             });
         }
         protected override void Dispose(bool disposing)
