@@ -1,6 +1,7 @@
 @{
     Layout="_MasterLayout";
     ViewData["HeadTitle"]="Giỏ hàng";
+    var item_text = "";
 }
 @model List<PhuKienDienThoai.Models.SanPhamViewModels.GioHangViewModel>
 
@@ -26,6 +27,7 @@
 					<tbody>
                         @foreach(var item in Model)
                         {
+                            item_text += item.SoLuong.ToString() + " x " + item.SanPham.TenSanPham + " + "; 
                             <tr>
                                 <td class="cart_product">
                                    <img src="~/images/SanPham/@item.SanPham.HinhAnh" style="max-height:100px" alt="Ảnh của @item.SanPham.TenSanPham">
@@ -57,6 +59,10 @@
                             <td>
                                 @Model.Sum(x=>x.ThanhTien).ToString("#,0")Đ
                             </td>
+                            @{
+                                ViewData["mathang"] = System.Net.WebUtility.UrlEncode(item_text.Remove(item_text.Length - 3));
+                                ViewData["thanhtien"] = Model.Sum(x=>x.ThanhTien).ToString();
+                            }
                             <td></td>
                         </tr>
                     </tfoot>
@@ -91,15 +97,7 @@ else
 
 @section Scripts
 {
-    <script src="~/lib/ckeditor/ckeditor.js"></script>
     <script>
-        var frmGhiChu = document.getElementById("frmThanhToan_ghiChu");
-        if(frmGhiChu)
-        {
-            CKEDITOR.replace(frmGhiChu,{
-                customConfig:"/js/ckEditor.config.js"
-            });
-        }
         $(function() {
             $(".cart_quantity_input").keypress((e)=>{
                 if(e.keyCode<48 || e.keyCode>57)
