@@ -58,10 +58,6 @@
 {
     <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn4b6Y62qV-ONkx8YJ7YSNx_B-SR316Rc&callback=initMap&language=vi"type="text/javascript"></script> -->
     <script>
-        CKEDITOR.replace('ghichu',{
-            customConfig: "/js/ckeditor.config.js"
-        });
-
         //var directionsDisplay;
         //var directionsService;
         //function initMap() {
@@ -108,6 +104,10 @@
                     ],
                 });
 
+                $("#phuongthucthanhtoan").html("");
+                $("#diachigiaohang").html("");
+                $("#ghichu").val("");
+
                 $.ajax({
                     url: "@Url.Action("ChiTietHoaDon","Home")" + "/" + _id,
                     type: "GET",
@@ -119,9 +119,6 @@
                     },
                     error: function()
                     {
-                        $("#phuongthucthanhtoan").html("");
-                        $("#diachigiaohang").html("");
-                        $("#ghichu").val("");
                         alert("Không tìm thấy Địa chỉ giao hàng và Ghi chú");
                     }
                 });

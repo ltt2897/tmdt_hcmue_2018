@@ -7,12 +7,13 @@
     </div>
     <div class="form-group">
         <label for="frmThanhToan_ghiChu">Ghi chú</label>
-        <textarea name="GhiChu" id="frmThanhToan_ghiChu" cols="30" rows="10"></textarea>
+        <textarea name="GhiChu" id="frmThanhToan_ghiChu" cols="30" rows="4" maxlength="500"></textarea>
     </div>
     <div class="form-group">
         <label for="frmThanhToan_phuongThuc">Chọn phương thức thanh toán</label><br/>
         <button class="btn btn-default check_out" type="submit">Thanh toán trực tiếp</button><br/><br/>
-        <div id="paypal-button"></div>
+        <div id="paypal-button"></div><br/>
+        <a href="https://www.baokim.vn/payment/product/version11?business=lethanhtuan2897%40gmail.com&id=&order_description=&product_name=@ViewData["mathang"]&product_price=@ViewData["thanhtien"]&product_quantity=1&total_amount=@ViewData["thanhtien"]&url_cancel=&url_detail=&url_success="><img src="https://www.baokim.vn/cdn/x_developer/module/baokim_btn/thanhtoan-m.png" alt="Thanh toán an toàn với Bảo Kim !" border="0" title="Thanh toán trực tuyến an toàn dùng tài khoản Ngân hàng (VietcomBank, TechcomBank, Đông Á, VietinBank, Quân Đội, VIB, SHB,... và thẻ Quốc tế (Visa, Master Card...) qua Cổng thanh toán trực tuyến BảoKim.vn" ></a>
     </div>
     <hr/>
     <a class="btn btn-default update" asp-action="index" asp-controller="Home">Tiếp tục mua hàng</a>
@@ -47,9 +48,14 @@
                 paymentID: data.paymentID,
                 payerID: data.payerID
             }).then(function () {
-                window.location.href = host + 'Payment/Success'
+                window.location.href = arr_url[0] + '//' + arr_url[2] + '/Payment/Success?DiaChi=' + encodeURIComponent($("#frmThanhToan_diaChi").val()) + '&GhiChu=' + encodeURIComponent($("#frmThanhToan_ghiChu").val()); 
             });
+        },
+
+        onCancel: function(data) {
+            alert("Thanh toán qua PayPal bị huỷ");
         }
 
     }, '#paypal-button');
+
 </script>

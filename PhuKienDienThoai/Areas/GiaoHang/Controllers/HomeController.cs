@@ -37,7 +37,7 @@ namespace PhuKienDienThoai.Areas.GiaoHang.Controllers
                 model.DanhSachHoaDon.Add(new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem
                 {
                     Value = item.Id.ToString(),
-                    Text = item.Id.ToString() + " / " + item.NgayLapHoaDon.ToLongTimeString() + " / " + item.User.HoTen,
+                    Text = item.Id.ToString() + " / " + item.NgayLapHoaDon.ToString() + " / " + item.User.HoTen,
                 });
             }
             return View(model);

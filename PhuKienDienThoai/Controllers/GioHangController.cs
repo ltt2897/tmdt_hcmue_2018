@@ -193,12 +193,14 @@ namespace PhuKienDienThoai.Controllers
                         ChiTietHoaDons = ChiTietHoaDon,
                         DiaChi = DiaChi,
                         GhiChu = GhiChu,
-                        PhuongThucThanhToan = "Trực tiếp",
+                        PhuongThucThanhToan = "Thanh toán trực tiếp",
                         TongThanhTien = ChiTietHoaDon.Sum(x => x.ThanhTien),
                         User = currentUser,
                     });
                     await context.SaveChangesAsync();
-
+                    
+                    TempData["Message"] = "Đặt hàng thành công! Cảm ơn quý khách đã tin tưởng chúng tôi";
+                    
                     // TempData["Message"] = "Đặt hàng thành công! Cảm ơn quý khách đã tin tưởng chúng tôi";
                     // //template path
                     // var template = new EmailTemplate(environment);
