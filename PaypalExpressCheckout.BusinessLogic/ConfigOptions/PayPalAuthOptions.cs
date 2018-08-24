@@ -1,4 +1,4 @@
-﻿namespace PaypalExpressCheckout.BusinessLogic.ConfigOptions
+﻿namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic.ConfigOptions
 {
     public class PayPalAuthOptions
     {

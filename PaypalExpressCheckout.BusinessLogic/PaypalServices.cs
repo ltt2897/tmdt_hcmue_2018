@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using PhuKienDienThoai.Models.SanPhamViewModels;
 using PayPal.Api;
-using PaypalExpressCheckout.BusinessLogic.ConfigOptions;
-using PaypalExpressCheckout.BusinessLogic.Interfaces;
+using PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic.ConfigOptions;
+using PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic.Interfaces;
 
-namespace PaypalExpressCheckout.BusinessLogic
+namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic
 {
     public class PaypalServices : IPaypalServices
     {

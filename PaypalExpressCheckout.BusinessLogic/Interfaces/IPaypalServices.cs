@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using PhuKienDienThoai.Models.SanPhamViewModels;
 
-namespace PaypalExpressCheckout.BusinessLogic.Interfaces
+namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic.Interfaces
 {
     public interface IPaypalServices
     {
