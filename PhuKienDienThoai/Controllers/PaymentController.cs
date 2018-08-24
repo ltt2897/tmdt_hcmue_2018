@@ -18,17 +18,10 @@ namespace PhuKienDienThoai.Controllers
     public class PaymentController : Controller
     {
         private IPaypalServices _PaypalServices;
-
-        ApplicationDbContext context;
-        UserManager<ApplicationUser> usermanager;
-        IHostingEnvironment environment;
-
-        public PaymentController(IPaypalServices paypalServices, ApplicationDbContext _c, UserManager<ApplicationUser> _usermanager, IHostingEnvironment _env)
+        
+        public PaymentController(IPaypalServices paypalServices)
         {
             _PaypalServices = paypalServices;
-            context = _c;
-            usermanager = _usermanager;
-            environment = _env;
         }
 
         public IActionResult Index()
@@ -53,6 +46,16 @@ namespace PhuKienDienThoai.Controllers
             var payment = _PaypalServices.ExecutePayment(paymentId, PayerID);
             
             // Hint: You can save the transaction details to your database using payment/buyer info
+            return Ok();
+        }
+
+        public IActionResult Success()
+        {
+            return Ok();
+        }
+
+        public IActionResult Cancel()
+        {
             return Ok();
         }
 
