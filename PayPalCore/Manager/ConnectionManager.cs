@@ -26,8 +26,6 @@ namespace PayPal.Api
         /// Accessor for the Singleton instance of ConnectionManager
         /// </summary>
         public static ConnectionManager Instance { get { return lazyConnectionManager.Value; } }
-
-        private bool logTlsWarning = false;
         
         /// <summary>
         /// Create and Config a HttpWebRequest

@@ -28,6 +28,7 @@ namespace PhuKienDienThoai.Controllers
             usermanager = _usermanager;
             environment = _env;
         }
+
         //action để xử lý khi người dùng chưa đăng nhập mà lại muốn thêm thông tin vào giỏ hàng 
         public IActionResult ThemVaoGioHang(string returnurl = null)
         {

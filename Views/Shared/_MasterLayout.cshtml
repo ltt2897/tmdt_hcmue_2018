@@ -26,7 +26,7 @@
 
 	@if ((Context.Request.Host + Context.Request.Path).Contains("/SanPham/"))
 	{
-	var description = Regex.Replace(Model.TomTat, "<.*?>", string.Empty).Substring(0, 150) + "...";
+	var description = Regex.Replace(Model.TomTat, "<.*?>", string.Empty).Substring(0, 100) + "...";
 	<meta property="og:description" content="@Html.Raw(description)" />
 	<meta property="og:image" content="http://@Context.Request.Host/images/SanPham/@Html.Raw(@Model.HinhAnh)" />
 	<meta name="keywords" content="mua @Html.Raw(@Model.TenSanPham), mua online @Html.Raw(@Model.TenSanPham), @Html.Raw(@Model.TenSanPham)">
