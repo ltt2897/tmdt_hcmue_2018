@@ -1713,7 +1713,7 @@ ul.reviews li a:hover{
 }
 
 
-.chose_area .update {
+.chose_area {
   margin-left: 40px;
 }
 
@@ -1725,14 +1725,6 @@ ul.reviews li a:hover{
   border: none;
   padding: 5px 15px;
 }
-.update{
-    margin-left: 40px;
-}
-
-.check_out {
-  margin-left: 20px
-}
-
 
 
 /*************************

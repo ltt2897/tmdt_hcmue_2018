@@ -97,6 +97,7 @@ namespace PhuKienDienThoai.Controllers
                 //cập nhật lại sản phẩm
                 context.SanPham.Update(sanpham);
                 await context.SaveChangesAsync();
+
                 //thêm vào session giỏ hàng với giá trị là chuỗi json  
                 HttpContext.Session.SetString("GioHang", JsonConvert.SerializeObject(lst));
                 return Ok();
@@ -192,6 +193,7 @@ namespace PhuKienDienThoai.Controllers
                         ChiTietHoaDons = ChiTietHoaDon,
                         DiaChi = DiaChi,
                         GhiChu = GhiChu,
+                        PhuongThucThanhToan = "Trực tiếp",
                         TongThanhTien = ChiTietHoaDon.Sum(x => x.ThanhTien),
                         User = currentUser,
                     });
@@ -239,7 +241,7 @@ namespace PhuKienDienThoai.Controllers
                 controllerName: "Home"
             );
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

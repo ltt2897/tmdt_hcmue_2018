@@ -55,7 +55,7 @@ namespace PhuKienDienThoai.Services
                     currency = "USD",
                     price = dongia.ToString(),
                     quantity = item.SoLuong.ToString(),
-                    sku = "sku"
+                    sku = item.SanPham.id.ToString()
                 };
 
                 total += dongia * item.SoLuong;

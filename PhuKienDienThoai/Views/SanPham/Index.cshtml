@@ -141,6 +141,7 @@ else
                 $.post(url, serializeObj, function(data, status, jqxhr)
                 {
                     alert("Thêm vào giỏ hàng thành công");
+                    location.reload();
                 }).fail(function(xhr, status, err) 
                 {
                     alert("Đã có lỗi xảy ra trong quá trình xử lý");

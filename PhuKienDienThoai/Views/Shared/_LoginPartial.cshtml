@@ -1,14 +1,26 @@
 @using Microsoft.AspNetCore.Identity
 @using PhuKienDienThoai.Models
+@using PhuKienDienThoai.Models.SanPhamViewModels;
+@using Newtonsoft.Json;
+@using Microsoft.AspNetCore.Http
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IHttpContextAccessor HttpContextAccessor
 
 @if (SignInManager.IsSignedIn(User))
 {
    
     <ul class="nav navbar-nav">
         @{
+            var soluonghangtronggio = 0;
+            var stringList = HttpContextAccessor.HttpContext.Session.GetString("GioHang");
+            if (!string.IsNullOrEmpty(stringList)) {
+                var ListItemTrongGioHang = new List<GioHangViewModel>();
+                ListItemTrongGioHang = JsonConvert.DeserializeObject<List<GioHangViewModel>>(stringList);
+                soluonghangtronggio = ListItemTrongGioHang.Sum(x => x.SoLuong);  
+            }
+
             var userRole = "Users";
             if(User.IsInRole("Admin"))
             {
@@ -19,7 +31,7 @@
                     <a is-active-route asp-area="Users" asp-controller="TaiKhoan" asp-action="Index"> <i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>
                 </li> 
                 <li>
-                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi</a>
+                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi (<b>@soluonghangtronggio</b>)</a>
                 </li>
             }
             else if(User.IsInRole("Giao Hàng"))
@@ -31,7 +43,7 @@
             else
             {
                 <li>
-                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi</a>
+                    <a asp-controller="GioHang" asp-area="" asp-action="Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng của tôi (<b>@soluonghangtronggio</b>)</a>
                 </li>
                 <li>
                     <a is-active-route asp-area="Users" asp-controller="TaiKhoan" asp-action="Index"> <i class="fa fa-user" aria-hidden="true"></i> Tài khoản</a>

@@ -13,8 +13,10 @@ namespace PhuKienDienThoai.Models
         public string DiaChi { get; set; }
         public string GhiChu { get; set; }
         //pivot trạng thái, nếu ngày giao là null thì trạng thái là chưa giao
-        //nếu ngày giao có ngày tháng thì trạng thái da944 giao
+        //nếu ngày giao có ngày tháng thì trạng thái đã giao
         public DateTime? NgayGiao { get; set; }
+        [StringLength(255)]
+        public string PhuongThucThanhToan { get; set; }
         public int TongThanhTien { get; set; }
         public List<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public ApplicationUser User { get; set; }
