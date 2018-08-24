@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using PhuKienDienThoai.Models.SanPhamViewModels;
 
-namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic.Interfaces
+namespace PhuKienDienThoai.Models
 {
     public interface IPaypalServices
     {
-        Payment CreatePayment(decimal amount, string returnUrl, string cancelUrl, string intent, List<GioHangViewModel> list);
+        Payment CreatePayment(List<GioHangViewModel> list, string returnUrl, string cancelUrl, string intent);
 
         Payment ExecutePayment(string paymentId, string payerId);
     }

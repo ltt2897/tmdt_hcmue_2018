@@ -9,9 +9,7 @@ using Microsoft.Extensions.Logging;
 using PhuKienDienThoai.Data;
 using PhuKienDienThoai.Models;
 using PhuKienDienThoai.Services;
-using PaypalExpressCheckout.BusinessLogic;
-using PaypalExpressCheckout.BusinessLogic.ConfigOptions;
-using PaypalExpressCheckout.BusinessLogic.Interfaces;
+using PhuKienDienThoai.Configurations;
 
 namespace PhuKienDienThoai
 {

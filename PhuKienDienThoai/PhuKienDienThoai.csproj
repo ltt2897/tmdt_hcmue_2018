@@ -22,10 +22,14 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.0.3" />
     <PackageReference Include="X.PagedList" Version="7.5.0" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PayPalCore\PayPalCore.csproj" />
+  </ItemGroup>
 </Project>

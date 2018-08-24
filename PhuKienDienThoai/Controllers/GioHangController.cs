@@ -197,36 +197,36 @@ namespace PhuKienDienThoai.Controllers
                     });
                     await context.SaveChangesAsync();
 
-                    TempData["Message"] = "Đặt hàng thành công! Cảm ơn quý khách đã tin tưởng chúng tôi";
-                    //template path
-                    var template = new EmailTemplate(environment);
-                    var emailReceipttemplatePath = template.ReceiptTemplatePath("EmailReceipt");
-                    var NoiDungReceiptTemplatePath = template.ReceiptTemplatePath("EmailReceiptContent");
+                    // TempData["Message"] = "Đặt hàng thành công! Cảm ơn quý khách đã tin tưởng chúng tôi";
+                    // //template path
+                    // var template = new EmailTemplate(environment);
+                    // var emailReceipttemplatePath = template.ReceiptTemplatePath("EmailReceipt");
+                    // var NoiDungReceiptTemplatePath = template.ReceiptTemplatePath("EmailReceiptContent");
                     
-                    var NoiDungEmailTemplate = "";
-                    using (var NoiDungfileStream = System.IO.File.OpenText(NoiDungReceiptTemplatePath))
-                    {
-                        var NoiDungTemplate = await NoiDungfileStream.ReadToEndAsync();
-                        foreach (var item in ListItemTrongGioHang)
-                        {
-                            NoiDungEmailTemplate += NoiDungTemplate.Replace("{TenSanPham}", item.SanPham.TenSanPham)
-                                                        .Replace("{SoLuong}", item.SoLuong.ToString())
-                                                        .Replace("{ThanhTien}", item.ThanhTien.ToString("#,0"))
-                                                        .Replace("{SanPhamUrl}", Url.Action(nameof(SanPhamController.Index), nameof(SanPhamController), new { id = item.SanPham.id }));
-                            NoiDungfileStream.Close();
-                        }
-                    }
-                    var ResceiptTemplate = "";
-                    using (var EmailReceiptfileStream = System.IO.File.OpenText(emailReceipttemplatePath))
-                    {
-                        ResceiptTemplate = await EmailReceiptfileStream.ReadToEndAsync();
-                        ResceiptTemplate = ResceiptTemplate.Replace("{DiaChi}", DiaChi)
-                                                            .Replace("{TongThanhTien}", HoaDon.Entity.TongThanhTien.ToString())
-                                                            .Replace("{NoiDung}", NoiDungEmailTemplate);
-                        EmailReceiptfileStream.Close();
-                    };
-                    var _email = new EmailSender();
-                    await _email.SendEmailAsync(currentUser.Email, "Xác nhận thanh toán", ResceiptTemplate);
+                    // var NoiDungEmailTemplate = "";
+                    // using (var NoiDungfileStream = System.IO.File.OpenText(NoiDungReceiptTemplatePath))
+                    // {
+                    //     var NoiDungTemplate = await NoiDungfileStream.ReadToEndAsync();
+                    //     foreach (var item in ListItemTrongGioHang)
+                    //     {
+                    //         NoiDungEmailTemplate += NoiDungTemplate.Replace("{TenSanPham}", item.SanPham.TenSanPham)
+                    //                                     .Replace("{SoLuong}", item.SoLuong.ToString())
+                    //                                     .Replace("{ThanhTien}", item.ThanhTien.ToString("#,0"))
+                    //                                     .Replace("{SanPhamUrl}", Url.Action(nameof(SanPhamController.Index), nameof(SanPhamController), new { id = item.SanPham.id }));
+                    //         NoiDungfileStream.Close();
+                    //     }
+                    // }
+                    // var ResceiptTemplate = "";
+                    // using (var EmailReceiptfileStream = System.IO.File.OpenText(emailReceipttemplatePath))
+                    // {
+                    //     ResceiptTemplate = await EmailReceiptfileStream.ReadToEndAsync();
+                    //     ResceiptTemplate = ResceiptTemplate.Replace("{DiaChi}", DiaChi)
+                    //                                         .Replace("{TongThanhTien}", HoaDon.Entity.TongThanhTien.ToString())
+                    //                                         .Replace("{NoiDung}", NoiDungEmailTemplate);
+                    //     EmailReceiptfileStream.Close();
+                    // };
+                    // var _email = new EmailSender();
+                    // await _email.SendEmailAsync(currentUser.Email, "Xác nhận thanh toán", ResceiptTemplate);
                     HttpContext.Session.Clear();
                 }
             }

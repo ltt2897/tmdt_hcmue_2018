@@ -1,12 +1,13 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
-using PhuKienDienThoai.Models.SanPhamViewModels;
 using PayPal.Api;
-using PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic.ConfigOptions;
-using PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic.Interfaces;
+using PhuKienDienThoai.Configurations;
+using PhuKienDienThoai.Models;
+using PhuKienDienThoai.Models.SanPhamViewModels;
+using PhuKienDienThoai.Controllers;
 
-namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic
+namespace PhuKienDienThoai.Services
 {
     public class PaypalServices : IPaypalServices
     {
@@ -17,18 +18,15 @@ namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic
         public PaypalServices(IOptions<PayPalAuthOptions> options)
         {
             _options = options.Value;
-        }
-        
+        } 
 
-        public Payment CreatePayment(decimal amount, string returnUrl, string cancelUrl, string intent, List<GioHangViewModel> ListItemTrongGioHang)
+        public Payment CreatePayment(List<GioHangViewModel> ListItemTrongGioHang, string returnUrl, string cancelUrl, string intent)
         {
-
-
             var payment = new Payment()
             {
                 intent = intent,
                 payer = new Payer() { payment_method = "paypal" },
-                transactions = GetTransactionsList(amount, ListItemTrongGioHang),
+                transactions = GetTransactionsList(ListItemTrongGioHang),
                 redirect_urls = new RedirectUrls()
                 {
                     cancel_url = cancelUrl,
@@ -42,27 +40,25 @@ namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic
         }
 
 
-        private List<Transaction> GetTransactionsList(decimal amount, List<GioHangViewModel> ListItemTrongGioHang)
+        private List<Transaction> GetTransactionsList(List<GioHangViewModel> ListItemTrongGioHang)
         {
             var transactionList = new List<Transaction>();
             var get_item_list = new List<Item>();
-
+            double total = 0;
             foreach (var item in ListItemTrongGioHang)
-            {
-                // ChiTietHoaDon.Add(new Models.ChiTietHoaDon
-                // {
-                //     SanPhamId = item.SanPham.id,
-                //     SoLuong = item.SoLuong,
-                //     ThanhTien = item.SanPham.DonGia * item.SoLuong,
-                // });
+            {   
+                double dongia = Math.Round((Convert.ToDouble(item.SanPham.DonGia) / 23000));
+
                 var paypal_item = new Item()
                 {
-                    name = item.SanPham.TenSanPham,
-                    currency = "VND",
-                    price = amount.ToString(),
+                    name = SlugController.GenerateSlug(item.SanPham.TenSanPham),
+                    currency = "USD",
+                    price = dongia.ToString(),
                     quantity = item.SoLuong.ToString(),
                     sku = "sku"
                 };
+
+                total += dongia * item.SoLuong;
                 get_item_list.Add(paypal_item);
             }
             transactionList.Add(new Transaction()
@@ -71,13 +67,13 @@ namespace PhuKienDienThoai.PaypalExpressCheckout.BusinessLogic
                 invoice_number = GetRandomInvoiceNumber(),
                 amount = new Amount()
                 {
-                    currency = "VND",
-                    total = amount.ToString(),
+                    currency = "USD",
+                    total = total.ToString(),
                     details = new Details()
                     {
                         tax = "0",
                         shipping = "0",
-                        subtotal = amount.ToString()
+                        subtotal = total.ToString()
                     }
                 },
                 item_list = new ItemList()

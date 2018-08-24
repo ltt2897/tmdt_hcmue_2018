@@ -5,8 +5,8 @@ using PhuKienDienThoai.Models.SanPhamViewModels;
 using PhuKienDienThoai.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
-using PaypalExpressCheckout.BusinessLogic.Interfaces;
 using System.Collections.Generic;
+using PhuKienDienThoai.Configurations;
 
 namespace PhuKienDienThoai.Controllers
 {
@@ -36,7 +36,7 @@ namespace PhuKienDienThoai.Controllers
             ListItemTrongGioHang = JsonConvert.DeserializeObject<List<GioHangViewModel>>(stringItem);
             string returnURL = Request.Scheme + "://" + Request.Host + "/Payment/ExecutePayment";
             string cancelURL = Request.Scheme + "://" + Request.Host + "/Payment/Cancel";
-            var payment = _PaypalServices.CreatePayment(ListItemTrongGioHang.Count, returnURL, cancelURL, "sale", ListItemTrongGioHang);
+            var payment = _PaypalServices.CreatePayment(ListItemTrongGioHang, returnURL, cancelURL, "sale");
 
             return new JsonResult(payment);
         }

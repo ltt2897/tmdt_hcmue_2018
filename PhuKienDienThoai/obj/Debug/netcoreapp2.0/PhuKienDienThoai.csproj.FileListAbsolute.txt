@@ -1,0 +1,16 @@
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\obj\Debug\netcoreapp2.0\PhuKienDienThoai.csprojAssemblyReference.cache
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\obj\Debug\netcoreapp2.0\PhuKienDienThoai.csproj.CoreCompileInputs.cache
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\obj\Debug\netcoreapp2.0\PhuKienDienThoai.AssemblyInfoInputs.cache
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\obj\Debug\netcoreapp2.0\PhuKienDienThoai.AssemblyInfo.cs
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PhuKienDienThoai.dll.config
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PhuKienDienThoai.deps.json
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PhuKienDienThoai.runtimeconfig.json
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PhuKienDienThoai.runtimeconfig.dev.json
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PhuKienDienThoai.dll
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PhuKienDienThoai.pdb
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PayPalCore.dll
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PayPalCore.pdb
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\bin\Debug\netcoreapp2.0\PayPalCore.xml
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\obj\Debug\netcoreapp2.0\PhuKienDienThoai.csproj.CopyComplete
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\obj\Debug\netcoreapp2.0\PhuKienDienThoai.dll
+d:\ASPNET\PhuKienDienThoai\PhuKienDienThoai\obj\Debug\netcoreapp2.0\PhuKienDienThoai.pdb
