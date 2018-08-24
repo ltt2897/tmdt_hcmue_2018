@@ -26,11 +26,6 @@ namespace PhuKienDienThoai.Controllers
 
         public IActionResult CreatePayment()
         {
-            //string baseURI = Request.Url.Scheme + "://" + Request.Url.Authority + "/Paypal/PaymentWithPayPal?";
-            // WebClient client = new WebClient();
-            // client.Headers.Add("referer", "http://stackoverflow.com");
-            // client.Headers.Add("user-agent", "Mozilla/5.0");
-            //lấy dữ liệu từ session
             var stringItem = HttpContext.Session.GetString("GioHang");
             var ListItemTrongGioHang = new List<GioHangViewModel>();
             ListItemTrongGioHang = JsonConvert.DeserializeObject<List<GioHangViewModel>>(stringItem);

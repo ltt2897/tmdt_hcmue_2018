@@ -14,10 +14,10 @@
             <div class="box-body">
                 <div class="form-group">
                     <label for="slct_HoaDonChuaGiao">Chọn hóa đơn</label>
-                    <select class="form-control" id="slct_HoaDonChuaGiao" asp-for="Id" asp-items="Model.DanhSanPhamHoaDon"></select>
+                    <select class="form-control" id="slct_HoaDonChuaGiao" asp-for="Id" asp-items="Model.DanhSachHoaDon"></select>
                 </div>
                 <div class="row clearfix">
-                    <div class="col-md-5">
+                    <div class="col-md-12">
                         <table class="table table-responsive table-datatable">
                             <thead>
                                 <tr>
@@ -29,8 +29,16 @@
                             </thead>
                         </table>
                     </div>
-                    <div class="col-md-7">
+                    <!-- <div class="col-md-7">
                         <div id="googlemap" style="height:370px"></div>
+                    </div> -->
+                </div>
+                <div class="row clearfix">
+                    <div class="col-md-12">
+                        <label>Phương thức thanh toán:</label> <span id="phuongthucthanhtoan"></span><br/>
+                        <label>Địa chỉ giao hàng:</label> <span id="diachigiaohang"></span><br/>
+                        <label>Ghi chú đơn hàng:</label>
+                        <textarea class="form-control" id="ghichu"></textarea><br/>
                     </div>
                 </div>
                 <div class="clearfix">
@@ -39,7 +47,7 @@
                         <button type="submit" class="btn btn-primary pull-right">Xác nhận giao hàng</button>
                     </form>
                 </div>
-                <div id="directionpanel" style="height: 330px; overflow: auto"></div> 
+                <!-- <div id="directionpanel" style="height: 330px; overflow: auto"></div>  -->
             </div>
         </div>
     </div>
@@ -48,58 +56,79 @@
 
 @section Scripts
 {
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn4b6Y62qV-ONkx8YJ7YSNx_B-SR316Rc&callback=initMap&language=vi"type="text/javascript"></script>
+    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAn4b6Y62qV-ONkx8YJ7YSNx_B-SR316Rc&callback=initMap&language=vi"type="text/javascript"></script> -->
     <script>
-        var directionsDisplay;
-        var directionsService;
-        function initMap() {
-            directionsService = new window.google.maps.DirectionsService();
-            directionsDisplay = new google.maps.DirectionsRenderer();
-            var latlng = new google.maps.LatLng(10.754792, 106.6952276);
-            var myOptions = {
-                zoom: 9,
-                center: latlng,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-            var map = new google.maps.Map(document.getElementById("googlemap"), myOptions);
+        CKEDITOR.replace('ghichu',{
+            customConfig: "/js/ckeditor.config.js"
+        });
 
-            directionsDisplay.setMap(map);
-            directionsDisplay.setPanel(document.getElementById('directionpanel'));
+        //var directionsDisplay;
+        //var directionsService;
+        //function initMap() {
+        //    directionsService = new window.google.maps.DirectionsService();
+        //    directionsDisplay = new google.maps.DirectionsRenderer();
+        //    var latlng = new google.maps.LatLng(10.754792, 106.6952276);
+        //    var myOptions = {
+        //        zoom: 9,
+        //        center: latlng,
+        //        mapTypeId: google.maps.MapTypeId.ROADMAP
+        //    };
+        //    var map = new google.maps.Map(document.getElementById("googlemap"), myOptions);
+        //
+        //    directionsDisplay.setMap(map);
+        //    directionsDisplay.setPanel(document.getElementById('directionpanel'));
+        //
+        //}
 
-        }
-
-        function XL_Xuat_Dia_diem(pointStart,pointEnd) {
-            var request = {
-                origin: pointStart,
-                destination: pointEnd,
-                travelMode: google.maps.DirectionsTravelMode.DRIVING
-            };
-            directionsService.route(request, function(response, status) {
-                if (status == google.maps.DirectionsStatus.OK) {
-                    directionsDisplay.setDirections(response);
-                }
-            });
-        }
+        //function XL_Xuat_Dia_diem(pointStart,pointEnd) {
+        //    var request = {
+        //        origin: pointStart,
+        //        destination: pointEnd,
+        //        travelMode: google.maps.DirectionsTravelMode.DRIVING
+        //    };
+        //    directionsService.route(request, function(response, status) {
+        //        if (status == google.maps.DirectionsStatus.OK) {
+        //            directionsDisplay.setDirections(response);
+        //        }
+        //    });
+        //}
         $(function()
         {
-            $("#slct_HoaDonChuaGiao").change(function()
-            {
+            $("#slct_HoaDonChuaGiao").change(function() {
                 var _id = $(this).val();
                 var table = $(".table-datatable").DataTable(
                 {
                     "destroy": true,
                     ajax: "@Url.Action("ChiTietDonHang","Home")" + "/" + _id,
                     columns: [
-                        {data: "tenSanPham"},
+                        {data:"tenSanPham"},
                         {data:"soLuong"},
                         {data:"donGia"},
                         {data:"thanhTien"}
                     ],
                 });
-                var pointStart="280 An Dương Vương Phường 4 Quận 10 Tp.HCM";
-                var pointEnd= $("#slct_HoaDonChuaGiao option:selected").text();
+
+                $.ajax({
+                    url: "@Url.Action("ChiTietHoaDon","Home")" + "/" + _id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(json) {
+                        $("#phuongthucthanhtoan").html(json.phuongthucthanhtoan);
+                        $("#diachigiaohang").html(json.diachi);
+                        $("#ghichu").val(json.ghichu);
+                    },
+                    error: function()
+                    {
+                        $("#phuongthucthanhtoan").html("");
+                        $("#diachigiaohang").html("");
+                        $("#ghichu").val("");
+                        alert("Không tìm thấy Địa chỉ giao hàng và Ghi chú");
+                    }
+                });
+                //var pointStart="280 An Dương Vương Phường 4 Quận 10 Tp.HCM";
+                //var pointEnd= $("#slct_HoaDonChuaGiao option:selected").text();
                 $("#XacNhanGiaoHang_HoaDonID").val(_id);
-                XL_Xuat_Dia_diem(pointStart,pointEnd);
+                //XL_Xuat_Dia_diem(pointStart,pointEnd);
             });
             
             $("#slct_HoaDonChuaGiao").change();
